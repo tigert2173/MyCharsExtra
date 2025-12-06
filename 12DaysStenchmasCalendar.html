@@ -225,21 +225,48 @@
             font-weight: bold;
             font-size: 0.9em;
         }
+
+		/* Navigation Links as Buttons */
+        .nav-links {
+            display: flex;
+            gap: 15px; /* Space between buttons */
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .nav-button {
+            text-decoration: none;
+            color: var(--color-text-light);
+            background-color: var(--color-secondary); /* Red background */
+            border: 2px solid var(--color-accent);    /* Gold border */
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            font-size: 0.9em;
+        }
+        .nav-button:hover {
+            background-color: var(--color-primary); /* Green on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
     <div id="gradient-wrapper"></div>
     
    <div class="content-container">
-        <header>
+       <header>
             <h1>🎄 The Stenchmas Scenario Calendar 🎁</h1>
             <p>14 Days of Filth, Farts, and Festive Fear. Scroll down to see the calendar transform!</p>
             
             <div class="nav-links">
-                <a href="#" class="nav-link">🎶 LISTEN TO SONG</a>
-                <a href="#" class="nav-link">🔙 BACK TO JANTIORAI</a>
+                <a href="https://tigert2173.github.io/MyCharsExtra/TwelveDaysofStenchmas.html" class="nav-button">🎶 LISTEN TO SONG</a>
+                <a href="https://janitorai.com/characters/d5c650ec-ac79-4c6b-8060-cb2725f29669_character-beta-twelve-days-of-stenchmas" class="nav-button">🔙 BACK TO JANTIORAI</a>
             </div>
-            </header>
+        </header>
 
         <div id="calendar-output">
             </div>
