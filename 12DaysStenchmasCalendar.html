@@ -56,6 +56,30 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
+		/* Navigation Link Styles */
+        .nav-links {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: var(--color-secondary);
+            color: var(--color-text-light);
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .nav-link:hover {
+            background-color: #d00;
+            transform: translateY(-1px);
+        }
+		
         header {
             padding: 20px 0;
             color: var(--color-primary);
@@ -180,11 +204,16 @@
 <body>
     <div id="gradient-wrapper"></div>
     
-    <div class="content-container">
+<div class="content-container">
         <header>
             <h1>🎄 The Stenchmas Scenario Calendar 🎁</h1>
-            <p>14 Days of Filth, Farts, and Festive Fear. Scroll down to see the calendar transform!</p>
-        </header>
+            <p>12 Days of Filth, Farts, and Festive Fear. Scroll down to see the calendar transform!</p>
+            
+            <div class="nav-links">
+                <a href="#" class="nav-link">🎶 LISTEN TO SONG</a>
+                <a href="#" class="nav-link">🔙 BACK TO JANTIORAI</a>
+            </div>
+            </header>
 
         <div id="calendar-output">
             </div>
