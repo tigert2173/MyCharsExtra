@@ -570,40 +570,48 @@ var actionDatabase = {
             target.style.display = isRevealed ? 'grid' : 'none';
         }
 
-        // NEW: Function for password-protected reveal
-        function revealSecretScenarios(day) {
-            const input = document.getElementById(`pass-${day}`);
-            const message = document.getElementById(`msg-${day}`);
-            const target = document.getElementById(`target-${day}`);
-            
-            const enteredName = input.value.trim().toLowerCase().replace(/[^a-z]/g, '');
-            let correctName = "";
-            let revealName = "";
-
-            if (day === 14) {
-                // The Skunk Queen
-                correctName = "theskunkqueen";
-                revealName = "The Skunk Queen";
-            } else {
-                message.textContent = "Error: Invalid Day for password.";
-                return;
-            }
-
-            if (enteredName === correctName || enteredName === correctName.replace("the", "")) {
-                // Also check for "skunkqueen" just in case
-                target.style.display = 'grid'; // Reveal the scenarios
-                message.textContent = `Access Granted! ${revealName} Scenarios Revealed!`;
-                message.style.color = 'lime';
-                // Remove input and button for cleanliness
-                const revealBox = input.closest('.reveal-box');
-                if (revealBox) {
-                    revealBox.style.display = 'none';
-                }
-            } else {
-                message.textContent = "Incorrect Name. Try Again.";
-                message.style.color = 'yellow';
-            }
-        }
+		// NEW: Function for password-protected reveal
+	function revealSecretScenarios(day) {
+	    const input = document.getElementById(`pass-${day}`);
+	    const message = document.getElementById(`msg-${day}`);
+	    const target = document.getElementById(`target-${day}`);
+	    
+	    // Normalize input: lowercase and remove spaces/special characters
+	    const enteredName = input.value.trim().toLowerCase().replace(/[^a-z]/g, '');
+	    
+	    let acceptedNames = []; 
+	    let revealName = "";
+	
+	    if (day === 14) {
+	        // The Skunk Queen - List of all accepted normalized names
+	        acceptedNames = [
+	            "maligra",
+	            "skunkqueen", 
+	            "theskunkqueen",
+	            "queen",
+	            "queenofskunks"
+	        ];
+	        revealName = "The Skunk Queen";
+	    } else {
+	        message.textContent = "Error: Invalid Day for password.";
+	        return;
+	    }
+	
+	    // Check if the entered (normalized) name is in the list of accepted names
+	    if (acceptedNames.includes(enteredName)) { 
+	        target.style.display = 'grid'; // Reveal the scenarios
+	        message.textContent = `Access Granted! ${revealName} Scenarios Revealed!`;
+	        message.style.color = 'lime';
+	        // Remove input and button for cleanliness
+	        const revealBox = input.closest('.reveal-box');
+	        if (revealBox) {
+	            revealBox.style.display = 'none';
+	        }
+	    } else {
+	        message.textContent = "Incorrect Name. Try Again.";
+	        message.style.color = 'yellow';
+	    }
+	}
 
 
         function handleScrollGradient() {
