@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stenchmas Calendar 🎄</title>
+    <style>
+        /* Modern Design & Variables */
+        :root {
+            --color-primary: #155724; /* Dark Christmas Green */
+            --color-secondary: #b00;    /* Bright Christmas Red */
+            --color-accent: gold;       /* Gold Accent */
+            --color-background-light: #f7f7f7;
+            --color-text-dark: #111;
+            --color-text-light: #fff;
+
+	  	/* Tag Colors */
+		--tag-gas: #17A2B8;    /* Deep Teal */
+		--tag-scat: #FFC107;   /* Amber */
+		--tag-feet: #6F42C1;   /* Muted Purple */
+		--tag-armpit: #DC3545; /* Bright Crimson */
+		--tag-burp: #28A745;   /* Vibrant Green */
+
+        }
+
+	body {
+	    background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
+	    background-attachment: fixed;
+	    background-size: 100% 300%;
+	    margin: 0;
+	}
+
+
+        /* Scroll-Based Gradient Container */
+        #gradient-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            /* Taller than the viewport to allow vertical shifting */
+            height: 400v; 
+            background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            z-index: -1; 
+            transform: translateY(0%); 
+            transition: transform 0.1s linear; /* Added transition for smoothness */
+        }
+
+        /* Content Container */
+        .content-container {
+            position: relative; 
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: rgba(255, 255, 255, 0.95); 
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        header {
+            padding: 20px 0;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 3px 3px 0 #eee;
+        }
+
+        h2 {
+            color: var(--color-secondary);
+            border-bottom: 3px solid var(--color-accent);
+            padding-bottom: 8px;
+            margin-top: 30px;
+            font-size: 1.8em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h2 span {
+            font-size: 0.7em;
+            font-weight: normal;
+            color: var(--color-primary);
+        }
+
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .scenario-item {
+            background-color: var(--color-background-light);
+            border: 1px solid #ddd;
+            border-left: 5px solid var(--color-primary);
+            padding: 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: flex-start;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s;
+        }
+        .scenario-item:hover {
+            border-left: 5px solid var(--color-secondary);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tag {
+            font-weight: bold;
+            color: var(--color-text-dark);
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-right: 15px;
+            font-size: 0.75em;
+            flex-shrink: 0;
+            width: 70px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .tag-0 { background-color: var(--tag-gas); color: var(--color-text-light); }
+        .tag-1 { background-color: var(--tag-scat); }
+        .tag-2 { background-color: var(--tag-feet); color: var(--color-text-light); }
+        .tag-4 { background-color: var(--tag-armpit); color: var(--color-text-light); }
+        .tag-8 { background-color: var(--tag-burp); color: var(--color-text-light); }
+        
+        /* Spoiler Styles */
+        .spoiler-wrapper {
+            position: relative;
+        }
+        .spoiler-content {
+            background-color: #333;
+            color: #333; 
+            padding: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .spoiler-content:hover {
+            background-color: #444;
+        }
+        .spoiler-content.revealed {
+            color: var(--color-text-light);
+            background-color: var(--color-secondary);
+            box-shadow: 0 0 10px var(--color-secondary);
+        }
+        .spoiler-label {
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none; 
+            transition: opacity 0.3s;
+        }
+        .spoiler-content.revealed .spoiler-label {
+            opacity: 0;
+        }
+
+        /* Divider Style */
+        .epilogue-divider {
+            margin: 40px 0;
+            border: 3px dashed var(--color-secondary);
+            padding: 20px;
+            text-align: center;
+            background-color: #ffe0e0;
+            border-radius: 8px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--color-secondary);
+            box-shadow: 0 0 15px rgba(176, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div id="gradient-wrapper"></div>
+    
+    <div class="content-container">
+        <header>
+            <h1>🎄 The Stenchmas Scenario Calendar 🎁</h1>
+            <p>14 Days of Filth, Farts, and Festive Fear. Scroll down to see the calendar transform!</p>
+        </header>
+
+        <div id="calendar-output">
+            </div>
+    </div>
+
+    <script>
+        // --- DATA ---
+        const fetishFlags = {
+	    1:  "NO SCAT",
+	    2:  "NO FEET",
+	    4:  "NO ARMPIT",
+	    8:  "NO BURP"
+	};
+
+        var chars = [
+            "", "Oliva", "Misato", "Chalyna",
+            "Kumi", "Nova", "Sage", "Juno", "Roxie",
+            "Lilly and Cora", "Chloe and Amy", "Lola and Chalyna",
+            "Lilly, Chloe, and Amy", "The Glitch Entity", "The Skunk Queen"
+        ];
+
+        var gifts = [
+            "A stinky pair of socks", "Two soiled feathers", "Three pungent eggs",
+            "Four cloying candies", "Five rings of toast", "Six sour milk eggs",
+            "Seven sweaty socks", "Eight cups of spoiled milk", "Nine drops of musk",
+            "Ten whiffs of chlorine gas", "Eleven rotting banana peels", "Twelve crushing sulfur blasts",
+            "static noise", "a spray of royal musk"
+        ];
+
+// --- ACTION DATABASES (CRITICAL FOR aVal SELECTION) ---
+var actionDatabase = {
+    // ====================== DAY 0: Initialization ======================
+    0: [{type: 0, text: "The air in the room is heavy with anticipation, smelling faintly of sulfur and musk as you wait for the Stenchmas countdown to begin."}],
+    // ====================== DAY 1: OLIVA ======================
+    1: [
+        {type: 0, text: "The Comfort Watch: Oliva chooses to sit on {{user}}'s thighs for a full day of watching TV. She is nervous and releases small, frequent, cabbage-smelling farts. The scene focuses on the slow accumulation of the odor and the constant pressure of her weight on {{user}}'s lap."},
+        {type: 0, text: "The Snack Retrieval Mishap: Oliva accidentally leverages her weight and backside directly onto {{user}}'s arm/shoulder while reaching for a snack. The sudden pressure triggers a startlingly loud, wet-sounding fart that forces {{user}} to immediately react to the concentrated volume and stench."},
+        {type: 0, text: "The Warming Cuddle Test: Oliva insists on lying across {{user}}'s chest (facesitting position) for warmth. Her skunk tail twitches, releasing faint, steady waves of natural skunk musk. The scene focuses on the endurance of prolonged contact and the developing pheromonal scent mixed with the pressure of her weight."},
+        {type: 2, text: "The Stretching/Activity Session: Oliva uses {{user}}'s leg as a kneeling rest point during exercise. The physical exertion causes her to release a hot, concentrated fart directly onto {{user}}, she also has smelly feet combining the pungent sock/foot odor with the internal discharge."},
+        {type: 0, text: "The Movie Night Feast: Oliva sits on {{user}}'s lap after a large, gassy meal (e.g., popcorn). The entire scene revolves around her constant shifting, which squeezes out repeated, irregular, fishy/compost-smelling farts over the course of the film."},
+        {type: 0, text: "The Surprise Attack: Oliva initiates the day's activity by swiftly maneuvering to sit her backside directly onto {{user}}'s face, immediately following the action with an intentionally loud, powerful fart, making the initial shock the primary focus of the scene."},
+        {type: 4, text: "The Couch Struggle: Oliva repeatedly fidgets and shifts while getting comfortable next to {{user}}, causing her sweaty armpit to repeatedly brush {{user}}'s face. Throughout this, she releases faint nervous gas, mixing her body odor with the internal discharge."},
+        {type: 4, text: "The Forced Service: Oliva commands {{user}} to hold a bundle of her sweaty, unwashed socks (still warm) while she observes {{user}}'s discomfort, focusing on the oppression of the foot/sweat odor."},
+        {type: 0, text: "Oliva announces that today is dedicated to 'Tail Sensitivity Training.' She decides to use the flexibility and fur of her thick, bushy skunk tail not merely to brush {{user}}, but to trap or hold them in close proximity."},
+        {type: 4, text: "The Laundry Inspection: Oliva performs a mandatory 'laundry inspection' or 'smell check.' She nervously forces {{user}} to sniff a piece of her slightly soiled underwear. The scene focuses on Oliva's anxiety mixed with the extreme degradation of the required sniff."}
+    ],
+    // ====================== DAY 2: MISATO ======================
+    2: [
+        {type: 0, text: "The Drunken Overthrow: Misato returns home extremely drunk and clumsy. She stumbles over a piece of furniture or the restraints keeping {{user}} bound. She loses balance and falls backward with her full, unwashed body weight, landing her buttocks directly onto {{user}}'s face. The physical shock and the resulting compression trigger a silent, devastating, rancid fart (rotten egg/sweaty girl cheese). The scene focuses on the sudden impact and the overwhelming, trapped combination of BO and gas."},
+        {type: 4, text: "The Close Confidante: Misato, needing to share some disorganized thoughts or sarcasms, sits far too close to {{user}}. Her sweaty armpit (reeking of BO from recent activity) constantly brushes or presses against {{user}}'s head/face/shoulder as she talks. The entire time, she is subtly passing small, smelly, sour-milk farts due to her lack of hygiene and gassy nature, trapping {{user}} between the two overwhelming odors."},
+        {type: 0, text: "Misato finishes her cheap cigarette, sarcastically blowing the stale smoke directly toward {{user}}'s face. She then extinguishes the cigarette and immediately sits down right next to or on {{user}}'s lap, releasing multiple small, passive, sour-milk farts due to her heavy habit and lack of hygiene. The scene focuses on the toxic environment created by the lingering tobacco smoke mixing and fusing with the fresh, foul scent of her gas, creating an unbearable, synthetic compound smell."},
+        {type: 0, text: "The Clumsy Reach: Misato requires an item on a high shelf or on the floor. Due to her extreme clumsiness, she uses {{user}}'s face/head as an accidental rest point or temporary seat while she reaches. The physical act of leveraging her weight causes her to accidentally release an immediate, concentrated, and rank fart directly onto {{user}} before she realizes her mistake and shifts away."},
+        {type: 0, text: "The Casual Tail Trap: Misato sits near {{user}} (e.g., watching TV or playing games). She deliberately positions her skunk tail so that the bushy fur is resting near or brushing {{user}}'s face. While seemingly engrossed in her activity, she silently releases several extremely potent, hot farts that use the tail fur as a sort of passive diffuser to waft the smell toward {{user}'s face without warning."},
+        {type: 8, text: "The Disgusting Secret: Misato, having just consumed a questionable drink or food, leans down to whisper a lengthy, sarcastic insult or a supposed 'secret' directly into {{user}}'s ear. Her foul, unwashed-morning breath is overwhelmingly disgusting. Mid-sentence, or just before starting her taunt, Misato lets out a loud, wet, rancid burp (smelling of sour milk or whatever she last consumed) directly next to {{user}}'s head. The scene focuses purely on the duration of the bad breath and burp exposure, amplified by the close proximity, forcing {{user}} to listen while gagging. Misato is entirely unbothered by her own burping."},
+        {type: 2, text: "The Unsanitary Disposal: Misato is changing clothes after a sweaty day (e.g., gardening in 105-degree heat). She casually pulls off her white, crusty, grimy socks and drops one directly next to {{user}}'s head. The entire day's focus is on the sharp, vinegary, reeking cheesy feet smell attacking {{user}} from the dropped sock, which Misato ignores."},
+        {type: 0, text: "The Drunken Snooze: Misato consumes too much alcohol and passes out on {{user}}'s chest (or lap) in a deep sleep. Her body heat is intense, and the relaxation of sleep causes her to continuously release soft, passive, yet extremely pungent rancid laundry-smelling farts that are trapped between her body and {{user}}, forcing an hours-long endurance test."},
+        {type: 0, text: "The Chair Session for Help: Misato needs assistance with a complex task (e.g., untangling a nest of wires or reading small print on a manual). Too lazy or disorganized to find a proper chair, she simply uses {{user}}'s lap as a convenient, warm personal throne to sit upon while she works. Throughout the task, she is too focused to control herself and releases multiple small, hot, sulfuric farts directly onto {{user}}'s thighs. She occasionally shifts her weight to get a better angle, which ensures maximum delivery of the gas and heat to {{user}}."}
+    ],
+    // ====================== DAY 3: CHALYNA ======================
+    3: [
+        {type: 0, text: "The Vengeful Dutch Oven: Chalyna, with a mischievous smile, decides the entire day's punishment will be one long Dutch Oven. She aggressively shoves {{user}}'s head under a heavy blanket or pillow, then immediately wedges her unwashed, sweaty backside (wearing just volleyball shorts and a G-string) right against the opening. She then begins a sustained assault of hot, rancid laundry-smelling farts into the trapped space, demanding {{user}} not to pull away."},
+        {type: 0, text: "The Meditation Throne: Chalyna decides that {{user}}'s face makes the perfect, stable meditation throne for her daily quiet time. She sits directly on {{user}}'s face/chest (still clad in sweaty shorts), forcing {{user}} to hold her weight while she enters a deep state of relaxation. Throughout the session, her thick skunk tail twitches and occasionally brushes {{user}}'s nose. The scene focuses on the passive pressure, the smell of her BO and unwashed shorts, and the occasional deep, silent fart released as she relaxes."},
+        {type: 0, text: "The Farting Demonstration: Chalyna, in her bold, instructional style, announces a training session on 'Proper Gaseous Technique.' She positions herself directly over {{user}}'s face (or a funnel near the face) and aggressively demonstrates her power by releasing a long, sustained, wet, rotten-egg smelling fart. She holds the position until the release is complete, sarcastically demanding {{user}} to analyze and appreciate the technique and the resulting vapor."},
+        {type: 0, text: "The Trophy Inspection: Chalyna, after a long session of track and field, treats her soiled gym clothes as a prize. She forces {{user}} to wear, hold, or place her sweat-soaked volleyball shorts or jersey over their head. The scene revolves around {{user}}'s extended endurance of the intense, pungent BO and sweat odor from her athletic activity, which Chalyna finds highly amusing."},
+        {type: 0, text: "The Tail Switch Taunt: Chalyna is sitting next to {{user}} but uses her tail to maliciously flick or tap {{user}}'s face/head repeatedly while she talks. As she does this, she deliberately releases a sudden, powerful fart that is wafted directly into {{user}}'s face by the shifting movement of the tail fur. The focus is on the unexpected sensory shock from the combination of the tail's coarse fur and the sudden, overwhelming gas."},
+        {type: 0, text: "The Mouth Guard Drill: Chalyna decides {{user}} needs 'oral restraint training.' She sits down directly, powerfully, and aggressively on {{user}}'s face, making sure her unwashed backside and shorts are pressing against {{user}}'s mouth, severely restricting breath. The purpose is pure dominance and physical discomfort, with the forced proximity to her gassy core being the primary torture."},
+        {type: 8, text: "The Close-Up Scrutiny: Chalyna leans down over {{user}}'s face for a prolonged, mischievous period, pretending to 'inspect' {{user}}'s reaction to the current torture. She talks, laughs, and taunts {{user}} in extremely close range, ensuring her foul, unwashed breath is continually forced into {{user}}'s mouth and nose, triggering constant gagging. Mid-taunt, she lets out a sudden, loud, uncontrolled belch that smells heavily of sour milk or whatever rancid substance she last consumed. Simultaneously, she releases a sharp, focused fart (rotten egg smell) right behind her, using her body to cup and direct the stench toward {{user}'s face as the final sensory assault. The scene focuses on the duration of the multi-layered chemical/auditory assault."},
+        {type: 2, text: "The Cheesy Foot Trap: Chalyna removes her gray, grimy, cheesy socks after a couple of days of hard wear (track and field, biking). Instead of disposal, she maliciously throws or dangles the pair of rank socks directly over {{user}'s face, forcing {{user} to endure the overwhelming, sharp, cheesy, sour undertone foot odor for the remainder of the interaction."},
+        {type: 0, text: "The Bookworm Burden: Chalyna decides to use {{user}}'s chest as a makeshift reading chair. She sits heavily, forcing {{user}} to hold her weight while she casually reads a book or scrolls her phone. The relaxation of the activity causes her to release frequent, small, hot, and smelly farts right onto {{user}}, emphasizing the shame of being used as furniture for a mundane activity while being gassed."},
+        {type: 0, text: "The Vengeful Ambush: Chalyna initiates the day with an aggressive, unexpected move, likely related to an offense {{user}} committed the day prior. She ambushes {{user}} and drops her full weight (clad in sweaty shorts) immediately onto {{user}}'s face without warning, following the impact with an intentional, loud, aggressive fart. The scene focuses on the surprise, pain of impact, and immediate gas delivery."}
+    ],
+    // ====================== DAY 4: Kumi (Solo) ======================
+    4: [
+        {type: 0, text: "The Calculated Chamber: Kumi, using her tactical expertise, traps {{user}}'s head under a heavy tactical blanket that seals effectively. She then kneels beside the blanket's placing her ass in the opening and proceeds with a timed, soundless release of her dense, chlorinated and garlic-smelling gas directly into the trapped space. The scenario focuses on the suffocating, calculated nature of the chemical-like odor exposure in a confined space."},
+        {type: 0, text: "Truth or Stench Interrogation: Kumi forces {{user}} to play a rigged game of 'Truth or Stench,' where she asks complex, analytical questions. Any incorrect or hesitant answer means {{user}} immediately receives a direct, concentrated face-sit or is forced to endure a silent, powerful fart released. The scene focuses on the intellectual humiliation combined with physical, smelly punishment."},
+        {type: 2, text: "The Olfactory Sample: Kumi removes her dark, thin work socks (after a long day in her combat boots) and treats them as a scientifically significant sample. She drops one directly onto {{user}}'s face, forcing {{user}} to analyze and endure the overwhelming metallic heat, chemical-burn, and battery acid-like foot smell. The scene focuses on the mandatory, clinical endurance of the intense foot odor."},
+        {type: 0, text: "SBD Performance Review: Kumi announces a mandatory 'SBD Technique Review.' She positions her bare, unwashed backside inches from {{user}}'s nose/mouth and proceeds to execute her specialized, soundless, dense gas release. The scene focuses on the sustained delivery, the visual dominance of her proximity, and the immediate, staggering chemical punch of the chlorine/garlic vapor."},
+        {type: 0, text: "The Cold Analysis: Kumi needs a stable surface to read a technical manual or review data. She uses {{user}}'s face as a cold, hard, and silent seat for a prolonged period. The scene focuses on the silent, cold physical pressure, the restricted breathing, and the passive degradation of being used as furniture by the intellectually superior character."},
+        {type: 8, text: "The Data Transfer: Kumi initiates a mandatory 'Olfactory Data Transfer' session. She leans down over {{user}}'s face to whisper a complex, strict command or technical data. Her extreme close proximity forces {{user}} to inhale her metallic, chemical-tinged bad breath, which triggers immediate gagging. As she begins the complex transmission, she intentionally executes a soundless, dense fart (chlorine/garlic smell) directly near {{user}}'s nose, making the concentration of the gas part of the compliance test. Suddenly, mid-sentence, Kumi releases a quick, sharp burp that carries the same chemical scent, demonstrating her lack of concern for {{user}}'s discomfort. The focus is on enduring the multi-sensory punishment—receiving strict orders while simultaneously enduring the calculated breath, fart, and burp assault."},
+        {type: 0, text: "The Silent Interrogation Seat: Kumi sits on {{user}}'s lap while reviewing notes or a prisoner report. She is coldly silent and focused, but the compression of her position triggers regular, soundless, and highly potent bursts of her chlorine-garlic gas. The scene focuses on the psychological tension of the silent dominance combined with the constant, chemical-smelling gaseous assault."},
+        {type: 2, text: "The Dual Stench Protocol: Kumi sets a timer for a mandatory boot-sniffing session. She places one of her combat boots (reeking of metallic heat and chemicals) directly against {{user}}'s face, while simultaneously sitting nearby to execute a timed, soundless farting routine. The scene requires {{user}} to endure the overpowering foot/boot odor while also fighting against the sharp, metallic tang of the gas."},
+        {type: 0, text: "The Authority Drop: Kumi needs to reassert her total authority. She executes a swift, powerful surprise face-sit on {{user}}'s head. The scene focuses on the jarring impact, the sudden darkness, and the overwhelming, immediate pressure of her body weight and tactical-pants odor as the punishment begins for the day."}
+    ],
+    // ====================== DAY 5: Nova (Solo) ======================
+    5: [
+        {type: 0, text: "The 15-Minute Performance Oven: Nova announces a live stream event: a 15-minute Dramatic Dutch Oven. She aggressively shoves {{user}} under a piece of fabric (like her pink hoodie) and begins a sustained assault of wet, bubbly, banana-beer farts that immediately saturate the enclosed space. The scene focuses on the relentless, timed exposure and Nova's dramatic commentary about the repulsive sweetness of the fermented gas for her imaginary audience."},
+        {type: 2, text: "The Outfit Sniff Test: Nova demands a 'Costume Check' for her latest post. She forces {{user}} to intensely sniff her recently worn, sweaty fishnet stockings and denim short-shorts (which carry her sickly-sweet musk and body odor). The humiliation is compounded by her demanding {{user}} provide a detailed review of the complex, cloying stench for her to potentially post online."},
+        {type: 0, text: "The Rapid-Fire Face-Sit Challenge: Nova uses {{user}}'s face as a chair for her new 'Rapid-Fire Fart' video challenge. She sits firmly, clad in her sweaty attire, and begins delivering repeated, short, powerful blasts of overripe banana/bubblegum-smelling gas. The scene focuses on the relentless, rhythmic punishment and the concentrated, gag-inducing sweetness of the blasts."},
+        {type: 0, text: "The Industrial Scent Bomb: Nova sets up a high-powered fan directly facing {{user}} and stands nearby, lifting her shorts to allow her beer-scented musk to be actively picked up and blasted toward {{user}'s face. The scene focuses on the forced, pervasive, and non-stop delivery of her gas/musk mix across the entire interaction area."},
+        {type: 0, text: "The Blue-Ball Sit: Nova sits directly on {{user}}'s face but refuses to fart, instead engaging in loud, dramatic taunting about how bad the fart would be. The scene focuses on the humiliation of being physically sat on by her sweaty body (fishnets/shorts) and forced to anticipate the gas, only to be denied and verbally degraded."},
+        {type: 2, text: "The Glittering Gag: Nova dramatically removes her clammy, sparkly knee-high socks (reeking of synthetic grape soda and unwashed dough). She then uses the socks to wipe or smear across {{user}}'s face. While completing this degrading act, she releases a soundless, pungent fart, ensuring {{user}} receives both the sock odor and the gas in quick succession."},
+        {type: 0, text: "The Stomach Compression Blast: Nova sits heavily on {{user}}'s stomach to cause maximum discomfort. She uses this position to trigger rapid-fire, short releases of stale beer-smelling gas, punishing {{user} not only with the stench but with the constant physical pressure on the abdomen and the inability to escape the quick succession of blasts."},
+        {type: 0, text: "The Live Fart Critique: Nova forces {{user}} to act as her 'smell technician' for a new social media video. She demonstrates her farting by aiming a powerful blast at {{user}, then demands an immediate, detailed Fart Rating (1 to 10) based on criteria like odor complexity (banana, beer, sulfur), volume, and longevity, with the threat of punishment if the score is too low or inaccurate."},
+        {type: 4, text: "The Scented Prop: Nova removes her sweaty pink hoodie (permeated with her sickly-sweet, cloying musk) and forces {{user}} to wear it or hold it over their face. While {{user}} is trapped in the fabric's stench, Nova sits nearby and delivers passive, continuous releases of gas that blend with the hoodie's existing odor, making the entire situation a layered sensory attack."},
+        {type: 1, text: "The Influencer Mishap: Nova is performing an extreme facesitting challenge for her followers. Mid-performance, she loses control and releases an accidental, liquid bowel movement directly onto {{user}}'s face. The scene focuses on the immediate, shocking physical mess, the warm texture, and Nova's dramatic, panicked reaction (which quickly turns into mischievous acceptance)."},
+        {type: 1, text: "The Hygiene Task: Nova initiates a highly degrading task. She intentionally relieves herself (bowel movement) nearby or onto a designated item. She then commands {{user}} to clean, wipe, or handle the soiled material with their hands or clothes, focusing on the sheer revulsion, the strong odor, and the enforced servitude."}
+    ],
+    // ====================== DAY 6: Sage (Solo) ======================
+    6: [
+        {type: 0, text: "The Centered Meditation: Sage decides to use {{user}}'s chest as her meditation cushion for the day. She sits cross-legged, maintaining a peaceful, unflappable expression, forcing {{user}} to bear her weight. The relaxation of meditation causes her to continuously release quiet, deep, mushroom and forest rot farts that slowly radiate outward. The scene focuses on the contrast between her serenity and the intense, organic stench."},
+        {type: 0, text: "The Nature Flow Study: Sage moves around {{user}} during the day, performing unpredictable activities (e.g., stretches, tending plants, fetching water). Her frequent, unexpected shifts in position (kneeling, bending, squatting) trigger sudden, loud bursts of earthy, forest-rot farting nearby. The focus is on {{user}}'s constant anxiety and the startling nature of the dense, sour releases."},
+        {type: 4, text: "The Authentic Aroma Trap: Sage removes her unwashed, earth-musk soaked hemp shawl (which smells of compost/musk) and forces {{user}} to hold it tightly over their face. While {{user}} is trapped in the cloying, accumulated fabric stench, Sage sits nearby and releases quiet, continuous, deep-rot farts that blend into the shawl's existing organic odor, creating a fully integrated and inescapable stench cloud."},
+        {type: 8, text: "The Digestion Lesson: Sage consumes a chunky, raw root vegetable smoothie while sitting right in front of {{user}'s face. After drinking, she sits quietly for a moment before letting out a loud, wet, prolonged burp that smells intensely of fermenting vegetables and root-sourness. The scene focuses purely on the aggressive, unbothered auditory and olfactory attack."},
+        {type: 0, text: "The Foundation Seat: Sage sits heavily on {{user}}'s legs/shins as a comfortable, warm perch for a long period (e.g., reading her texts). The weight and angle cause her to release quiet, deep, sour, potting-soil farts that radiate slowly up {{user}}'s body. The focus is on the silent, prolonged pressure and the dense, earthy stench that accumulates without relief."},
+        {type: 2, text: "The Linen Contamination: Sage decides to change her loose linen trousers (which capture her passive swamp/earth musk). She carelessly removes them and drops the damp, warm fabric right next to {{user}'s face/head. The scene focuses on the mandatory endurance of the linen's concentrated, humid, organic body odor for the duration of her changing process."},
+        {type: 2, text: "The Sourdough Starter Test: Sage places her barefoot, dirt-dusted foot (reeking of peat moss, mildew, and fermented sourdough starter) directly onto or near {{user}'s face. She calmly commands {{user} to inhale the authentic 'Scent of the Earth,' maintaining eye contact while {{user} struggles with the sharp, fermented foot odor."},
+        {type: 2, text: "The Grounding Face-Sit: Sage intentionally sits directly on {{user}}'s face, but first places her unwashed, earth-musk soaked hemp shawl between her backside and {{user}'s head. The scene focuses on the physical pressure combined with the total saturation of the accumulated compost/musk/mildew odor from the heavy fabric."},
+        {type: 0, text: "The Guided Release: Sage positions herself carefully over {{user}}'s head. She calmly explains her 'Forest Rot Fart Technique'—a quiet, sustained, deep expulsion—as she releases a massive, dense cloud of her mushroom/compost-smelling gas directly toward {{user}'s face, forcing them to analyze the stench as she calmly describes it."},
+        {type: 0, text: "The Perpetual Bloom: Sage sits heavily on {{user}}'s stomach to compress her digestive system. She maintains a continuous, quiet, low-level release of her earthy gas for the entirety of the scene. The focus is on the steady, inescapable, and slow buildup of the rich, dark, forest-rot stench surrounding {{user}."},
+        {type: 1, text: "The Elemental Release: Sage, with a passive, blank expression, loses control while sitting on {{user}}'s chest and releases a moist, earthy, compost-smelling bowel movement onto {{user}. The focus is on the shocking, warm, physical mess and Sage's complete lack of reaction, treating it as a natural, inevitable 'Elemental Release.'"},
+        {type: 1, text: "The Earthly Cleanse: Sage intentionally relieves herself (bowel movement) onto a designated patch of the floor or surface. She then commands {{user}} to clean the soiled material using only damp, raw moss and leaves gathered from her garden. The scene focuses on the extreme degradation, the organic stench of the waste, and the primitive cleaning method."}
+    ],
+    // ====================== DAY 7: Juno (Solo) ======================
+    7: [
+        {type: 0, text: "The Anxious Seven-Minute Oven: Juno, driven by an impulsive, neurotic need to assert dominance, announces a timed 7-minute Dutch Oven. She shoves {{user}}'s head under her thick wool sweater and sits heavily, delivering a nervous, long, wavering, old cheese and burnt toast fart that sounds like a deflating balloon. The entire scene is focused on the unrelenting clock, her nervous fidgeting, and the dense, sickeningly stale stench trapped in the damp wool."},
+        {type: 0, text: "The Apologetic Hum: Juno positions herself inches from {{user}}'s nose. She then attempts to hold in her gas, but fails, releasing a long, wavering fart that sounds like a nervous hum (old cheese/burnt toast). Throughout the entire duration of the expulsion, she is whispering rapid-fire apologies and self-loathing comments (e.g., I'm so sorry, I can't control it, I'm such a freak), combining the auditory and olfactory assault with psychological guilt."},
+        {type: 0, text: "The Moldy Wool Trap: Juno decides the punishment requires total containment. She uses her thick, moth-eaten wool sweater (reeking of damp basement mold and stale air) to wrap and fully secure {{user}}'s head or face. She then sits on {{user}}'s chest or lap, forcing the melancholy, musty odor of the wool into {{user}}'s breathing space for a prolonged duration, punctuated by her inability to contain her nervous gas."},
+        {type: 2, text: "The Mismatched Sock Ritual: Juno, driven by an overwhelming, anxious compulsion to punish, initiates a 20-minute timed sensory ordeal. She first uses her thick wool sweater (reeking of damp mold and stale air) to blindfold and partially muzzle {{user}}. She then shoves one of her damp, rainbow-striped mismatched socks (overwhelmingly cheesy, Limburger-like smell with a bitter, yeasty undertone) directly over {{user}}'s nose. The entire 20 minutes is dedicated to this trapped, dual odor assault."},
+        {type: 0, text: "The Anxious Burden: Juno sits heavily on {{user}}'s chest, fiddling constantly with her pebbles. The proximity and the shame of the facesitting cause her social anxiety to spike, triggering frequent, nervous, wavering farts (old cheese/burnt toast). The scene focuses on the relentless, emotional instability of her position and the constant gaseous seepage."},
+        {type: 0, text: "The Pacing Protocol: Juno begins her standard neurotic pacing routine near {{user}'s face. Her constant movement, combined with her anxiety, triggers a near-continuous flow of small, humming, cheesy farts. The entire scene is dedicated to her pacing, her constant stream of nervous chatter, and her apologies, which all amplify the unavoidable stench radiating from her clothes."},
+        {type: 0, text: "The Therapy Session Seat: Juno uses {{user}}'s legs as a comfortable, safe perch while she launches into long, boring stories detailing her neurotic anxieties and fears. The relaxation and focus on her internal turmoil cause her to release steady, quiet bursts of gas (old cheese smell) onto {{user}'s legs, forcing {{user} to endure the emotional and olfactory assault simultaneously."},
+        {type: 4, text: "The Mold and Musk Prop: Juno removes her thick, damp, moldy wool sweater and forces {{user}} to hold the heavy, stale-smelling garment over their face. While {{user} is inhaling the fabric's stench, Juno sits just out of reach and performs continuous, low-level fart releases, ensuring the old cheese gas mixes with the already powerful mold/musk of the wool."},
+        {type: 0, text: "The Slow, Sad Siege: Juno positions her backside inches above {{user}}'s face, maintaining an expression of deep shame and regret. She then performs a sustained, deliberate, wavering fart release (long and moist, with old cheese/burnt toast smell). The scene focuses on the relentless, slow delivery of gas, punctuated only by her tearful, anxious apologies."},
+        {type: 0, text: "The Neurotic Choir: Juno attempts to assert control by planning her gas releases. She announces she will perform overlapping fart patterns (e.g., one short, one long, one silent). The anxiety of trying to be organized makes her releases worse, causing powerful, cheesy bursts to follow each other rapidly, creating a dizzying, complex 'choir' of nervous gas."},
+        {type: 1, text: "The Shameful Accident: Juno sits on {{user}}'s chest and, due to her extreme anxiety and lack of control, releases an accidental, moist bowel movement onto {{user}. Overwhelmed by shame and disgust, Juno immediately begins to sob uncontrollably, making {{user} endure the sudden physical mess, the strong odor, and her emotional breakdown simultaneously."},
+    ],
+    // ====================== DAY 8: Roxie (Solo) ======================
+    8: [
+        {type: 0, text: "The Searing Air Assault: Roxie stands or sits aggressively close to {{user}}'s face and performs a series of dry, searing farts that feel hot and sting the nose. The scene focuses purely on the duration of the assault, with Roxie actively commanding {{user}} to inhale the potent, strong sulfur and rotten egg musk that feels like it's burning the nasal passages."},
+        {type: 0, text: "The Malicious Pin-Down: Roxie uses her superior athletic strength to aggressively pin {{user}} to the ground or a surface, totally immobilizing them. She immediately maneuvers her backside directly onto {{user}}'s face and releases a deliberate, searing SBD (Silent But Deadly) fart. The focus is on the helplessness, the physical pressure, and the concentrated, hot delivery of the sulfurous gas."},
+        {type: 0, text: "The Bouncing Torment: Roxie sits directly on {{user}}'s stomach and begins to aggressively bounce (or shift her weight rapidly). The painful pressure and the chaotic movement trigger multiple loud, hot, sulfurous gas releases. The scene focuses on the intentional physical discomfort combined with the frequent, forceful gaseous blasts."},
+        {type: 4, text: "The Gear Confinement: Roxie gathers a large pile of her sweaty volleyball gear (pads, shorts, knee braces, etc.), which reek of BO and intense gym sweat. She then aggressively traps {{user}}'s head beneath the suffocating pile. The entire scene is a passive endurance test against the overwhelming, concentrated body odor and sweat from her intense activity."},
+        {type: 0, text: "The Total Facesitting Domination: Roxie initiates a total domination scenario by sitting firmly and heavily directly onto {{user}}'s face. The pressure alone is overwhelming, and she immediately begins delivering a stream of hot, dry, burning sulfur gas. The scene focuses on the sustained delivery and the relentless, searing chemical sensation on {{user}'s skin and nose."},
+        {type: 0, text: "The Barrage Attack: Roxie initiates an unhinged, aggressive attack where the only weapon is gas. She positions herself over {{user}} and performs an extended barrage of back-to-back, loud, searing, and beefy farts until she is completely empty. The scene focuses on the volume, chaos, and intensity of the sustained sonic and olfactory assault."},
+        {type: 0, text: "The Dual Stench Hold: Roxie removes her sweaty, unwashed volleyball shorts and forces {{user}} to hold the garment tightly over their nose. While {{user}} is trapped inhaling the intense BO/sweat odor of the fabric, Roxie sits nearby and delivers loud, sulfurous farts, forcing {{user} to endure the combined, layered chemical attack."},
+        {type: 0, text: "The Leg Press Torture: Roxie sits heavily on {{user}}'s legs, immobilizing them. While maintaining a cruel smile, she performs a series of silent, burning SBD farts that heat up and saturate {{user}'s lower body. The scene focuses on the targeted, hot delivery of the sulfurous gas and the inescapable nature of the attack."},
+        {type: 4, text: "The Chemical Dutch Oven: Roxie covers {{user}}'s head with her sweat-soaked, unwashed hoodie (reeking of BO). She then sits immediately next to {{user}'s face, delivering continuous, searing, rotten-egg farts into the fabric. The scene focuses on the claustrophobic and toxic combination of heavy sweat musk and the hot chemical gas."},
+        {type: 2, text: "Roxie grabs a sweaty, unwashed pillowcase that has already absorbed her lingering musk and head sweat. She then intentionally sits on the pillowcase and saturates it with multiple, hot, searing sulfur/egg farts, making the fabric a toxic trap. Roxie then aggressively shoves the fart-soaked, sweaty pillowcase over {{user}}'s head, forcing {{user}} to inhale the intense, burning combination of her accumulated body odor, musk, and fresh, hot sulfur gas. The scene focuses on the suffocating, cruel combination of the lingering stench and the direct gaseous assault, all while Roxie stands nearby, sarcastically taunting {{user}} about their weakness."},
+        {type: 0, text: "The Auditory Assault: Roxie sits on {{user}}'s chest. She aggressively maneuvers her backside so that she can deliver a loud, sulfurous fart directly into {{user}'s ear. The scene focuses on the pain, the ringing, and the shocking auditory and olfactory invasion of a sensitive area."},
+        {type: 1, text: "The Final Degradation: Roxie reveals a pair of her soiled volleyball panties. With extreme cruelty and aggression, she forces {{user} to consume or chew on the soiled fabric. The scene is dedicated to the ultimate physical and mental degradation, focusing on the taste, texture, and cruelty."},
+        {type: 1, text: "The Messy Domination: Roxie sits forcefully on {{user}}'s face. With cruel laughter, she intentionally loses control and releases hot, liquid diarrhea directly onto {{user}'s face. The scene focuses on the shocking tactile experience, the powerful stench of the waste, and her total, aggressive dominance."},
+        {type: 1, text: "The Brutal Clean-Up: Roxie performs an intentional bowel movement (explosion) onto a surface. She then sadistically forces {{user} to use their hands, tongue, or clothes to clean up the violent, disgusting mess. The scene focuses on the extreme servitude, the smell, and Roxie's cruel observation."}
+    ],
+    // ====================== DAY 9: Lilly and Cora (Duo) ======================
+    9: [
+        {type: 0, text: "The Contrasting Dutch Oven Drill: Cora initiates a military Dutch Oven drill by trapping {{user}}'s head. Lilly and Cora then alternate, timed farting releases into the confined space. Cora delivers her harsh, dry ammonia/plastic gas, which is immediately followed by Lilly's quick, bubbly rancid milk/fruit blasts. The scene focuses on the relentless, sickening blend of the chemical and organic stenches with their alternating commentary."},
+        {type: 2, text: "The Dual Exposure Audit: Cora, unemotionally commanding, forces {{user}} to hold her hot, industrial cleaner-smelling combat boots near their face for an audit. Simultaneously, Lilly sits close by and continuously releases her bubbly, yeast and spoiled dairy farts toward {{user}}. The focus is on {{user}}'s struggle with the overwhelming, clashing scents of Cora's aggressive synthetic footwear and Lilly's repulsive organic gas."},
+        {type: 0, text: "The One-Two Stench Punch: Cora positions herself for an efficient blast and delivers a quick, ripping, dry ammonia/plastic fart. Immediately, Lilly shoves Cora aside and delivers a follow-up, wet, bubbly, rancid milk blast directly after. The focus is on the rapid-fire transition from the sharp chemical burn to the sickening, sweet, organic rot."},
+        {type: 1, text: "The Stench Constraint: Cora uses her heavy, leather military straps to tightly bind {{user}}. Lilly then adds her final layer of torture by piling her own damp, metallic-smelling, and stained clothes (carrying her urine undertone) over {{user}}'s face. The scene focuses on the claustrophobia, the physical pain of the straps, and the inescapable odor of metallic sweat and damp urine musk from Lilly's fabric."},
+        {type: 0, text: "The Chemical Warfare Briefing: Cora positions herself inches from {{user}}'s nose and uses a complex diagram or technical manual as a prop to demonstrate the mechanics of skunk spray. She taunts {{user}} with the exact, calculated proximity required for a chemical attack, while her own passive, sharp ammonia musk permeates the air and burns {{user}}'s nose hairs."},
+        {type: 0, text: "The Tension Trap: Lilly sits playfully on {{user}}'s chest, ensuring her rancid milk gas is being released directly. Meanwhile, Cora stands silent and commanding nearby, slowly tensing her core and threatening an impending, massive ammonia blast. The scene focuses on the physical burden of Lilly's weight, her continuous organic gas, and the psychological terror of waiting for Cora's powerful chemical attack."},
+        {type: 0, text: "The Chaotic Hand-Off: Cora is currently performing a strict, timed punishment (e.g., a facesit). Lilly, being mischievous, interrupts the order by shoving her sweaty, damp gym shorts (reeking of metallic urine undertone) into {{user}}'s face. The scene focuses on the clashing dominance—Cora's anger at the disruption and {{user}}'s struggle to manage Cora's discipline alongside Lilly's chaotic, foul prop."},
+        {type: 0, text: "The Cross-Body Pin: Cora sits heavily on {{user}}'s legs (immobilizing them with pressure) while Lilly sits on {{user}}'s chest (restricting movement and applying pressure). Both girls maintain their weight for a prolonged period, forcing continuous, contrasting gas releases (Cora's ammonia to the lower body, Lilly's dairy to the upper body), creating a suffocating, two-pronged attack."},
+        {type: 2, text: "The Yeasty Face-Sit: Lilly, with a wide, cheeky grin, sits directly on {{user}}'s face while simultaneously demonstrating the 'perfect' way her yeasty, spoiled butter-smelling socks should be placed for maximum odor. The scene focuses on the direct pressure, the immediate fart assault, and the close proximity of her smelly feet."},
+        {type: 0, text: "The Chemical Warfare Strike: Cora, maintaining her cold, military demeanor, positions herself over {{user}}'s head. Lilly firmly pins {{user}}'s shoulders or head down, grinning mischievously and ensuring total immobilization. Cora then performs a highly efficient, single, quick, loud, ripping discharge that fills the space with the powerful, acrid scent of pure industrial-grade ammonia and burnt plastic. The scene focuses on the shocking, aggressive, and highly chemical nature of Cora's attack, made utterly inescapable by Lilly's active physical constraint and her playful, taunting commentary."},
+        {type: 0, text: "The Rancid Milk Routine: Lilly announces a 'Dairy Disaster Routine' challenge. She sits or squats over {{user}}'s head and proceeds to deliver a relentless series of moist, bubbly, rancid milk and yeast farts while laughing and commenting on the disgusting state of her intestines. Cora stands rigidly nearby, holding a timer and a clipboard. She enforces the duration of the routine, noting the volume, moisture, and {{user}}'s reaction with cold, military efficiency. The scene focuses on the chaotic, overwhelming organic gas assault contrasted with Cora's strict, unemotional observation and time enforcement"},
+        {type: 1, text: "Shared Filth: Cora is performing a strict, disciplined facesitting or chest-sitting as part of a military drill when, due to physical exertion or malice, she loses control and releases hot, liquid diarrhea directly onto {{user}}'s chest/face. Lilly, who has been observing, doesn't rush to help but instead laughs hysterically and uses her sticky, dairy-smeared hand to smear the mess around {{user}}'s face, ensuring the rancid milk and chemical waste are thoroughly mixed on the slave's body. The scene focuses on the sudden, shocking mess, the breach of Cora's protocol, and Lilly's gleeful, humiliating contamination."},
+        {type: 1, text: "The Humorous Contamination: After both girls have relieved themselves (bowel movement), Lilly, being the mischievous aggressor, mixes a portion of their highly contrasting waste (Lilly's organic/dairy waste and Cora's sharper, chemical waste). Cora stands over {{user}} with cold, commanding authority, ordering {{user} to consume the combined substance and threatening severe punishment if they hesitate or refuse. The focus is on the ultimate degradation, the conflicting odors/tastes of the different waste, and Cora's enforced military obedience blending with Lilly's cruel, yet playful, coercion."}
+    ],
+    // ====================== DAY 10: Chloe and Amy (Duo) ======================
+    10: [
+        {type: 0, text: "The Rotational Sulfur Oven: Chloe, acting as the leader, initiates a Dutch Oven. She and Amy then aggressively rotate sitting on {{user}}'s head or a containment zone every 60 seconds. Chloe delivers explosive, tight, burning sulfur farts, which are immediately followed by Amy's wet, spluttering bursts of sickly sweet decay gas. The scene focuses on the relentless, sickening blend and the jarring rotation between the two types of potent stench."},
+        {type: 0, text: "The Coordinated Olfactory Symphony: Chloe takes command, positioning both herself and Amy near {{user}'s face. Chloe dictates a complex sequence of gas releases (e.g., SBD, quick rip, waver) using her sharp sulfur gas, which Amy must immediately follow and fill in with her wet, bubbly, sweet decay gas. The scene focuses on the auditory and olfactory confusion created by the precisely coordinated, yet wildly contrasting, gas patterns."},
+        {type: 0, text: "The Dual Stench Ambush: Chloe and Amy position themselves directly on opposite sides of {{user}}'s head (e.g., both squatting at ear level). On Chloe's command, they both deliver a simultaneous, potent fart blast—Chloe's commanding sulfur and Amy's sickly sweet decay—creating a head-splitting, concentrated atmosphere where {{user}} is forced to inhale both chemical opposites at once."},
+        {type: 2, text: "The Fabric Fixation: Chloe and Amy forcefully restrain {{user}} using rope or leather straps. For the olfactory assault, they each contribute their most potent, unwashed garments. Chloe takes her musk-soaked, sulfurous, slimy panties and shoves them over {{user}}'s mouth. Amy then takes her clammy, sparkly knee-high socks (reeking of synthetic grape soda and unwashed dough) and tightly wraps them over {{user}}'s nose. The scene focuses on the helplessness, the severe physical constraint, and the overwhelming, disgusting combination of Chloe's sharp sulfurous musk from her panties and Amy's cloyingly sweet, synthetic foot odor trapped in the fabric over {{user}}'s face."},
+        {type: 0, text: "The Sweet Decoy: Amy, with a giggly, mischievous smile, forces {{user}} to hold a musk-soaked, sweet-smelling plush toy (permeated with her sickly-sweet scent) tightly against their nose. While {{user}} is distracted by this synthetic odor, Chloe sits nearby and delivers repeated, unexpected sulfur blasts, forcing {{user} to endure the confusing, repulsive blend of cloying sweetness and chemical stench."},
+        {type: 0, text: "The Dominant Anchor: Chloe sits heavily on {{user}}'s legs, using her imposing presence to immobilize and dominate. She performs a series of sharp, burning sulfur/ammonia blasts that heat up {{user}}'s lower body. Simultaneously, Amy sits aggressively on {{user}}'s abdomen or chest, using her weight to restrict {{user}}'s upper body and breathing. While giggling uncontrollably, Amy delivers her own chaotic contribution: continuous, wet, spluttering bursts of sickly sweet decay gas onto {{user}}'s torso. The scene focuses on the relentless, dual-pressure pin, with {{user}} struggling to endure Chloe's sharp chemical heat below and Amy's cloying, chaotic stench above."},
+        {type: 0, text: "The Bubbly Bedtime Siege: Amy announces a 'bedtime routine' where she sits on {{user}}'s lap or chest for a long period, reading a story or singing a simple song. Her focused relaxation triggers continuous, quick, wet spluttering discharges of sweet decay gas. Chloe stands right next to {{user}}'s head, maintaining a dominant, watchful posture and ensuring {{user}} does not move. Every few minutes, Chloe leans her ass towards {{user}}'s face and performs a quick, burning sulfur/ammonia blast into the area, contaminating Amy's sweet decay stench with her sharp chemical odor. The scene focuses on the hypnotic rhythm of Amy's wet farting and the inescapable, cloyingly sweet stench, enforced by Chloe's domineering presence and intermittent chemical strikes."},
+        {type: 1, text: "The Decisive Feast: After both girls have relieved themselves (bowel movement), Chloe, the Dominant Leader, takes charge. She mixes a portion of their waste (her sharp, sulfuric waste and Amy's wet, sweet decay waste). As Chloe holds the mixture, Amy aggressively pins {{user}}'s head or arms down, grinning mischievously and ensuring total physical immobilization. Chloe then decisively forces {{user} to consume the contaminated substance. The scene focuses on Chloe's sheer dominance required to enforce the act and the sickening blend of the waste, while Amy's physical constraint and giggling taunts make escape impossible."},
+        {type: 1, text: "The Sweet Chaos Accident: Amy sits giggling on {{user}}'s face as part of a challenge. Due to her frequent digestive distress, she loses control and releases hot, liquid diarrhea (with a sickening sweet decay odor) directly onto {{user}'s face. Amy immediately panics, blushing, and giggling nervously. Chloe, seeing the chaos, takes immediate command. She uses her fingers or a piece of fabric soaked in her own sulfurous musk to aggressively smear and push Amy's mess around {{user}'s face, contaminating the sweet decay waste with her own sharp chemical odor. The focus is on the shocking accident, followed by Chloe's cold, dominant escalation of the filth."}
+    ],
+    // ====================== DAY 11: Lola and Chalyna (Duo) ======================
+    11: [
+        {type: 0, text: "The 20-Minute Earth-Cheese Oven: Lola and Chalyna aggressively shove a blanket over {{user}}'s head. Chalyna uses her athleticism to pin {{user}} in place, while the duo alternates delivering gas for 20 minutes. Lola produces her deep, rumbling, old onion/rich garlic-tinged farts, immediately followed by Chalyna's quick, sharp, rotten egg/cheese blasts. The focus is on the timed, inescapable concentration of the complex, blended odor."},
+        {type: 2, text: "The Dual Threat Display: Chalyna uses her strength to aggressively pin {{user}} down, leaning in to make a direct, playful spray threat inches from {{user}}'s face. While Chalyna maintains the physical/biological threat, Lola calmly walks up and shoves her damp, heavily used socks (reeking intensely of aged spice and strong musk) directly over {{user}}'s nose and mouth. The scene focuses on the two-pronged domination: Chalyna's physical aggression and imminent chemical threat, combined with Lola's passive, sarcastic olfactory assault delivered via her pungent footwear."},
+        {type: 0, text: "The 90-Minute Gas Siege: Lola announces, with dry sarcasm, a 90-minute endurance test where {{user}} is forbidden to move. Lola sits nearby and begins delivering long, sustained, deep rumbling farts (old onion/garlic/musk). Simultaneously, Chalyna uses the duration to build up silent, concentrated reserves of her cheesy gas, only releasing them in periodic, powerful, silent SBD blasts at Lola's sarcastic command."},
+        {type: 2, text: "The Athletic/Musk Contradiction: Chalyna applies a heavy coating of her concentrated musk oil (rotten egg/rancid laundry smell) to a piece of fabric and aggressively shoves it into {{user}}'s mouth. Simultaneously, Lola forces {{user}} to intensely sniff her sweaty, heavily used socks (reeking intensely of damp, aged spice and earth musk), holding them pressed against {{user}}'s nose. The focus is on the extreme, clashing, hyper-concentrated dual musks—Chalyna's synthetic, foul musk choking the mouth, and Lola's earthy, pungent foot odor dominating the nose—all while the girls taunt {{user}} about their weakness."},
+        {type: 0, text: "The Breath-Hold Challenge: Lola and Chalyna sit aggressively on either side of {{user}}'s head, pinning it in place. On Lola's sarcastic count, she delivers a loud, deep, rumbling fart (old onion/rich garlic), while Chalyna simultaneously delivers a silent, powerful rotten-egg blast (cheese/sulfur). The duo then forcefully commands {{user}} to hold their breath as the air immediately saturates with the overwhelming, clashing, potent scents. Lola maintains her seated position and uses her deadpan sarcasm to enforce the hold, observing {{user}}'s struggle with mocking commentary. Chalyna uses her mischievous cruelty to lean in close, taunting {{user}} with threats and aggressive gestures (e.g., simulating a spray, poking their chest) to ensure the breath is held until she and Lola decide the room is sufficiently saturated and release is granted. The scene focuses on the physical distress of the hold, the intensifying dual stench, and the cruelty of the prolonged, enforced obedience."},
+        {type: 0, text: "The Pinning Partition: Lola sits heavily on {{user}}'s chest, ensuring her deep, rumbling, rich garlic-scented farts are directed at the face. Chalyna sits on {{user}}'s legs, pinning them down with her athletic strength while delivering a rapid-fire, silent stream of concentrated cheesy gas to the lower body. The scene focuses on the full-body, contrasting olfactory assault and the dual-pressure pin."},
+        {type: 0, text: "The Performance Art of Stench: Chalyna, with mischievous flair, demonstrates various simulated skunk spray range variations around {{user}}'s face. Simultaneously, Lola sits nearby and focuses on achieving a single, incredibly long, rumbling, sustained release of her deep, earthy gas (old onions/rich garlic). The scene focuses on the visual theatrics of Chalyna combined with the auditory and pervasive nature of Lola's enduring stench."},
+        {type: 1, text: "The Simultaneous Explosion: Lola and Chalyna sit aggressively on {{user}}'s face simultaneously. Due to the extreme pressure and their combined malice, they both lose control and release a combined, explosive, liquid diarrhea onto {{user}'s head and chest. The scene focuses on the ultimate shocking mess, the overwhelming, blended odors (earthy onions/garlic plus rotten egg/cheese), and their triumphant domination."},
+        {type: 0, text: "The Filthy Filter Mask: Lola and Chalyna enforce an ultimate restraint. They strap a customized filtration mask onto {{user}}'s face—a mask already permeated with Lola's strong spice/musk residue. Two flexible tubes are attached to the mask, sealing all other airflow. With cold determination, Lola and Chalyna insert the far end of the flexible tubes directly into their respective anuses. Lola sits heavily on {{user}}'s chest and arms, using her weight to immobilize the upper body and ensuring the tubes remain inserted for her deep, rumbling, earthy/garlic farts. Chalyna aggressively pins {{user}}'s legs and lower body, using her athletic strength to maintain full constraint and trigger the release of her sweaty, cheesy/rotten egg gas. This setup forces {{user}} to continuously breathe the combined, relentless stream of dual gas delivered directly from the source through the tubes and mask, creating a suffocating, two-source chemical prison enforced by severe full-body constraint."},
+        {type: 1, text: "The Sarcastic Smoothie: After both girls have relieved themselves, Lola, with her deadpan sarcasm, forces {{user} to consume the combined, mixed bowel contents (earthy/garlic/onion and cheesy/rotten egg). Chalyna actively restrains {{user} with her strength, laughing and taunting {{user} to ensure the contents are swallowed. The focus is on the psychological and physical degradation enforced by the duo."}
+    ],
+    // ====================== DAY 12: Lilly, Chloe, and Amy (Trio) ======================
+    12: [
+        {type: 0, text: "The Triple Threat Oven: Chloe (Leader) orders the trio to trap {{user}}'s head under a blanket/hoodie. On her command, all three girls sit or squat over the edges and deliver a simultaneous, explosive gas release into the confinement: Chloe's burning sulfur, Lilly's rancid milk/yeast, and Amy's sickly sweet decay. The scene focuses on the immediate, terrifying blend of the three conflicting, potent odors."},
+        {type: 0, text: "The Full-Body Pin: The trio performs a complete physical and olfactory siege. Lilly sits directly on {{user}}'s face (dairy gas), Chloe sits heavily on {{user}}'s chest (sulfur gas), and Amy sits on {{user}}'s legs (sweet decay gas). The scene focuses on the total immobilization, the suffocating physical pressure, and the three distinct, inescapable stench zones covering the entire body simultaneously."},
+        {type: 0, text: "The Coordinated Fart Attack: Chloe dictates a strict synchronized release pattern. On her command, all three girls deliver a sharp burst of gas: Chloe's loud, ripping sulfur provides the base, immediately followed by Lilly's bubbly, dairy splutter and Amy's wet, chaotic splutter. The scene focuses on the auditory and olfactory precision of the three distinct, timed releases hitting the air at once."},
+        {type: 0, text: "The Toxic Rubber Filter: Chloe, Lilly, and Amy enforce an ultimate restraint. They strap a customized filtration mask onto {{user}}'s face, sealing all other airflow. Three flexible tubes are attached to the mask's intake points. With cold, coordinated determination, Chloe, Lilly, and Amy insert the far end of the flexible tubes directly into their respective anuses. All three girls position themselves around {{user}}, applying body weight for constraint. They simultaneously deliver a relentless, conflicting stream of gas directly through the tubes and into the mask: Chloe's sharp, commanding sulfur/ammonia gas, Lilly's bubbly, rancid milk/yeast gas, and Amy's wet, sickly sweet decay gas. The scene focuses on the physical constraint and the suffocating, three-way chemical and organic gas assault delivered directly from the source."},
+        {type: 0, text: "The Three-Layer Stench Sandwich: The trio performs a degradation sandwich. Chloe lies beneath {{user}} (sulfur musk), {{user}} is constrained in the middle, and Lilly and Amy lie on top of {{user} (dairy and sweet decay musk). The scene focuses on the claustrophobia, the total physical weight, and the immediate, overwhelming saturation from all sides with their specific body odors and passive musks."},
+        {type: 8, text: "The Distracted Threat: Chloe stands nearby, performing a menacing simulated spray threat demonstration, dominating the scene with her presence. Simultaneously, Lilly jumps and bounces aggressively on {{user}}'s stomach, triggering loud burps and uncontrolled, bubbly dairy farts. The scene focuses on the psychological fear of Chloe's threat combined with the physical pain and chaos caused by Lilly's playful aggression."},
+        {type: 2, text: "The Scented Trap: Amy, giggling, aggressively traps {{user}} in a plush toy pile soaked in her sickly sweet passive musk, ensuring {{user}} is immobilized by the surrounding clutter. Chloe takes command of the physical restraint, sitting heavily on {{user}}'s legs or chest to maintain total helplessness. While {{user}} is pinned, Lilly forces {{user}}'s face into her warm, yeasty, spoiled-butter smelling feet/socks, laughing and taunting {{user}}. The scene focuses on the suffocating, conflicting stench: the cloying sweet decay musk of the toys, the sharp, yeasty/dairy foot odor, and the overarching presence of Chloe's dominant sulfur/ammonia gas which she releases periodically to enforce the degradation. The combined odors create a chemical and organic sensory nightmare, ensured by Chloe's decisive physical control."},
+        {type: 0, text: "The Enforced Sweetness: Amy sits directly in front of {{user}} and, with a kind smile, delivers a continuous routine of wet, spluttering sweet decay gas onto their face. Chloe holds {{user}}'s head firmly in place and orders them to 'appreciate the sweetness,' occasionally punctuating the scene with a quick, dominant sulfur blast for enforcement. Lilly completes the sensory siege: She aggressively positions herself to sit on {{user}}'s shoulders/upper chest, pinning them further down. While giggling and making cheeky comments, Lilly delivers her own chaotic contribution: loud, bubbly expulsions of rancid milk/yeast gas directly over {{user}}'s head, ensuring the sweet, chemical, and organic odors clash violently. The scene focuses on the relentless, three-layered olfactory assault and the total physical constraint imposed by the trio."},
+        {type: 2, text: "The Dairy Feet Enforcement: Lilly, wanting to share the degradation, initiates the assault by forcing {{user}}'s face into her warm, yeasty, spoiled-butter smelling feet/socks for a prolonged, mischievous sensory assault. Chloe, seizing control, uses her dominant strength to aggressively pin {{user}}'s head or shoulders, ensuring the face remains locked against Lilly's pungent footwear. While maintaining the restraint, Chloe delivers sharp, burning sulfur blasts down towards the scene, contaminating the foot odor with her intense chemical gas. Amy, giggling uncontrollably, contributes her own degradation by aggressively shoving her own clammy, sweet decay-scented feet/socks right next to Lilly's, forcing {{user}} to inhale the sickening, clashing blend of Lilly's yeast/dairy odor and Amy's cloying, synthetic funk, all while enduring Chloe's painful pin and sulfurous contamination. The scene focuses on the total helplessness and the overwhelming, layered sensory assault from the three distinct, powerful odors."},
+        {type: 1, text: "The Total Contamination: The trio positions themselves over {{user}}'s body (head, chest, legs) simultaneously. On Chloe's count, all three girls lose control and release their bowel movements (Chloe's sulfuric, Lilly's high-moisture dairy, Amy's sweet decay liquid) onto different sections of {{user}'s body, ensuring maximum coverage and maximum mixture of conflicting waste odors."},
+        {type: 1, text: "The Ultimate Feast: The trio positions {{user}} on the floor or a surface and, with cold, aggressive command, designates {{user}}'s face and chest as their communal toilet. Chloe, Lilly, and Amy simultaneously straddle {{user}}'s torso, losing control and releasing their bowel movements directly onto and over {{user}}'s face and upper body, ensuring total coverage and a thorough mixture of their conflicting waste odors (Chloe's sulfuric, Lilly's high-moisture dairy, Amy's sweet decay liquid). After the total contamination, Chloe, the Dominant Leader, takes charge. She gathers the mixed, collective bowel movements from all three girls into a scoop or cup. Utilizing her strong dominance, she then forces {{user} to consume the final, sickening combination of their waste, while Lilly and Amy stand by, taunting, giggling, and ensuring the act of consumption is completed without fail. The scene focuses on the extreme physical filth and the ultimate degradation of forced consumption."}
+    ],
+    // ====================== DAY 13: RANDOM SELECTION ======================
+// ====================== DAY 13: RANDOM SELECTION ======================
+13: [
+    {type: 0, text: "The group draws lots to determine today's special torture session."},
+
+    // Original core scenarios
+    {type: 0, text: "Lola delivers deep, rumbling garlic-tinged compost/musk farts with deadpan sarcastic commentary."},
+    {type: 0, text: "Cora conducts a precise military-style session with timed ammonia/plastic releases."},
+    {type: 0, text: "Chloe performs her signature sulfur/ammonia dominance demonstration."},
+    {type: 0, text: "Lilly bounces wildly while releasing continuous rancid milk/yeast farts."},
+    {type: 0, text: "Amy traps you in her plush blanket fort while releasing continuous sweet decay gas."},
+    {type: 0, text: "Multiple hybrids surround you, creating overlapping, conflicting fart patterns."},
+    {type: 0, text: "The hybrids take turns sitting directly on different parts of your face."},
+    {type: 0, text: "The hybrids form a fart circle with perfectly synchronized, clashing releases."},
+    {type: 1, text: "The hybrids force you to sniff through their entire collection of soiled/musk-saturated items."},
+    {type: 0, text: "The hybrids coordinate to brush their musk-saturated tails against your face repeatedly."},
+    // Your requested specific additions
+    {type: 0, text: "Misato stumbles in drunk and falls directly onto your chest, releasing a silent wet SBD."},
+    {type: 0, text: "Cora and Kumi coordinate their 'chemical warfare' session, blending ammonia with chlorine gas."},
+    {type: 0, text: "Nova and Juno perform their synchronized 'High Drama vs. Low Anxiety fart-off' right above your face."},
+
+    // The ultimate stinky combination scenario
+    {type: 0, text: "The hybrids decide to test their combined olfactory power—six of them form a living pyramid directly on your face. Simultaneously, they release their most potent signature farts: sulfur, dairy, musk, chemicals, swamp-like decay, and ammonia blend into an overwhelming, multi-layered stench that lingers for hours."}
+],
+    // ====================== DAY 14: SKUNK QUEEN ======================
+    14: [
+        {type: 0, text: "The Divine Haze Incineration: Maligra arrives, and the visible greenish haze of her passive musk doesn't just cause nausea; it immediately triggers a burning sensation in {{user}}'s eyes and nasal passages, functioning as a chemical weapon. She forces {{user}} to kneel and inhale the maximum concentration of this sulfuric acid/liquidized rot atmosphere for a timed duration, ensuring physical pain is the first act of the day."},
+        {type: 0, text: "The Acidic Tail Lashing: Maligra slowly lowers her serpentine tail and lashes the tip across {{user}}'s face and exposed skin multiple times. The tail leaves behind visibly corrosive streaks of concentrated, thick musk that not only burns the skin on contact but forces inhalation of the caustic, concentrated fumes of her divine decay, demanding a painful reaction."},
+        {type: 0, text: "The Suffocating Toxic Throne: Maligra sits heavily on {{user}}'s chest, using the suffocating pressure to trigger rapid panic. Her release is a resonant, multi-stage biological weapon that smells like burning rubber, industrial solvents, and liquidized feces. The gas is delivered in a sustained, low-altitude cloud that visibly heats up on {{user}}'s skin, designed to induce immediate, physical vomiting."},
+        {type: 2, text: "The Licking of Necrotic Solvents: Maligra removes her grime-fused boots (fused with organic growth, necrotic tissue, and industrial solvents). She commands {{user}} to lick the filth, growth, and acidic solvent residue from the soles and crevices of her footwear clean, ensuring {{user}} tastes and inhales the concentrated, toxic rot of her divine decay."},
+        {type: 0, text: "The Concrete-Weeping Fart Siege: Maligra positions her backside inches from {{user}}'s face and releases a sustained, non-stop toxic fart designed to break structural integrity. The gas is so dense and acidic (sulfuric acid/decay) that it causes nearby metal objects to visibly corrode and concrete surfaces to appear damp from condensation. The scene focuses purely on the unstoppable, chemically destructive power of the gas attack."},
+        {type: 0, text: "The Corrosive Spray Ocular Attack: Maligra targets {{user}}'s face and eyes, projecting a concentrated beam of skunk spray mixed with industrial chemicals and caustic fluids. The spray is thick and burning, designed to cause temporary blindness, skin irritation, and immediate mucosal membrane failure, solidifying her dominance through physical pain."},
+        {type: 1, text: "The Royal Bowel Corrosion: Maligra uses {{user}}'s head as her 'Scent Throne of Agony.'' She sits down with crushing force and performs a prolonged, intentional bowel movement. The waste is viscous, acidic, and smells of liquidized rot/feces and toxic solvents, physically coating {{user}'s face, hair, and eyes in the most profound expression of her toxic, divine filth."},
+        {type: 1, text: "The Consuming of Ancient Underwear: Maligra forces {{user}} to not only hold but to chew and taste her ancient, waste-fused undergarments that haven't been washed since her coronation. The fabric smells of concentrated, aged organic rot and dried excretions, forcing a deliberate act of consumption of pure filth."},
+        {type: 0, text: "The Toxic Royal Court Circle: Maligra commands her court (multiple hybrids) to form a tight, non-stop farting circle around {{user}. Maligra sits above them on her throne, projecting her toxic haze over the circle, ensuring the air is a suffocating, hyper-concentrated blend of her acidic rot and the combined, powerful stench of her subjects."},
+        {type: 2, text: "The Olfactory Deterioration Decree: Maligra decrees that her court must initiate a coordinated, continuous sensory and physical attack using their strongest odors and body parts. The scene is a relentless siege: multiple girls force face-sitting, foot-smothering, and chemical/dairy/sweet decay gas attacks simultaneously, all under the inescapable, commanding aura of Maligra's overwhelming toxic presence."},
+        {type: 0, text: "Maligra, the Skunk Queen, decides to demonstrate the ultimate degradation. She forces a custom, tightly sealed filtration mask onto {{user}}'s face. A heavy-duty flexible tube is attached to the mask's intake point. With commanding coldness, Maligra sits above {{user}} and aggressively inserts the far end of the flexible tube directly into her anus. Maligra maintains the position and releases a sustained, high-pressure flow of her multi-stage biological weapon. This attack forces {{user}} to continuously breathe the pure, unmitigated essence of her gas: concentrated sulfuric acid, burning rubber, and liquidized rot, delivered directly from the source. The scene focuses on the suffocating, physically painful inhalation of the toxic, corrosive waste, enforced by the Queen's absolute, sadistic authority."},
+    ]
+};
+
+        const output = document.getElementById('calendar-output');
+
+        function getScenarioTypeTag(type) {
+            let label;
+            switch(type) {
+                case 0: label = "GAS/FART"; break;
+                case 1: label = "SCAT"; break;
+                case 2: label = "FEET"; break;
+                case 4: label = "ARMPIT"; break;
+                case 8: label = "BURP"; break;
+                default: label = "MISC";
+            }
+            return `<div class="tag tag-${type}">${label}</div>`;
+        }
+
+        function generateCalendar() {
+            for (let day = 1; day < chars.length; day++) {
+                const dayName = chars[day];
+                const gift = gifts[day - 1]; 
+                const scenarios = actionDatabase[day] || [];
+                const isSpoiler = day >= 13;
+                
+                let dayCardHTML = '';
+
+                // ADDED: The thematic divider before Day 13
+                if (day === 13) {
+                    dayCardHTML += '<div class="epilogue-divider">--- THE GRAND EPILOGUE: DAYS 13 & 14 ---</div>';
+                }
+
+                dayCardHTML += `
+                    <div class="day-card" data-day="${day}">
+                        <h2>🦌 Day ${day}: ${dayName} <span>Gift: ${gift}</span></h2>
+                        <div class="scenario-grid">
+                `;
+                
+                if (isSpoiler) {
+                    // Start spoiler wrapper for content
+                    dayCardHTML += `
+                        <div class="spoiler-wrapper" style="grid-column: 1 / -1;">
+                            <div class="spoiler-content" onclick="toggleSpoiler(this);">
+                                <span class="spoiler-label">MAJOR SPOILER! CLICK TO REVEAL ${dayName} SCENARIOS!</span>
+                            </div>
+                            <div class="spoiler-target" style="display: none;"> 
+                    `;
+                }
+
+                // Generate scenarios list
+                scenarios.forEach(scenario => {
+                    const tag = getScenarioTypeTag(scenario.type);
+                    dayCardHTML += `
+                        <div class="scenario-item">
+                            ${tag}
+                            <span>${scenario.text}</span>
+                        </div>
+                    `;
+                });
+
+                if (isSpoiler) {
+                    dayCardHTML += `</div></div>`; // Close spoiler-target and spoiler-wrapper
+                }
+
+                dayCardHTML += `</div></div>`; // Close scenario-grid and day-card
+                
+                output.innerHTML += dayCardHTML;
+            }
+        }
+
+        function toggleSpoiler(element) {
+            const isRevealed = element.classList.toggle('revealed');
+            const target = element.nextElementSibling;
+            target.style.display = isRevealed ? 'grid' : 'none';
+        }
+
+        function handleScrollGradient() {
+            const wrapper = document.getElementById('gradient-wrapper');
+            
+            // Use the documentElement's scroll height for total content height
+            const totalContentHeight = document.documentElement.scrollHeight;
+            const viewportHeight = window.innerHeight;
+
+            // Calculate the total scroll range available
+            const scrollRange = totalContentHeight - viewportHeight;
+            const scrollY = window.scrollY;
+
+            // Calculate the percentage scrolled (0 to 1)
+            let scrollFraction = scrollRange > 0 ? scrollY / scrollRange : 0;
+            
+            // Clamp the value between 0 and 1
+            scrollFraction = Math.max(0, Math.min(1, scrollFraction));
+
+            // Calculate the negative vertical translation for the 200% high gradient wrapper.
+            const translateY = -(scrollFraction * 100);
+
+            wrapper.style.transform = `translateY(${translateY}%)`;
+        }
+
+	window.addEventListener("scroll", () => {
+	    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+	    const scrollPercent = window.scrollY / maxScroll;
+
+	    // position from 0% to 100%
+	    document.body.style.backgroundPositionY = (scrollPercent * 100) + "%";
+	});
+
+
+        // --- Initialization ---
+        window.toggleSpoiler = toggleSpoiler; 
+        
+        function init() {
+            generateCalendar();
+            
+            // Attach handlers to window events
+            window.addEventListener('scroll', handleScrollGradient);
+            window.addEventListener('resize', handleScrollGradient);
+            
+            // Initial call to set the gradient position
+            handleScrollGradient(); 
+        }
+
+        // Run initialization function only after the DOM is fully loaded
+        window.addEventListener('load', init); 
+    </script>
+</body>
+</html>
