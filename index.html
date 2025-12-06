@@ -1,86 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Twelve Days of Stinkmas</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #1c1c1c;
-      color: #f1f1f1;
-      padding: 20px;
-    }
-    h1, h2, h3 {
-      color: #ff6f61;
-    }
-    hr {
-      border: 1px solid #555;
-    }
-    .lyrics {
-      margin: 20px 0;
-      line-height: 1.6;
-    }
-    .lyrics p {
-      margin: 5px 0;
-    }
-    a.button {
-      display: inline-block;
-      margin: 10px 0;
-      padding: 10px 15px;
-      background-color: #ff6f61;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-    a.button:hover {
-      background-color: #ff3b2f;
-    }
-    .state-tag {
-      color: #ff3b2f;
-      font-weight: bold;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twelve Days of Stinkmas</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #1c1c1c, #2c2c2c);
+    color: #f1f1f1;
+  }
+
+  header {
+    text-align: center;
+    padding: 20px;
+    background-color: #3a3a3a;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+  }
+
+  header img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+    border: 3px solid #ff6f61;
+    margin-bottom: 10px;
+  }
+
+  header h1 {
+    margin: 10px 0 0 0;
+    font-size: 2.5em;
+    color: #ff6f61;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #2b2b2b;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.7);
+  }
+
+  h2, h3 {
+    color: #ffb86c;
+  }
+
+  .lyrics p {
+    margin: 10px 0;
+    line-height: 1.5;
+  }
+
+  a.button {
+    display: inline-block;
+    margin: 15px 0;
+    padding: 10px 20px;
+    background-color: #ff6f61;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  a.button:hover {
+    background-color: #ff3b2f;
+  }
+
+  hr {
+    border: 1px solid #555;
+    margin: 25px 0;
+  }
+
+  .state-tag {
+    color: #ff3b2f;
+    font-weight: bold;
+  }
+</style>
 </head>
 <body>
 
+<header>
+  <img src="https://ella.janitorai.com/bot-avatars/s-CCGcpfuJESfwnPuEIsg.webp?width=400" alt="Stinkmas Avatar">
   <h1>🎄 Twelve Days of Stinkmas 🎄</h1>
+</header>
 
-  <h2>📝 User Guide for Interacting with This Scenario 😈</h2>
-  <p>This scenario uses a <strong>State Tracking System</strong> hidden within the character's last message to manage the progression of Days, Actions, and Fetishes. <strong>Your input must always include the latest state tag</strong> to ensure the story progresses correctly.</p>
+<div class="container">
 
-  <hr>
-
-  <h3>⚠️ Critical Rules for Stable Play</h3>
-  <ol>
-    <li><strong>Always Copy and Paste the State Tag:</strong> At the end of every response, the character will include a tag like <span class="state-tag">[STATE_MEM: FETISHES:0, DAY:1, ACTION:1, GUIDED:0, TURN:3]</span>. You <strong>must</strong> copy and paste this entire tag into your next prompt. <strong>Do not modify the numbers unless instructed.</strong></li>
-    <li><strong>Max Tokens/Length:</strong> Set your maximum generation length <strong>as high as possible</strong> to prevent the AI from cutting off the critical state tag at the end of its response.</li>
-    <li><strong>Highly Suggested Temperature Setting:</strong> Use a value between <strong>0.9 and 1.0</strong> for creative output.</li>
-  </ol>
-
-  <hr>
-
-  <h3>🎵 Play or Download the Stinky Twelve Days of Christmas</h3>
-  <p>Click the button below to download or play the song in a new tab:</p>
-  <a class="button" href="stinky_twelve_days.mp3" target="_blank">🎶 Play/Download Song</a>
-
-  <hr>
-
-  <h2>🎁 Lyrics for Twelve Days of Stinkmas</h2>
+  <h2>🎁 Lyrics</h2>
   <div class="lyrics">
-    <p><strong>Day 1:</strong> A stinky pair of socks.</p>
-    <p><strong>Day 2:</strong> Two soiled feathers,<br>And a stinky pair of socks.</p>
-    <p><strong>Day 3:</strong> Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
-    <p><strong>Day 4:</strong> Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
-    <p><strong>Day 5:</strong> Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
-    <p><strong>Day 6:</strong> Six sour milk eggs,<br>Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
-    <p><strong>Day 7:</strong> Seven sweaty socks,<br>Six sour milk eggs,<br>Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
-    <p><strong>Day 8:</strong> Eight cups of spoiled milk,<br>Seven sweaty socks,<br>Six sour milk eggs,<br>Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
-    <p><strong>Day 9:</strong> Nine drops of musk,<br>Eight cups of spoiled milk,<br>Seven sweaty socks,<br>Six sour milk eggs,<br>Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
-    <p><strong>Day 10:</strong> Ten whiffs of chlorine gas,<br>Nine drops of musk,<br>Eight cups of spoiled milk,<br>Seven sweaty socks,<br>Six sour milk eggs,<br>Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
-    <p><strong>Day 11:</strong> Eleven rotting banana peels,<br>Ten whiffs of chlorine gas,<br>Nine drops of musk,<br>Eight cups of spoiled milk,<br>Seven sweaty socks,<br>Six sour milk eggs,<br>Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
-    <p><strong>Day 12:</strong> Twelve crushing sulfur blasts,<br>Eleven rotting banana peels,<br>Ten whiffs of chlorine gas,<br>Nine drops of musk,<br>Eight cups of spoiled milk,<br>Seven sweaty socks,<br>Six sour milk eggs,<br>Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
+    <p>On the first day of Christmas,<br>my true love sent to me<br>A stinky pair of socks.</p>
+    <p>On the second day of Christmas,<br>my true love sent to me<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
+    <p>On the third day of Christmas,<br>my true love sent to me<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
+    <p>On the fourth day of Christmas,<br>my true love sent to me<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
+    <p>On the fifth day of Christmas,<br>my true love sent to me<br>Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
+    <p>On the sixth day of Christmas,<br>my true love sent to me<br>Six sour milk eggs,<br>Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
+    <p>On the seventh day of Christmas,<br>my true love sent to me<br>Seven sweaty socks,<br>Six sour milk eggs,<br>Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
+    <p>On the eighth day of Christmas,<br>my true love sent to me<br>Eight cups of spoiled milk,<br>Seven sweaty socks,<br>Six sour milk eggs,<br>Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
+    <p>On the ninth day of Christmas,<br>my true love sent to me<br>Nine drops of musk,<br>Eight cups of spoiled milk,<br>Seven sweaty socks,<br>Six sour milk eggs,<br>Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
+    <p>On the tenth day of Christmas,<br>my true love sent to me<br>Ten whiffs of chlorine gas,<br>Nine drops of musk,<br>Eight cups of spoiled milk,<br>Seven sweaty socks,<br>Six sour milk eggs,<br>Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
+    <p>On the eleventh day of Christmas,<br>my true love sent to me<br>Eleven rotting banana peels,<br>Ten whiffs of chlorine gas,<br>Nine drops of musk,<br>Eight cups of spoiled milk,<br>Seven sweaty socks,<br>Six sour milk eggs,<br>Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
+    <p>On the twelfth day of Christmas,<br>my true love sent to me<br>Twelve crushing sulfur blasts,<br>Eleven rotting banana peels,<br>Ten whiffs of chlorine gas,<br>Nine drops of musk,<br>Eight cups of spoiled milk,<br>Seven sweaty socks,<br>Six sour milk eggs,<br>Five rings of toast,<br>Four cloying candies,<br>Three pungent eggs,<br>Two soiled feathers,<br>And a stinky pair of socks!</p>
   </div>
+
+</div>
 
 </body>
 </html>
