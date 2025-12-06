@@ -3,134 +3,230 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Twelve Days of Stinkmas</title>
+<title>Stinky Twelve Days of Christmas</title>
 <style>
   body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to bottom, #1c1c1c, #2c2c2c);
-    color: #f1f1f1;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: #001f3f;
+    color: #fff;
+    overflow: hidden;
     text-align: center;
   }
-
-  header {
-    padding: 20px;
-    background-color: #3a3a3a;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+  h1 {
+    margin-top: 20px;
+    color: #ff4136;
+    text-shadow: 0 0 10px #fff;
   }
-
-  header img {
-    width: 150px;
-    height: auto;
-    border-radius: 50%;
-    border: 3px solid #ff6f61;
-    margin-bottom: 10px;
-  }
-
-  header h1 {
-    margin: 10px 0 0 0;
-    font-size: 2.5em;
-    color: #ff6f61;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: #2b2b2b;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.7);
-  }
-
-  .lyrics p {
-    margin: 10px 0;
-    line-height: 1.5;
-  }
-
-  audio {
-    margin: 20px 0;
-    width: 80%;
-  }
-
-  canvas {
-    display: block;
+  #lyrics {
     margin: 20px auto;
-    background: rgba(0,0,0,0.2);
-    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    text-align: left;
+    line-height: 1.6;
+    background: rgba(0,0,0,0.3);
+    padding: 20px;
+    border-radius: 10px;
+  }
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+  audio {
+    margin-top: 20px;
   }
 </style>
 </head>
 <body>
 
-<header>
-  <img src="https://ella.janitorai.com/bot-avatars/s-CCGcpfuJESfwnPuEIsg.webp?width=400" alt="Stinkmas Avatar">
-  <h1>🎄 Twelve Days of Stinkmas 🎄</h1>
-</header>
+<h1>🎄 Stinky Twelve Days of Christmas 🎄</h1>
 
-<div class="container">
-  <h2>🎁 Lyrics</h2>
-  <div class="lyrics">
-    <!-- Lyrics here (your exact lyrics copied) -->
-    <p>On the first day of Christmas,<br>my true love sent to me<br>A stinky pair of socks.</p>
-    <p>On the second day of Christmas,<br>my true love sent to me<br>Two soiled feathers,<br>And a stinky pair of socks.</p>
-    <!-- ... continue all 12 days ... -->
-  </div>
+<audio id="audio" controls>
+  <source src="stinky_twelve_days.mp3" type="audio/mpeg">
+  <source src="stinky_twelve_days.ogg" type="audio/ogg">
+  Your browser does not support the audio element.
+</audio>
 
-  <h2>🎵 Play the Stinkmas Song</h2>
-  <audio controls>
-    <source src="stinky_twelve_days.mp3" type="audio/mpeg">
-    <source src="stinky_twelve_days.ogg" type="audio/ogg">
-    Your browser does not support the audio element.
-  </audio>
-
-  <canvas id="visualizer" width="800" height="150"></canvas>
+<div id="lyrics">
+<pre>
+On the first day of Christmas,
+my true love sent to me
+A stinky pair of socks.
+On the second day of Christmas,
+my true love sent to me
+Two soiled feathers,
+And a stinky pair of socks.
+On the third day of Christmas,
+my true love sent to me
+Three pungent eggs,
+Two soiled feathers,
+And a stinky pair of socks.
+On the fourth day of Christmas,
+my true love sent to me
+Four cloying candies,
+Three pungent eggs,
+Two soiled feathers,
+And a stinky pair of socks.
+On the fifth day of Christmas,
+my true love sent to me
+Five rings of toast,
+Four cloying candies,
+Three pungent eggs,
+Two soiled feathers,
+And a stinky pair of socks.
+On the sixth day of Christmas,
+my true love sent to me
+Six sour milk eggs,
+Five rings of toast,
+Four cloying candies,
+Three pungent eggs,
+Two soiled feathers,
+And a stinky pair of socks.
+On the seventh day of Christmas,
+my true love sent to me
+Seven sweaty socks,
+Six sour milk eggs,
+Five rings of toast,
+Four cloying candies,
+Three pungent eggs,
+Two soiled feathers,
+And a stinky pair of socks.
+On the eighth day of Christmas,
+my true love sent to me
+Eight cups of spoiled milk,
+Seven sweaty socks,
+Six sour milk eggs,
+Five rings of toast,
+Four cloying candies,
+Three pungent eggs,
+Two soiled feathers,
+And a stinky pair of socks.
+On the ninth day of Christmas,
+my true love sent to me
+Nine drops of musk,
+Eight cups of spoiled milk,
+Seven sweaty socks,
+Six sour milk eggs,
+Five rings of toast,
+Four cloying candies,
+Three pungent eggs,
+Two soiled feathers,
+And a stinky pair of socks.
+On the tenth day of Christmas,
+my true love sent to me
+Ten whiffs of chlorine gas,
+Nine drops of musk,
+Eight cups of spoiled milk,
+Seven sweaty socks,
+Six sour milk eggs,
+Five rings of toast,
+Four cloying candies,
+Three pungent eggs,
+Two soiled feathers,
+And a stinky pair of socks.
+On the eleventh day of Christmas,
+my true love sent to me
+Eleven rotting banana peels,
+Ten whiffs of chlorine gas,
+Nine drops of musk,
+Eight cups of spoiled milk,
+Seven sweaty socks,
+Six sour milk eggs,
+Five rings of toast,
+Four cloying candies,
+Three pungent eggs,
+Two soiled feathers,
+And a stinky pair of socks.
+On the twelfth day of Christmas,
+my true love sent to me
+Twelve crushing sulfur blasts,
+Eleven rotting banana peels,
+Ten whiffs of chlorine gas,
+Nine drops of musk,
+Eight cups of spoiled milk,
+Seven sweaty socks,
+Six sour milk eggs,
+Five rings of toast,
+Four cloying candies,
+Three pungent eggs,
+Two soiled feathers,
+And a stinky pair of socks!
+</pre>
 </div>
 
+<canvas id="snow"></canvas>
+<canvas id="visualizer"></canvas>
+
 <script>
-const audio = document.getElementById('song');
-const canvas = document.getElementById('visualizer');
-const ctx = canvas.getContext('2d');
+// --- Snow Animation ---
+const snowCanvas = document.getElementById('snow');
+const snowCtx = snowCanvas.getContext('2d');
+snowCanvas.width = window.innerWidth;
+snowCanvas.height = window.innerHeight;
+const snowflakes = [];
+
+function createSnowflake() {
+  snowflakes.push({
+    x: Math.random() * snowCanvas.width,
+    y: Math.random() * snowCanvas.height,
+    radius: Math.random() * 4 + 1,
+    speed: Math.random() * 2 + 1
+  });
+}
+for (let i = 0; i < 200; i++) createSnowflake();
+
+function drawSnow() {
+  snowCtx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
+  snowCtx.fillStyle = 'white';
+  snowCtx.beginPath();
+  for (let f of snowflakes) {
+    snowCtx.moveTo(f.x, f.y);
+    snowCtx.arc(f.x, f.y, f.radius, 0, Math.PI*2);
+  }
+  snowCtx.fill();
+  for (let f of snowflakes) {
+    f.y += f.speed;
+    if (f.y > snowCanvas.height) f.y = 0;
+  }
+  requestAnimationFrame(drawSnow);
+}
+drawSnow();
+
+// --- Audio Visualizer ---
+const audio = document.getElementById('audio');
+const visCanvas = document.getElementById('visualizer');
+const visCtx = visCanvas.getContext('2d');
+visCanvas.width = window.innerWidth;
+visCanvas.height = 150;
 
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-const audioSource = audioCtx.createMediaElementSource(audio);
+const audioSrc = audioCtx.createMediaElementSource(audio);
 const analyser = audioCtx.createAnalyser();
-audioSource.connect(analyser);
+audioSrc.connect(analyser);
 analyser.connect(audioCtx.destination);
-analyser.fftSize = 64;
+analyser.fftSize = 256;
 
 const bufferLength = analyser.frequencyBinCount;
 const dataArray = new Uint8Array(bufferLength);
 
-function draw() {
-  requestAnimationFrame(draw);
-
+function drawVisualizer() {
+  requestAnimationFrame(drawVisualizer);
   analyser.getByteFrequencyData(dataArray);
+  visCtx.fillStyle = 'rgba(0,0,0,0.2)';
+  visCtx.fillRect(0,0,visCanvas.width,visCanvas.height);
 
-  ctx.fillStyle = '#2b2b2b';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  const barWidth = (canvas.width / bufferLength) * 2.5;
+  const barWidth = (visCanvas.width / bufferLength) * 2.5;
   let x = 0;
-
   for (let i = 0; i < bufferLength; i++) {
     const barHeight = dataArray[i];
-    const r = barHeight + 100;
-    const g = 50;
-    const b = 200;
-
-    ctx.fillStyle = `rgb(${r},${g},${b})`;
-    ctx.fillRect(x, canvas.height - barHeight / 2, barWidth, barHeight / 2);
-
+    visCtx.fillStyle = `rgb(${barHeight+100},50,${255-barHeight})`;
+    visCtx.fillRect(x, visCanvas.height - barHeight/2, barWidth, barHeight/2);
     x += barWidth + 1;
   }
 }
-
-audio.onplay = () => {
-  if (audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
-  draw();
-};
+audio.onplay = () => audioCtx.resume().then(drawVisualizer);
 </script>
 
 </body>
