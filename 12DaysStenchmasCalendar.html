@@ -56,30 +56,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-		/* Navigation Link Styles */
-        .nav-links {
-            margin-top: 20px;
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            padding: 10px 15px;
-            background-color: var(--color-secondary);
-            color: var(--color-text-light);
-            border-radius: 5px;
-            font-weight: bold;
-            text-transform: uppercase;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.2s, transform 0.1s;
-        }
-        .nav-link:hover {
-            background-color: #d00;
-            transform: translateY(-1px);
-        }
-		
         header {
             padding: 20px 0;
             color: var(--color-primary);
@@ -178,7 +154,6 @@
             position: absolute;
             top: 50%;
             left: 50%;
-			padding: 5px;
             transform: translate(-50%, -50%);
             pointer-events: none; 
             transition: opacity 0.3s;
@@ -200,21 +175,65 @@
             color: var(--color-secondary);
             box-shadow: 0 0 15px rgba(176, 0, 0, 0.5);
         }
+        
+        /* NEW: Style for Password Reveal */
+        .reveal-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: var(--color-secondary); /* Use Red for a challenge box */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        .reveal-box p {
+            font-weight: bold;
+            color: var(--color-text-light);
+            text-shadow: 0 0 3px black;
+        }
+        .reveal-box input {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 2px solid var(--color-accent);
+            border-radius: 5px;
+            width: 90%;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-sizing: border-box; /* Include padding in width */
+        }
+        .reveal-box button {
+            padding: 10px 20px;
+            background-color: var(--color-primary); /* Green button */
+            color: var(--color-text-light);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            text-transform: uppercase;
+        }
+        .reveal-box button:hover {
+            background-color: #008000;
+        }
+        .reveal-message {
+            margin-top: 10px;
+            color: var(--color-accent);
+            font-weight: bold;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
     <div id="gradient-wrapper"></div>
     
-<div class="content-container">
+    <div class="content-container">
         <header>
             <h1>🎄 The Stenchmas Scenario Calendar 🎁</h1>
-            <p>12 Days of Filth, Farts, and Festive Fear. Scroll down to see the calendar transform!</p>
-            
-            <div class="nav-links">
-                <a href="https://tigert2173.github.io/MyCharsExtra/TwelveDaysofStenchmas.html" class="nav-link">🎶 LISTEN TO SONG</a>
-                <a href="https://janitorai.com/characters/d5c650ec-ac79-4c6b-8060-cb2725f29669_character-beta-twelve-days-of-stenchmas" class="nav-link">🔙 BACK TO JANTIORAI</a>
-            </div>
-            </header>
+            <p>14 Days of Filth, Farts, and Festive Fear. Scroll down to see the calendar transform!</p>
+        </header>
 
         <div id="calendar-output">
             </div>
@@ -429,7 +448,7 @@ var actionDatabase = {
     {type: 0, text: "The hybrids form a fart circle with perfectly synchronized, clashing releases."},
     {type: 1, text: "The hybrids force you to sniff through their entire collection of soiled/musk-saturated items."},
     {type: 0, text: "The hybrids coordinate to brush their musk-saturated tails against your face repeatedly."},
-    // Your requested specific additions
+    
     {type: 0, text: "Misato stumbles in drunk and falls directly onto your chest, releasing a silent wet SBD."},
     {type: 0, text: "Cora and Kumi coordinate their 'chemical warfare' session, blending ammonia with chlorine gas."},
     {type: 0, text: "Nova and Juno perform their synchronized 'High Drama vs. Low Anxiety fart-off' right above your face."},
@@ -470,36 +489,58 @@ var actionDatabase = {
 
         function generateCalendar() {
             for (let day = 1; day < chars.length; day++) {
-                const dayName = chars[day];
+                const actualDayName = chars[day]; // Use this for internal checks
                 const gift = gifts[day - 1]; 
                 const scenarios = actionDatabase[day] || [];
-                const isSpoiler = day >= 13;
                 
                 let dayCardHTML = '';
+                let displayDayName = actualDayName;
 
-                // ADDED: The thematic divider before Day 13
+                // Handle the Grand Epilogue divider
                 if (day === 13) {
-                    dayCardHTML += '<div class="epilogue-divider">--- THE GRAND EPILOGUE: DAYS 13 & 14 ---</div>';
+                    dayCardHTML += '<div class="epilogue-divider">--- THE GRAND EPILOGUE ---</div>';
                 }
 
-                dayCardHTML += `
-                    <div class="day-card" data-day="${day}">
-                        <h2>🦌 Day ${day}: ${dayName} <span>Gift: ${gift}</span></h2>
-                        <div class="scenario-grid">
-                `;
-                
-                if (isSpoiler) {
-                    // Start spoiler wrapper for content
+                if (day === 13) {
+                    // Day 13: Simple Spoiler (as requested)
+                    displayDayName = "??? [Random Scenarios]";
                     dayCardHTML += `
-                        <div class="spoiler-wrapper" style="grid-column: 1 / -1;">
-                            <div class="spoiler-content" onclick="toggleSpoiler(this);">
-                                <span class="spoiler-label">MAJOR SPOILER! CLICK TO REVEAL ${dayName} SCENARIOS!</span>
-                            </div>
-                            <div class="spoiler-target" style="display: none;"> 
+                        <div class="day-card" data-day="${day}">
+                            <h2>🦌 Day ${day}: ${displayDayName} <span>Gift: ${gift}</span></h2>
+                            <div class="scenario-grid">
+                                <div class="spoiler-wrapper" style="grid-column: 1 / -1;">
+                                    <div class="spoiler-content" onclick="toggleSpoiler(this);">
+                                        <span class="spoiler-label">MAJOR SPOILER! CLICK TO REVEAL DAY 13 SCENARIOS!</span>
+                                    </div>
+                                    <div class="spoiler-target" style="display: none;"> 
+                    `;
+                } else if (day === 14) {
+                    // Day 14: Password Protected Spoiler
+                    displayDayName = "??? [The Ultimate Queen]"; // Hidden name
+                    dayCardHTML += `
+                        <div class="day-card" data-day="${day}">
+                            <h2>👑 Day ${day}: ${displayDayName} <span>Gift: ${gift}</span></h2>
+                            <div class="scenario-grid">
+                                <div class="spoiler-wrapper" style="grid-column: 1 / -1;">
+                                    <div class="reveal-box">
+                                        <p style="color:#fff; margin: 0 0 10px;">Type the character's name to reveal Day 14's scenarios:</p>
+                                        <input type="text" id="pass-${day}" placeholder="CHARACTER NAME HERE" onkeydown="if(event.key === 'Enter') revealSecretScenarios(${day});">
+                                        <button onclick="revealSecretScenarios(${day});">REVEAL SCENARIOS</button>
+                                        <span id="msg-${day}" class="reveal-message"></span>
+                                    </div>
+                                    <div class="spoiler-target" id="target-${day}" style="display: none; grid-template-columns: 1fr;"> 
+                    `;
+                } else {
+                    // Regular Day
+                     dayCardHTML += `
+                        <div class="day-card" data-day="${day}">
+                            <h2>🦌 Day ${day}: ${displayDayName} <span>Gift: ${gift}</span></h2>
+                            <div class="scenario-grid">
                     `;
                 }
 
-                // Generate scenarios list
+
+                // Generate scenarios list for all days inside the appropriate container
                 scenarios.forEach(scenario => {
                     const tag = getScenarioTypeTag(scenario.type);
                     dayCardHTML += `
@@ -510,8 +551,10 @@ var actionDatabase = {
                     `;
                 });
 
-                if (isSpoiler) {
-                    dayCardHTML += `</div></div>`; // Close spoiler-target and spoiler-wrapper
+                if (day === 13) {
+                    dayCardHTML += `</div></div>`; // Close spoiler-target and spoiler-wrapper for Day 13
+                } else if (day === 14) {
+                    dayCardHTML += `</div></div>`; // Close spoiler-target and spoiler-wrapper for Day 14
                 }
 
                 dayCardHTML += `</div></div>`; // Close scenario-grid and day-card
@@ -525,6 +568,42 @@ var actionDatabase = {
             const target = element.nextElementSibling;
             target.style.display = isRevealed ? 'grid' : 'none';
         }
+
+        // NEW: Function for password-protected reveal
+        function revealSecretScenarios(day) {
+            const input = document.getElementById(`pass-${day}`);
+            const message = document.getElementById(`msg-${day}`);
+            const target = document.getElementById(`target-${day}`);
+            
+            const enteredName = input.value.trim().toLowerCase().replace(/[^a-z]/g, '');
+            let correctName = "";
+            let revealName = "";
+
+            if (day === 14) {
+                // The Skunk Queen
+                correctName = "theskunkqueen";
+                revealName = "The Skunk Queen";
+            } else {
+                message.textContent = "Error: Invalid Day for password.";
+                return;
+            }
+
+            if (enteredName === correctName || enteredName === correctName.replace("the", "")) {
+                // Also check for "skunkqueen" just in case
+                target.style.display = 'grid'; // Reveal the scenarios
+                message.textContent = `Access Granted! ${revealName} Scenarios Revealed!`;
+                message.style.color = 'lime';
+                // Remove input and button for cleanliness
+                const revealBox = input.closest('.reveal-box');
+                if (revealBox) {
+                    revealBox.style.display = 'none';
+                }
+            } else {
+                message.textContent = "Incorrect Name. Try Again.";
+                message.style.color = 'yellow';
+            }
+        }
+
 
         function handleScrollGradient() {
             const wrapper = document.getElementById('gradient-wrapper');
@@ -560,6 +639,7 @@ var actionDatabase = {
 
         // --- Initialization ---
         window.toggleSpoiler = toggleSpoiler; 
+        window.revealSecretScenarios = revealSecretScenarios; // Make available globally
         
         function init() {
             generateCalendar();
