@@ -3,72 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stinky Twelve Days of Christmas</title>
+<title>🎄 Stinky Twelve Days of Christmas 🎄</title>
+<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  body {
-    margin: 0;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    background: #001f3f;
-    color: #fff;
-    overflow: hidden;
-    text-align: center;
-  }
-  h1 {
-    margin-top: 20px;
-    color: #ff4136;
-    text-shadow: 0 0 10px #fff;
-  }
-  #lyrics {
-    margin: 20px auto;
-    width: 90%;
-    max-width: 600px;
-    text-align: left;
-    line-height: 1.6;
-    background: rgba(0,0,0,0.3);
-    padding: 20px;
-    border-radius: 10px;
-  }
-  canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-  }
-  audio {
-    margin-top: 20px;
-  }
+body {
+  margin: 0;
+  font-family: 'Mountains of Christmas', cursive;
+  background: linear-gradient(to bottom, #001f3f, #003366);
+  color: #fff;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+header {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 10px;
+  margin-top: 75px;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #ff4136;
+  text-shadow: 0 0 15px #fff, 0 0 20px #ff4136;
+  margin-bottom: 15px;
+}
+
+#character {
+  width: 200px;
+  border-radius: 20px;
+  border: 3px solid #ff4136;
+  box-shadow: 0 0 20px rgba(255,65,54,0.8);
+  margin-bottom: 20px;
+}
+
+audio {
+  margin-bottom: 20px;
+  outline: none;
+  width: 80%;
+  max-width: 500px;
+}
+
+#lyrics {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  width: 90%;
+  max-width: 700px;
+  margin: 0 auto 20px;
+  background: rgba(0,0,0,0.7);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+  overflow-y: auto;
+  line-height: 1.7;
+  font-size: 1.1em;
+}
+
+footer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  background: linear-gradient(90deg, #ff4136, #ffdc00, #0074D9, #2ECC40);
+  padding: 15px 0;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 -5px 15px rgba(0,0,0,0.4);
+}
+
+#footer-content p {
+  margin: 5px 0;
+  font-size: 1.1em;
+  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
 </style>
 </head>
 <body>
 
-<h1>🎄 Stinky Twelve Days of Christmas 🎄</h1>
+<!-- Effects Canvases -->
+<canvas id="snow"></canvas>
+<canvas id="lights"></canvas>
 
-<audio id="audio" controls>
-  <source src="stinky_twelve_days.mp3" type="audio/mpeg">
-  <source src="stinky_twelve_days.ogg" type="audio/ogg">
-  Your browser does not support the audio element.
-</audio>
+<header>
+  <h1>🎄 Stinky Twelve Days of Christmas 🎄</h1>
+  <img id="character" src="https://ella.janitorai.com/bot-avatars/s-CCGcpfuJESfwnPuEIsg.webp?width=400" alt="Character">
+  <audio id="audio" controls>
+    <source src="stinky_twelve_days.mp3" type="audio/mpeg">
+    <source src="stinky_twelve_days.ogg" type="audio/ogg">
+    Your browser does not support the audio element.
+  </audio>
+</header>
 
+
+<!-- Lyrics Card -->
 <div id="lyrics">
 <pre>
 On the first day of Christmas,
 my true love sent to me
 A stinky pair of socks.
+
 On the second day of Christmas,
 my true love sent to me
 Two soiled feathers,
 And a stinky pair of socks.
+
 On the third day of Christmas,
 my true love sent to me
 Three pungent eggs,
 Two soiled feathers,
 And a stinky pair of socks.
+
 On the fourth day of Christmas,
 my true love sent to me
 Four cloying candies,
 Three pungent eggs,
 Two soiled feathers,
 And a stinky pair of socks.
+
 On the fifth day of Christmas,
 my true love sent to me
 Five rings of toast,
@@ -76,6 +141,7 @@ Four cloying candies,
 Three pungent eggs,
 Two soiled feathers,
 And a stinky pair of socks.
+
 On the sixth day of Christmas,
 my true love sent to me
 Six sour milk eggs,
@@ -84,6 +150,7 @@ Four cloying candies,
 Three pungent eggs,
 Two soiled feathers,
 And a stinky pair of socks.
+
 On the seventh day of Christmas,
 my true love sent to me
 Seven sweaty socks,
@@ -93,6 +160,7 @@ Four cloying candies,
 Three pungent eggs,
 Two soiled feathers,
 And a stinky pair of socks.
+
 On the eighth day of Christmas,
 my true love sent to me
 Eight cups of spoiled milk,
@@ -103,6 +171,7 @@ Four cloying candies,
 Three pungent eggs,
 Two soiled feathers,
 And a stinky pair of socks.
+
 On the ninth day of Christmas,
 my true love sent to me
 Nine drops of musk,
@@ -114,6 +183,7 @@ Four cloying candies,
 Three pungent eggs,
 Two soiled feathers,
 And a stinky pair of socks.
+
 On the tenth day of Christmas,
 my true love sent to me
 Ten whiffs of chlorine gas,
@@ -126,6 +196,7 @@ Four cloying candies,
 Three pungent eggs,
 Two soiled feathers,
 And a stinky pair of socks.
+
 On the eleventh day of Christmas,
 my true love sent to me
 Eleven rotting banana peels,
@@ -139,6 +210,7 @@ Four cloying candies,
 Three pungent eggs,
 Two soiled feathers,
 And a stinky pair of socks.
+
 On the twelfth day of Christmas,
 my true love sent to me
 Twelve crushing sulfur blasts,
@@ -156,78 +228,91 @@ And a stinky pair of socks!
 </pre>
 </div>
 
-<canvas id="snow"></canvas>
-<canvas id="visualizer"></canvas>
+<footer>
+  <div id="footer-content">
+    <p>🎄 Stinky Twelve Days of Christmas 🎄</p>
+    <p>Created with festive stink & love! 💨</p>
+  </div>
+</footer>
 
 <script>
-// --- Snow Animation ---
+// Snow Effect
 const snowCanvas = document.getElementById('snow');
 const snowCtx = snowCanvas.getContext('2d');
 snowCanvas.width = window.innerWidth;
 snowCanvas.height = window.innerHeight;
-const snowflakes = [];
 
-function createSnowflake() {
-  snowflakes.push({
-    x: Math.random() * snowCanvas.width,
-    y: Math.random() * snowCanvas.height,
-    radius: Math.random() * 4 + 1,
-    speed: Math.random() * 2 + 1
-  });
-}
-for (let i = 0; i < 200; i++) createSnowflake();
+const snowflakes = Array.from({length: 200}, () => ({
+  x: Math.random()*snowCanvas.width,
+  y: Math.random()*snowCanvas.height,
+  radius: Math.random()*4+1,
+  speed: Math.random()*2+1
+}));
 
 function drawSnow() {
-  snowCtx.clearRect(0, 0, snowCanvas.width, snowCanvas.height);
-  snowCtx.fillStyle = 'white';
+  snowCtx.clearRect(0,0,snowCanvas.width,snowCanvas.height);
+  snowCtx.fillStyle='white';
   snowCtx.beginPath();
-  for (let f of snowflakes) {
-    snowCtx.moveTo(f.x, f.y);
-    snowCtx.arc(f.x, f.y, f.radius, 0, Math.PI*2);
-  }
-  snowCtx.fill();
-  for (let f of snowflakes) {
+  snowflakes.forEach(f => {
+    snowCtx.moveTo(f.x,f.y);
+    snowCtx.arc(f.x,f.y,f.radius,0,Math.PI*2);
     f.y += f.speed;
-    if (f.y > snowCanvas.height) f.y = 0;
-  }
+    if(f.y>snowCanvas.height) f.y=0;
+  });
+  snowCtx.fill();
   requestAnimationFrame(drawSnow);
 }
 drawSnow();
 
-// --- Audio Visualizer ---
-const audio = document.getElementById('audio');
-const visCanvas = document.getElementById('visualizer');
-const visCtx = visCanvas.getContext('2d');
-visCanvas.width = window.innerWidth;
-visCanvas.height = 150;
+// Christmas Lights with wire
+const lightsCanvas = document.getElementById('lights');
+const lightsCtx = lightsCanvas.getContext('2d');
+lightsCanvas.width = window.innerWidth;
+lightsCanvas.height = window.innerHeight;
 
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-const audioSrc = audioCtx.createMediaElementSource(audio);
-const analyser = audioCtx.createAnalyser();
-audioSrc.connect(analyser);
-analyser.connect(audioCtx.destination);
-analyser.fftSize = 256;
+const lights = Array.from({length: 20}, (_, i) => ({
+  x: 50 + i * ((window.innerWidth-100)/19),
+  y: 50 + Math.random()*20,
+  radius: 8,
+  color: `hsl(${Math.random()*360}, 100%, 60%)`,
+  phase: Math.random()*Math.PI*2
+}));
 
-const bufferLength = analyser.frequencyBinCount;
-const dataArray = new Uint8Array(bufferLength);
-
-function drawVisualizer() {
-  requestAnimationFrame(drawVisualizer);
-  analyser.getByteFrequencyData(dataArray);
-  visCtx.fillStyle = 'rgba(0,0,0,0.2)';
-  visCtx.fillRect(0,0,visCanvas.width,visCanvas.height);
-
-  const barWidth = (visCanvas.width / bufferLength) * 2.5;
-  let x = 0;
-  for (let i = 0; i < bufferLength; i++) {
-    const barHeight = dataArray[i];
-    visCtx.fillStyle = `rgb(${barHeight+100},50,${255-barHeight})`;
-    visCtx.fillRect(x, visCanvas.height - barHeight/2, barWidth, barHeight/2);
-    x += barWidth + 1;
+function drawLights(){
+  lightsCtx.clearRect(0,0,lightsCanvas.width,lightsCanvas.height);
+  
+  // Draw wire
+  lightsCtx.strokeStyle = "#222";
+  lightsCtx.lineWidth = 4;
+  lightsCtx.beginPath();
+  lightsCtx.moveTo(lights[0].x, lights[0].y);
+  for(let i=1; i<lights.length; i++){
+    lightsCtx.lineTo(lights[i].x, lights[i].y);
   }
+  lightsCtx.stroke();
+  
+  // Draw bulbs
+  lights.forEach(l=>{
+    l.phase += 0.05;
+    const y = l.y + Math.sin(l.phase)*10;
+    lightsCtx.beginPath();
+    lightsCtx.arc(l.x,y,l.radius,0,Math.PI*2);
+    lightsCtx.fillStyle=l.color;
+    lightsCtx.shadowBlur = 15;
+    lightsCtx.shadowColor = l.color;
+    lightsCtx.fill();
+  });
+  
+  requestAnimationFrame(drawLights);
 }
-audio.onplay = () => audioCtx.resume().then(drawVisualizer);
-</script>
+drawLights();
 
+// Resize handler
+window.addEventListener('resize', ()=>{
+  snowCanvas.width = lightsCanvas.width = window.innerWidth;
+  snowCanvas.height = lightsCanvas.height = window.innerHeight;
+  lights.forEach((l,i)=>l.x=50 + i*((window.innerWidth-100)/19));
+});
+</script>
 </body>
 </html>
