@@ -157,6 +157,7 @@
             transform: translate(-50%, -50%);
             pointer-events: none; 
             transition: opacity 0.3s;
+			padding: 10px;
         }
         .spoiler-content.revealed .spoiler-label {
             opacity: 0;
@@ -516,7 +517,7 @@ var actionDatabase = {
                     `;
                 } else if (day === 14) {
                     // Day 14: Password Protected Spoiler
-                    displayDayName = "??? [The Ultimate Queen]"; // Hidden name
+                    displayDayName = "???"; // Hidden name
                     dayCardHTML += `
                         <div class="day-card" data-day="${day}">
                             <h2>👑 Day ${day}: ${displayDayName} <span>Gift: ${gift}</span></h2>
