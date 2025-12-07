@@ -97,10 +97,21 @@
             padding: 12px;
             border-radius: 6px;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
             transition: all 0.2s;
         }
+		.action-number-label {
+		    font-size: 1.1em; /* Make it a bit bigger */
+		    font-weight: bold;
+		    color: var(--color-secondary); /* Use Red */
+		    margin-right: 15px; /* Space it out from the tag */
+		    flex-shrink: 0;
+		    width: 30px; /* Fixed width for alignment */
+		    text-align: center;
+		    border-right: 1px solid #ddd;
+		    padding-right: 15px;
+		}
         .scenario-item:hover {
             border-left: 5px solid var(--color-secondary);
             transform: translateY(-1px);
@@ -574,16 +585,20 @@ var actionDatabase = {
 
 
                 // Generate scenarios list for all days inside the appropriate container
-                scenarios.forEach(scenario => {
-                    const tag = getScenarioTypeTag(scenario.type);
-                    dayCardHTML += `
-                        <div class="scenario-item">
-                            ${tag}
-                            <span>${scenario.text}</span>
-                        </div>
-                    `;
-                });
-
+                scenarios.forEach((scenario, actionIndex) => {
+		            const tag = getScenarioTypeTag(scenario.type);
+		            
+		            // NEW: Create a clear label for the action number
+		            const actionNumberLabel = `<div style="font-size: 0.9em; font-weight: bold; color: var(--color-secondary); margin-left: 10px; flex-shrink: 0; min-width: 40px;">#${actionIndex}</div>`;
+		            
+		            dayCardHTML += `
+		                <div class="scenario-item">
+		                    ${actionNumberLabel}                                                                                
+		                    ${tag}
+		                    <span>${scenario.text}</span>
+		                </div>
+		            `;
+		        });
                 if (day === 13) {
                     dayCardHTML += `</div></div>`; // Close spoiler-target and spoiler-wrapper for Day 13
                 } else if (day === 14) {
