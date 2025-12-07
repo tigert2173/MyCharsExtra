@@ -1,216 +1,116 @@
 {
-  "profile_info": {
-    "username": "@TigerT",
-    "followers": 218,
-    "member_since": "May 24, 2024",
-    "tagline": "The Apex of Stench & Immersion",
-    "description": "My work, featuring popular originals ported from Yodayo and EFRO.AI, and new characters created exclusively on JanitorAI, is meticulously crafted to trap you in truly noxious scenarios:",
-    "niche": "Potent gassy girls, full-blown skunk characters, and overpowering stench scenarios.",
-    "goal": "From a shy girl's accidental flatulence to a full skunk spray dungeon crawl—prepare for total immersion.",
-    "commitment": "Every bot is crafted and tested over at least 5 hours for maximum quality and depth. I don't just create; I build communities: Founder of the legendary SkunkChatbots subreddit. Moderator for EFROChatbots."
-  },
-  "current_projects_status": [
-    {"project_name": "Skunk Supremacy [World]: Skunk Hybrid Player", "request_type": "Request"},
-    {"project_name": "The Holiday Musk List [Supremacy]", "request_type": "New Bot"},
-    {"project_name": "Twelve Days of Stenchmas [Supremacy]", "request_type": "New Bot"},
-    {"project_name": "Hotel Overbooking Chaos [Supremacy]", "request_type": "New Bot"},
-    {"project_name": "Emma (pokemon legends za)", "request_type": "Request"},
-    {"project_name": "Kumi [Supremacy]", "request_type": "New Bot"},
-    {"project_name": "Nova [Supremacy]", "request_type": "New Bot"},
-    {"project_name": "Sage [Supremacy]", "request_type": "New Bot"},
-    {"project_name": "Cora [Supremacy]", "request_type": "New Bot"},
-    {"project_name": "Juno [Supremacy]", "request_type": "New Bot"},
-    {"project_name": "Chloe [Supremacy]", "request_type": "New Bot"},
-    {"project_name": "Lilly [Supremacy]", "request_type": "New Bot"},
-    {"project_name": "Lola [Supremacy]", "request_type": "New Bot"},
-    {"project_name": "Amy [Supremacy]", "request_type": "New Bot"}
-  ],
-  "featured_worlds_and_characters": [
-    {
-      "type": "World",
-      "name": "SKUNK SUPREMACY",
-      "description": "A world enforced via concentrated musk and gas. Obedience is mandatory.",
-      "attributes": {
-        "volume": {"min": "Average Volume", "max": "Massive"},
-        "loudness": {"min": "Squeaky", "max": "Aggressive"},
-        "heat": {"min": "Warm", "max": "Hot"}
-      }
-    },
-    {
-      "type": "Character",
-      "name": "Oliva",
-      "description": "A nerdy skunk girl given a human 'gift' to overcome her shyness and master the art of supremacy."
-    },
-    {
-      "type": "Character",
-      "name": "Roxie & Chalyna",
-      "description": "They are sweaty, angry, and ready to drag you back for your reunion. Resistance is futile; your servitude is overdue.",
-      "attributes": {
-        "volume": {"min": "Dense", "max": "Massive Density"},
-        "loudness": {"min": "Ghost", "max": "Ripping"},
-        "heat": {"min": "Singeing", "max": "Hot"}
-      }
-    },
-    {
-      "type": "Character",
-      "name": "Misato",
-      "description": "A shy NEET and member of the Human Protection Association, with a passive BO that rivals Skunk Spray.",
-      "attributes": {
-        "volume": {"min": "Dense", "max": "Dense Rumbling"},
-        "loudness": {"min": "Loud & Starting", "max": "Rumbling"},
-        "heat": {"min": "Warm", "max": "Warm"}
-      }
-    },
-    {"type": "Character", "name": "Chloe", "description": "It's a surprise... Request what you'd like to see with her!"},
-    {"type": "Character", "name": "Lilly", "description": "It's a surprise... Request what you'd like to see with her!"},
-    {"type": "Character", "name": "Lola", "description": "It's a surprise... Request what you'd like to see with her!"},
-    {
-      "type": "Character",
-      "name": "Amy",
-      "description": "It's a surprise... Request what you'd like to see with her!",
-      "attributes": {
-        "volume": {"min": "Spluttering", "max": "Dense"},
-        "loudness": {"min": "Spluttering", "max": "Hiss"},
-        "heat": {"min": "Hot", "max": "Singeing"}
-      }
-    },
-    {"type": "Character", "name": "Kumi", "description": "It's a surprise... Request what you'd like to see with her!"},
-    {"type": "Character", "name": "Nova", "description": "It's a surprise... Request what you'd like to see with her!"},
-    {"type": "Character", "name": "Sage", "description": "It's a surprise... Request what you'd like to see with her!"},
-    {"type": "Character", "name": "Cora", "description": "It's a surprise... Request what you'd like to see with her!"},
-    {"type": "Character", "name": "Juno", "description": "It's a surprise... Request what you'd like to see with her!"}
-  ],
-  "featured_scenarios": [
-    {
-      "name": "Skunk Supremacy: Choose Your Fate",
-      "description": "The world is under the pervasive, musky rule of Skunk Hybrids. Decide whether you are a Human Slave, forced into eternal servitude and olfactory torment, or a proud Skunk Hybrid Ruler, enjoying your gassy dominion."
-    },
-    {
-      "name": "Hotel Overbooking Chaos",
-      "description": "Forced roommate duty with four Skunk-Human Hybrids! You're a low-priority human, kicked out of your room and now trapped in close quarters with Chloe, Lilly, Amy, and Lola. Prepare for mandatory compliance and immediate olfactory dominance in a world where their noxious, high-volume gas is the law.",
-      "modes": ["FART FOCUSED MODE", "SCAT FOCUSED MODE"]
-    },
-    {
-      "name": "The Twelve Days of Stenchmas",
-      "description": "CHRISTMAS SCENARIO: A Naughty List fate where the human slave must survive twelve escalating stages of musky torture leading up to the final, unbearable Christmas Day punishment. (Focus: Endurance, Accumulation)"
-    },
-    {"name": "The Holiday Musk List", "description": "CHRISTMAS SCENARIO: You've made the Naughty List! Wrapped and sealed inside a sturdy gift box, you become the Hybrids' personal 'Fart Box.' The Skunk Girls take turns sitting atop the box, delivering concentrated gas through a specially prepared opening as punishment for your disobedience. (Focus: Forced Containment, Farting, Olfactory Torture)", "status": "COMING SOON"}
-  ],
-  "characters_list_latest": [
+  "allCreations": [
     {
       "name": "Emma [Pokemon Legends ZA]",
-      "token_count": "3.6k tokens",
-      "tags": ["Limitless", "Female", "Multiple", "Detective Pokemon", "Fart", "#skunk", "#skunkgirl", "#gassy", "#scat", "#meat", "#armpit", "#facesitting", "#belching", "#gross"]
+      "description": "DETECTIVE EMMA: EXPANSION SUIT INTERROGATOR! You are a \"special case\" subject for Detective Emma, an operative using the chaotic Lumiose Incident as a cover.",
+      "type": "Character",
+      "janitorUrl": "Not provided",
+      "yodayoUrl": "Not provided",
+      "caveduckUrl": "Not provided"
     },
     {
       "name": "Skunk Supremacy [ULTRA-COMPA...]",
-      "token_count": "2.6k tokens",
-      "tags": ["Limitless", "Female", "Multiple", "Start", "#world", "#farting", "#gassy", "#efro", "#dystopian"]
+      "description": "SKUNK SUPREMACY: ULTRA-COMPACT EDITION | A world enforced via concentrated musk and gas. Humanity serves the dominant...",
+      "type": "World",
+      "janitorUrl": "Not provided",
+      "yodayoUrl": "Not provided",
+      "caveduckUrl": "Not provided"
     },
     {
       "name": "Skunk Supremacy [COMPACT]",
-      "token_count": "4.8k tokens",
-      "tags": ["Limitless", "Female", "Multiple", "Fart", "#world", "#skunk", "#farting", "#gassy", "#efro", "#dystopian"]
+      "description": "SKUNK SUPREMACY: COMPACT EDITION | A world enforced via concentrated musk and gas. Humanity serves the dominant Skunk-Hum...",
+      "type": "World",
+      "janitorUrl": "Not provided",
+      "yodayoUrl": "Not provided",
+      "caveduckUrl": "Not provided"
     },
     {
       "name": "HOTEL OVERBOOKING CHAOS [..]",
-      "token_count": "N/A",
-      "tags": ["Limitless", "Female", "Multiple", "#scat", "#farting", "#gassy", "#2025", "#efro", "#skunk", "#skunkgirl"]
+      "description": "Forced roommate duty with four Skunk-Human Hybrids! You're a low-prickly human, kicked out of your room and now trapped in close quarters with Chloe, Lilly, Amy...",
+      "type": "Scenario",
+      "janitorUrl": "Not provided",
+      "yodayoUrl": "Not provided",
+      "caveduckUrl": "Not provided"
     },
     {
       "name": "MISATO [SKUNK SUPREMACY]",
-      "token_count": "N/A",
-      "tags": ["Limitless", "Female", "#musk", "#farting", "#skunkgirl", "#spray", "#gassy", "#fart", "#2025"]
+      "description": "In a world under Skunk Supremacy, humans like the you are marginalized and heated poorly. You, having barely escaped a period of olfactory torture by two other s...",
+      "type": "Character",
+      "janitorUrl": "Not provided",
+      "yodayoUrl": "Not provided",
+      "caveduckUrl": "Not provided"
     },
     {
       "name": "SKUNK SUPREMACY [WORLD]:...",
-      "token_count": "N/A",
-      "tags": ["Limitless", "AnyPOV", "#fart", "#world", "#skunk", "#farting", "#gassy", "#efro", "#reversedroles", "#2025"]
+      "description": "The roles are reversed, you are now a skunk-hybrid. A world enforced via concentrated musk and gas. Obedience is mandatory.",
+      "type": "World",
+      "janitorUrl": "Not provided",
+      "yodayoUrl": "Not provided",
+      "caveduckUrl": "Not provided"
     },
     {
-      "name": "RORIE AND CHALYNA [SUPREN..",
-      "token_count": "N/A",
-      "tags": ["Limitless", "Female", "Multiple", "Fart", "#gassy", "#skunk", "#torture", "#farting", "#efro", "#skunkgirl", "#2025"]
-    },
-    {
-      "name": "SKUNK SUPREMACY [WORLD]",
-      "token_count": "2.6k",
-      "tags": ["Limitless", "Female", "Multiple", "#world", "#farting", "#gassy", "#efro", "#dystopian", "#2025"]
+      "name": "RORIE AND CHALYNA [SUPREN_]",
+      "description": "A week ago, you escaped from your previous skunk girls Roxie and Chalyna. The world has been dominated by skunk girls who have humanity under their thumbs—no... it's more like they have us all under their asses! You've...",
+      "type": "Character",
+      "janitorUrl": "Not provided",
+      "yodayoUrl": "Not provided",
+      "caveduckUrl": "Not provided"
     },
     {
       "name": "CASSANDRA",
-      "token_count": "N/A",
-      "tags": ["Limitless", "Female", "#gassy", "#fart", "#farting", "#college", "#gross", "#efro", "#stinkfetish", "#fartfetish", "#2025"]
+      "description": "CHARACTER: Cassandra \"Casey\" Sanborn AGE: 20 | College Junior SPECIES: Human (with extreme d...)",
+      "type": "Character",
+      "janitorUrl": "Not provided",
+      "yodayoUrl": "Not provided",
+      "caveduckUrl": "Not provided"
     },
     {
       "name": "Hazel (The Gassy Witch)",
-      "token_count": "1.9k tokens",
-      "tags": ["Limitless", "Female", "#fart", "#farting", "#gas", "#gassy", "#witch", "#spooktober"]
+      "description": "You were exploring deep in the forest when you notice a hut. You enter the but thinking its abandoned and instead, you find Hazel. She just so happens to study an entire school of magic based around gas and farts. Haze...",
+      "type": "Character",
+      "janitorUrl": "Not provided",
+      "yodayoUrl": "Not provided",
+      "caveduckUrl": "Not provided"
     },
     {
       "name": "CYRENE (RUTHLESS SKUNK GI_)",
-      "token_count": "N/A",
-      "tags": ["Limitless", "Female", "#dominant", "#skunk", "#skunkgirl", "#torture", "#gassy", "#fart", "#farting", "#spray", "#2025"]
+      "description": "A ruthless Skunk Girl. Cyrene is a ruthless, dominant, and cruel Skunk Hybrid with a penchant for inflict...",
+      "type": "Character",
+      "janitorUrl": "Not provided",
+      "yodayoUrl": "Not provided",
+      "caveduckUrl": "Not provided"
     },
     {
       "name": "OREO (SKUNK GIRLFRIEND)",
-      "token_count": "N/A",
-      "tags": ["Limitless", "Female", "#skunk", "#skunkgirl", "Fart", "#farting", "#gassy", "#girlfriend", "#efro", "#spray", "#2025"]
-    },
-    {
-      "name": "3 skunk girls torment",
-      "token_count": "712 tokens",
-      "tags": ["Limitless", "Female", "Fart", "#skunk", "#skunkgirl", "#gassy", "#farting", "#facesitting", "#efro"]
+      "description": "Oreo is your girlfriend who's a skunk girl. Her goal is to train you to enjoy her gas via associating pleasure with her farts. She does good with distinction of spray and tart, and their different smells. Set to D...",
+      "type": "Character",
+      "janitorUrl": "Not provided",
+      "yodayoUrl": "Not provided",
+      "caveduckUrl": "Not provided"
     },
     {
       "name": "PRINCESS YESPERA (STINKHA_)",
-      "token_count": "N/A",
-      "tags": ["Limitless", "Female", "#skunk", "#skunkgirl", "Fart", "#farting", "#gassy", "#efro", "#princess", "#2025"]
-    },
-    {
-      "name": "3 GIRL GASSY GIRLS (4TH O..",
-      "token_count": "N/A",
-      "tags": ["Limitless", "Female", "Multiple", "Fart", "#gassy", "#wet", "#gross", "#farting", "#sweat", "#meat", "#2025"]
-    },
-    {
-      "name": "Volcano (The Skunk Girl)",
-      "token_count": "712",
-      "tags": ["Limitless", "Female", "#skunkgirl", "#skunk", "Fart", "#gassy", "#spray", "#skunkspray", "#efro"]
-    },
-    {
-      "name": "SKUNK DUNGEON [01]",
-      "token_count": "3k",
-      "tags": ["Limitless", "#skunk", "#skunkgirl", "Fart", "#spray", "#fartfetish", "#2025"]
-    },
-    {
-      "name": "Skunk Dungeon [BETA] [Fart] (Spr...)",
-      "token_count": "1.4k tokens",
-      "tags": ["Limitless", "#skunk", "#skunkgirl", "Fart", "#spray", "#fartfetish", "#dungeon"]
+      "description": "Character Summary Princess Vespers is the spirited and unapologetically bold royal of the Kingdom of Stinkhaven. Known far and wide for her infamous and potent \"Royal ...\"",
+      "type": "Character",
+      "janitorUrl": "Not provided",
+      "yodayoUrl": "Not provided",
+      "caveduckUrl": "Not provided"
     },
     {
       "name": "OLIVA (SHY SKUNK GIRL) IS",
-      "token_count": "2525",
-      "tags": ["Limitless", "Fart", "#skunk", "#skunkgirl", "#spray", "#skunksupremacy", "#gassy", "#2025"]
-    },
-    {
-      "name": "STUCK WITH A SKUNK",
-      "token_count": "N/A",
-      "tags": ["Limitless", "Female", "#skunk", "#skunkgirl", "Fart", "#fartfetish", "#tightspaces", "#2025"]
+      "description": "You are the birthday gift for a shy nerdy skunk girl, so she can learn to be more confident. Her nickname is Oliva. In this alternate reality skunk girls...",
+      "type": "Character",
+      "janitorUrl": "Not provided",
+      "yodayoUrl": "Not provided",
+      "caveduckUrl": "Not provided"
     },
     {
       "name": "SKYE (ALIEN SKUNK FROM AN",
-      "token_count": "N/A",
-      "tags": ["Limitless", "Female", "#skunk", "#skunkgirl", "Fart", "#fartfetish", "#gassy", "#2025"]
-    },
-    {
-      "name": "SABLE (SKUNK GIRL NHO SNU_",
-      "token_count": "N/A",
-      "tags": ["Limitless", "Female", "#gassy", "Fart", "#2025"]
-    },
-    {
-      "name": "[Legacy] The Striped Tait Club — w",
-      "token_count": "2.9k tokens",
-      "tags": ["Limitless", "Female", "Multiple", "#fart", "#club", "#gassy", "#skunk", "#skunkgirl", "#scat", "#efro", "#vore"]
+      "description": "You've just met Skye, the mysterious new transfer student With her intense, glowing purple eyes and an air of aloof tension, she stands out immediately. No one suspects the truth: she'...",
+      "type": "Character",
+      "janitorUrl": "Not provided",
+      "yodayoUrl": "Not provided",
+      "caveduckUrl": "Not provided"
     }
   ]
 }
