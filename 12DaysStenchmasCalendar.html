@@ -585,15 +585,16 @@ var actionDatabase = {
 
 
                 // Generate scenarios list for all days inside the appropriate container
-                scenarios.forEach((scenario, actionIndex) => {
+                scenarios.forEach((scenario, actionIndex) => { 
 		            const tag = getScenarioTypeTag(scenario.type);
 		            
-		            // NEW: Create a clear label for the action number
-		            const actionNumberLabel = `<div style="font-size: 0.9em; font-weight: bold; color: var(--color-secondary); margin-left: 10px; flex-shrink: 0; min-width: 40px;">#${actionIndex}</div>`;
+		            const displayActionNumber = actionIndex + 1;
+		            
+		            const actionNumberLabel = `<div class="action-number-label">#${displayActionNumber}</div>`;
 		            
 		            dayCardHTML += `
 		                <div class="scenario-item">
-		                    ${actionNumberLabel}                                                                                
+		                    ${actionNumberLabel}
 		                    ${tag}
 		                    <span>${scenario.text}</span>
 		                </div>
