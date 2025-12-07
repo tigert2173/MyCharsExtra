@@ -204,6 +204,60 @@ f<!DOCTYPE html>
         color: #aaa;
         font-style: italic;
     }
+    
+    /* CORE HOVER LOGIC */
+    .name-cell {
+        position: relative; /* Crucial: anchors the preview box to this cell */
+        cursor: help;
+    }
+
+    /* THE CUSTOM PREVIEW CARD (Hidden by Default) */
+    .preview-box {
+        display: none; /* Hide the box initially */
+        position: absolute;
+        top: 50%; /* Start positioning halfway down the cell */
+        left: 105%; /* Position slightly to the right of the cell */
+        transform: translateY(-50%); /* Centers the box vertically */
+        z-index: 1000; /* Ensures the box is drawn over other table elements */
+        width: 300px; 
+        max-width: 400px;
+        padding: 15px;
+        
+        /* THEME/AESTHETIC */
+        background-color: #0d120d; /* Even darker background for contrast */
+        border: 2px solid var(--toxic-glow, #b0c47d); /* Border color */
+        border-radius: 6px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+        pointer-events: none; /* Important: Prevents the box from blocking clicks on elements behind it */
+    }
+
+    /* HOVER STATE: SHOW THE PREVIEW */
+    .name-cell:hover .preview-box {
+        display: block; /* Show the box when the parent cell is hovered */
+    }
+    
+    /* PREVIEW CARD STYLING */
+    .preview-box h4 {
+        color: var(--stale-brown, #D68A34); /* Accent color for the name */
+        margin: 0 0 8px 0;
+        font-size: 1.1em;
+        border-bottom: 1px solid #4a5746;
+        padding-bottom: 5px;
+    }
+
+    .preview-box p {
+        margin: 0;
+        font-size: 0.9em;
+        line-height: 1.4;
+        color: #eee;
+    }
+
+    /* Ensure the name text itself looks normal */
+    .name-text {
+        color: var(--text-color);
+        font-weight: bold;
+    }
+
     </style>
 </head>
 <body>
@@ -773,81 +827,6 @@ f<!DOCTYPE html>
 </table>
         </div>
     </div>
-<script>
-    function renderLink(url) {
-        // Consolidated link rendering logic
-        if (!url || url === 'N/A' || url.startsWith('[LINK TO')) {
-            return '<span class="na">N/A</span>';
-        }
-        // Using "🔗 Link" text and opening in a new tab
-        return `<a href="${url}" target="_blank">🔗 Link</a>`;
-    }
 
-    async function generateTable() {
-        const tbody = document.getElementById('bots-table-body');
-        
-        if (!tbody) {
-            console.error("Target tbody element 'bots-table-body' not found.");
-            return;
-        }
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Fetching data from bots.json...</td></tr>';
-
-        try {
-            // Fetch data from the external JSON file
-            const response = await fetch('bots.json');
-            if (!response.ok) {
-                // If bots.json is missing or inaccessible
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.json();
-            // Assuming your JSON structure has 'allCreations'
-            const creations = data.allCreations || [];
-
-            tbody.innerHTML = ''; // Clear loading message
-
-            if (creations.length === 0) {
-                // This is the message you were seeing, confirming the JSON loaded but was empty
-                tbody.innerHTML = `<tr><td colspan="5" style="font-style: italic;">No creations found in bots.json.</td></tr>`;
-                return;
-            }
-
-            // Populate the table with data from the JSON
-            creations.forEach(item => {
-                const row = tbody.insertRow();
-                
-                // Creation Name (Hover Description Implemented)
-                const nameCell = row.insertCell();
-                nameCell.innerHTML = `<strong>${item.name}</strong>`;
-                nameCell.className = 'name-cell';
-                // *** This line adds the description for the hover tooltip ***
-                nameCell.title = item.description || 'No description available.'; 
-                
-                // Type
-                const typeCell = row.insertCell();
-                typeCell.innerHTML = item.type || 'N/A';
-                
-                // JanitorAI Link
-                const janitorCell = row.insertCell();
-                janitorCell.innerHTML = renderLink(item.janitorUrl);
-
-                // Yodayo Link
-                const yodayoCell = row.insertCell();
-                yodayoCell.innerHTML = renderLink(item.yodayoUrl);
-                
-                // Caveduck Link
-                const caveduckCell = row.insertCell();
-                caveduckCell.innerHTML = renderLink(item.caveduckUrl);
-            });
-
-        } catch (e) {
-            // Display error if bots.json could not be loaded
-            tbody.innerHTML = `<tr><td colspan="5" style="color: #ff5555; text-align: center;">ERROR loading data. Check if 'bots.json' exists in the same folder and has valid JSON format. <br>Details: ${e.message}</td></tr>`;
-            console.error("Data Fetch Error:", e);
-        }
-    }
-
-    // Run the script once the page loads
-    document.addEventListener('DOMContentLoaded', generateTable);
-</script>
 </body>
 </html>
