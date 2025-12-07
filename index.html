@@ -759,27 +759,19 @@
 
         </div>
     </div>
-
-    <script>
-        function renderLink(url, text = 'Link 💨') {
-            if (url === 'N/A' || url.startsWith('[LINK TO')) {
-                return '<span class="na">N/A</span>';
-            }
-            return `<a href="${url}">${text}</a>`;
-        }
-
-    // Helper function to render links (required by your original function)
+<script>
     function renderLink(url) {
-        if (!url) {
-            return 'N/A';
+        // Consolidated link rendering logic
+        if (!url || url === 'N/A' || url.startsWith('[LINK TO')) {
+            return '<span class="na">N/A</span>';
         }
-        // Assuming the link text should be a simple icon or 'Link'
+        // Using "🔗 Link" text and opening in a new tab
         return `<a href="${url}" target="_blank">🔗 Link</a>`;
     }
 
     async function generateTable() {
         const tbody = document.getElementById('bots-table-body');
-        // Ensure we target the correct tbody if there are nested elements
+        
         if (!tbody) {
             console.error("Target tbody element 'bots-table-body' not found.");
             return;
@@ -790,6 +782,7 @@
             // Fetch data from the external JSON file
             const response = await fetch('bots.json');
             if (!response.ok) {
+                // If bots.json is missing or inaccessible
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
@@ -799,6 +792,7 @@
             tbody.innerHTML = ''; // Clear loading message
 
             if (creations.length === 0) {
+                // This is the message you were seeing, confirming the JSON loaded but was empty
                 tbody.innerHTML = `<tr><td colspan="5" style="font-style: italic;">No creations found in bots.json.</td></tr>`;
                 return;
             }
@@ -807,11 +801,11 @@
             creations.forEach(item => {
                 const row = tbody.insertRow();
                 
-                // Creation Name (UPDATED FOR HOVER DESCRIPTION)
+                // Creation Name (Hover Description Implemented)
                 const nameCell = row.insertCell();
                 nameCell.innerHTML = `<strong>${item.name}</strong>`;
                 nameCell.className = 'name-cell';
-                // *** ADDED: Set the description as the title attribute for the hover tooltip ***
+                // *** This line adds the description for the hover tooltip ***
                 nameCell.title = item.description || 'No description available.'; 
                 
                 // Type
@@ -840,6 +834,6 @@
 
     // Run the script once the page loads
     document.addEventListener('DOMContentLoaded', generateTable);
-    </script>
+</script>
 </body>
 </html>
