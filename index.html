@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile of @TigerT - The Apex of Stench</title>
+    
+    <style>
+        /* --- ROOT THEME (FART COLORS) --- */
+        /* These variables ensure consistency with the inline styles you provided */
+        :root {
+            --background: #1d281d;    /* Very dark background (Greenish tint) */
+            --card-bg: #2b3a2b;       /* Card background (Dark Olive) */
+            --text-color: #ffffff;
+            --link-color: #D68A34;    /* Accent Brown/Orange */
+            --border-color: #4a5746;  /* Mid-tone border */
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            
+            /* Fart Theme Colors */
+            --toxic-glow: #b0c47d;      /* Muted Green Glow/Highlight */
+            --stale-brown: #D68A34;     /* Primary Accent Brown/Orange */
+            --bar-fill: #798b5a;        /* Progress Bar Color (Olive) */
+            --success-color: #5cb85c;   /* Completed Green */
+            --beta-color: #f0ad4e;      /* Beta Orange */
+            --planned-color: #5bc0de;   /* Planned Blue/Cyan */
+            --cta-dominant: #b0c47d;    /* Dominant CTA button color */
+            --cta-secondary: #4a5746;   /* Secondary CTA button color */
+
+            /* Specific Bar Colors for Visual Variety (Used in inline styles) */
+            --bar-color-1: #b0c47d;   /* Stench (toxic-glow) */
+            --bar-color-2: #4cc9f0;   /* Wetness (Blue) */
+            --bar-color-3: #f48c06;   /* Volume (Orange) */
+            --bar-color-4: #9d4edd;   /* Loudness (Purple) */
+            --bar-color-5: #ef233c;   /* Heat (Red) */
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background);
+            color: var(--text-color);
+            margin: 0;
+            padding: 30px 20px;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1300px; 
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 300px 1fr; 
+        }
+        
+        /* --- General Text & Links --- */
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--toxic-glow);
+            text-decoration: underline;
+        }
+        h3 {
+            color: var(--text-color);
+            font-size: 1.3em;
+            margin-top: 30px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--stale-brown);
+        }
+        
+        /* --- Profile Sidebar (Left) --- */
+        .sidebar {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            height: fit-content;
+        }
+        .profile-header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        .profile-header h2 {
+            margin: 5px 0 0;
+            color: var(--toxic-glow);
+            font-size: 2.2em;
+        }
+
+        /* --- PFP GLOW EFFECT --- */
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top;
+            margin: 0 auto 15px auto;
+            display: block;
+            border: 3px solid #556b2f; 
+            overflow: hidden;
+            animation: pfp-breathe-glow 6s infinite alternate ease-in-out; 
+        }
+        @keyframes pfp-breathe-glow {
+            0% { box-shadow: 0 0 4px 1px #556b2f, 0 0 8px 3px rgba(176, 196, 149, 0.2); }
+            50% { box-shadow: 0 0 10px 4px var(--toxic-glow), 0 0 15px 6px rgba(176, 196, 149, 0.4); }
+            100% { box-shadow: 0 0 4px 1px #556b2f, 0 0 8px 3px rgba(176, 196, 149, 0.2); }
+        }
+        
+        /* --- Main Content Area (Right) --- */
+        .content {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+        }
+        h1 {
+            font-size: 2em;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* --- Comprehensive Bots Table --- */
+        .bots-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-top: 20px;
+            overflow: hidden;
+            font-size: 0.95em;
+        }
+        .bots-table th, .bots-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .bots-table th { background-color: var(--border-color); text-transform: uppercase; font-size: 0.85em;}
+        .bots-table td:first-child { text-align: left; font-weight: bold; }
+        .bots-table tr:last-child td { border-bottom: none; }
+        .bots-table tr:hover { background-color: #1F2937; }
+        .na { color: #525252; font-style: italic; }
+        .request-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        .request-btn:active {
+            transform: translateY(3px);
+            box-shadow: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <img 
+                src="https://ella.janitorai.com/avatars/5d3bafe4-e868-4d1d-874a-44d231e62364_d1014b18-abd7-48df-8c7b-33efdd141ad7.webp?width=600" 
+                alt="Profile Avatar" 
+                class="profile-avatar"
+            >
+            
+            <div class="profile-header">
+                <p style="color: var(--toxic-glow); margin-bottom: 0;">janitor <span style="font-style: italic;">beta</span></p>
+                <h2>@TigerT</h2>
+                <p style="margin: 0;">218 followers | Member Since May 24, 2029</p>
+            </div>
+            
+            <div class="description-box">
+                <h2 style="color: #b0c47d; text-align: center; margin-bottom: 5px; font-size: 26px;">🤢 The Apex of Stench &amp; Immersion 💨</h2>
+                <br>
+                <p>You've found the source! I deliver the <strong>stinkiest, gassiest, and most intensely immersive experiences</strong> available on the platform. Forget static, flat text—my definitive work, featuring popular originals ported from <strong><a href="https://yodayo.com/@tigert">Yodayo</a></strong> and <strong>EFRO.AI</strong>, and new characters created exclusively on JanitorAI, is meticulously crafted to trap you in truly noxious scenarios:</p>
+
+                <ul style="list-style-type: none; padding-left: 20px;">
+                    <li style="margin-bottom: 5px;">🟣 The Niche: Potent gassy girls, full-blown skunk characters, and overpowering stench scenarios.</li>
+                    <li style="margin-bottom: 5px;">🟣 The Goal: From a shy girl's accidental flatulence to a full skunk spray dungeon crawl—prepare for total immersion.</li>
+                    <li style="margin-bottom: 5px;">🟣 The Commitment: Every bot is crafted and tested over at least 5 hours for maximum quality and depth.</li>
+                </ul>
+
+                <p>I don't just create; I build communities:</p>
+
+                <ul style="list-style-type: none; padding-left: 20px;">
+                    <li style="margin-bottom: 5px;">⭐ Founder of the legendary <strong>SkunkChatbots</strong> subreddit.</li>
+                    <li style="margin-bottom: 5px;">⭐ Moderator for <strong>EFROChatbots</strong>.</li>
+                </ul>
+                </div>
+        </div>
+
+        <div class="content">
+            <h1>Character Portfolio & Stench Lab</h1>
+            
+            <h3>🔗 Profile Links</h3>
+            <table class="bots-table" style="font-size: 1em; text-align: left; margin-top: 10px;">
+                <thead>
+                    <tr>
+                        <th>Platform</th>
+                        <th>My Profile Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>JanitorAI</strong></td>
+                        <td><a href="https://janitorai.com/profiles/5d3bafe4-e868-4d1d-874a-44d231e62364_profile-of-tiger-t">@TigerT (The Main Source)</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Yodayo</strong></td>
+                        <td><a href="[INSERT YOUR YODAYO PROFILE LINK HERE]">Insert Yodayo Profile Link</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Caveduck</strong></td>
+                        <td><a href="[INSERT YOUR CAVEDUCK PROFILE LINK HERE]">Insert Caveduck Profile Link</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id="current-requests" style="border: 4px solid #798b5a; padding: 18px; margin-top: 35px; border-radius: 12px; background-color: rgba(35, 45, 35, 0.8);">
+                <h3 style="color: #798b5a; margin-top: 0; margin-bottom: 15px; font-size: 1.5em; text-align: center; border-bottom: 2px solid #798b5a; padding-bottom: 8px;">
+                    🛠️ Current Projects &amp; Status 🛠️
+                </h3>
+                <p style="color: #ffffff; text-align: center; font-size: 0.95em; margin-bottom: 20px;">
+                    Track the progress of custom bots and major updates here!
+                </p>
+                <div style="margin: 0 auto; max-width: 600px; font-size: 0.95em">
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: #556b2f; padding: 8px; border-top-left-radius: 6px; border-top-right-radius: 6px; font-weight: bold; color: #fff9e3; border-bottom: 2px solid #b0c47d; ">
+                        <div style="padding-left: 10px;">Project Name</div>
+                        <div style="text-align: center;">Type</div>
+                        <div style="text-align: center;">Status</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                        <div style="color: #b0c47d; padding-left: 10px;">Skunk Supremacy [World]:<br> Skunk Hybrid Player</div>
+                        <div style="text-align: center; color: #ffffff;">Request</div>
+                        <div style="text-align: center;">
+                            <span style="background-color: #5cb85c; color: white; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Completed</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                        <div style="color: #b0c47d; padding-left: 10px;">The Holiday Musk List [Supremacy]</div>
+                        <div style="text-align: center; color: #ffffff;">New Bot</div>
+                        <div style="text-align: center;">
+                            <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                        <div style="color: #b0c47d; padding-left: 10px;">Twelve Days of Stenchmas [Supremacy]</div>
+                        <div style="text-align: center; color: #ffffff;">New Bot</div>
+                        <div style="text-align: center;">
+                            <span style="background-color: orange; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Beta Is Out!</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                        <div style="color: #b0c47d; padding-left: 10px;">Hotel Overbooking Chaos [Supremacy]</div>
+                        <div style="text-align: center; color: #ffffff;">New Bot</div>
+                        <div style="text-align: center;">
+                            <span style="background-color: #5cb85c; color: white; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Completed</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;">
+                        <div style="color: #b0c47d; padding-left: 10px;">Emma (pokemon legends za)</div>
+                        <div style="text-align: center; color: #ffffff;">Request</div>
+                        <div style="text-align: center;">
+                            <span style="background-color: #5cb85c; color: white; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Completed</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                        <div style="color: #b0c47d; padding-left: 10px;">Kumi [Supremacy]</div>
+                        <div style="text-align: center; color: #ffffff;">New Bot</div>
+                        <div style="text-align: center;">
+                            <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                        <div style="color: #b0c47d; padding-left: 10px;">Nova [Supremacy]</div>
+                        <div style="text-align: center; color: #ffffff;">New Bot</div>
+                        <div style="text-align: center;">
+                            <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                        <div style="color: #b0c47d; padding-left: 10px;">Sage [Supremacy]</div>
+                        <div style="text-align: center; color: #ffffff;">New Bot</div>
+                        <div style="text-align: center;">
+                            <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                        <div style="color: #b0c47d; padding-left: 10px;">Cora [Supremacy]</div>
+                        <div style="text-align: center; color: #ffffff;">New Bot</div>
+                        <div style="text-align: center;">
+                            <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                        <div style="color: #b0c47d; padding-left: 10px;">Juno [Supremacy]</div>
+                        <div style="text-align: center; color: #ffffff;">New Bot</div>
+                        <div style="text-align: center;">
+                            <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                        <div style="color: #b0c47d; padding-left: 10px;">Chloe [Supremacy]</div>
+                        <div style="text-align: center; color: #ffffff;">New Bot</div>
+                        <div style="text-align: center;">
+                            <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                        <div style="color: #b0c47d; padding-left: 10px;">Lilly [Supremacy]</div>
+                        <div style="text-align: center; color: #ffffff;">New Bot</div>
+                        <div style="text-align: center;">
+                            <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                        <div style="color: #b0c47d; padding-left: 10px;">Lola [Supremacy]</div>
+                        <div style="text-align: center; color: #ffffff;">New Bot</div>
+                        <div style="text-align: center;">
+                            <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                        <div style="color: #b0c47d; padding-left: 10px;">Amy [Supremacy]</div>
+                        <div style="text-align: center; color: #ffffff;">New Bot</div>
+                        <div style="text-align: center;">
+                            <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
+                        </div>
+                    </div>
+                </div>
+                <p style="text-align: center; font-size: 1.1em; margin-top: 25px;">
+                    <a rel="noopener noreferrer nofollow" href="https://forms.gle/BUFZJ5GjoVZTvGQs7">
+                        <span class="request-btn" style="background-color: #b0c47d !important; color: #3a473a !important; box-shadow: 0 4px #798b5a;">SUBMIT A STENCH REQUEST NOW! 📝</span>
+                    </a>
+                </p>
+            </div>
+            <h2 style="color: #b0c47d; text-align: center; margin-top: 30px; margin-bottom: 15px; font-size: 24px; border-top: 2px solid #556b2f; padding-top: 15px;">
+                🗺️ Featured Worlds &amp; Characters 🗺️
+            </h2>
+           <div id="skunksupremacy" style="border: 4px solid #b0c47d; padding: 18px; margin-bottom: 35px; border-radius: 12px; background-color: rgba(30, 40, 30, 0.7);">
+    <h3 style="color: #b0c47d; margin-top: 0; margin-bottom: 10px; font-size: 1.50em; text-align: center; border-bottom: 2px solid #556b2f; padding-bottom: 8px;">
+        👑 SKUNK SUPREMACY 👑
+    </h3>
+    <i style="color: #ffffff; display: block; text-align: center; margin-bottom: 15px;">A world enforced via concentrated musk and gas. Obedience is mandatory.</i>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">   
+        <div style="border: 2px solid #556b2f; padding: 8px; border-radius: 8px; background-color: rgba(43, 58, 43, 0.5); box-sizing: border-box;">
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <img src="https://ella.janitorai.com/bot-avatars/utnkU6wlVaReJQVvUEJ6p.webp?width=1200" alt="Oliva" style="width: 85px; height: 85px; object-fit: cover; object-position: top; border-radius: 50%; border: 2px solid #b0c47d; margin-right: 10px; flex-shrink: 0; box-shadow: 0 0 5px #b0c47d;">       
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #b0c47d; margin-bottom: 1px;"><span>Stench</span><span>Sulfurous</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 85%; background: #b0c47d; height: 100%; border-radius: 3px;"></div></div>          
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #4cc9f0; margin-bottom: 1px;"><span>Wetness</span><span>Damp</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 45%; background: #4cc9f0; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #f48c06; margin-bottom: 1px;"><span>Volume</span><span>Average</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 50%; background: #f48c06; height: 100%; border-radius: 3px;"></div></div>
+                     <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #9d4edd; margin-bottom: 1px;"><span>Loudness</span><span>Squeaky</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 35%; background: #9d4edd; height: 100%; border-radius: 3px;"></div></div>
+                     <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #ef233c; margin-bottom: 1px;"><span>Heat</span><span>Warm</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px;"><div style="width: 60%; background: #ef233c; height: 100%; border-radius: 3px;"></div></div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <b style="color: #b0c47d; display: block;">— Oliva —</b>
+                <span style="color: #ffffff; font-size: 0.75em; display: block; margin-top: 3px;">A nerdy skunk girl given a human "gift" to overcome her shyness and master the art of supremacy.</span>
+                <a rel="noopener noreferrer nofollow" href="https://janitorai.com/characters/a7fce8fd-9d63-414c-925d-66f802bf5493_character-oliva-shy-skunk-girl-supremacy">
+                    <span class="request-btn" style="width: 95%; margin: 6px auto 0 auto; display:block; padding: 5px 10px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.70em; background-color: #a3b18a !important; box-shadow: 0 3px #798b5a !important;">🎁 UNWRAP GIFT 🎁</span>
+                </a>
+            </div>
+        </div>
+        <div style="border: 2px solid #b0c47d; padding: 8px; border-radius: 8px; background-color: rgba(43, 58, 43, 0.5); box-sizing: border-box;">
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <img src="https://ella.janitorai.com/bot-avatars/leCJrtEEagbOIaSqStgik.webp?width=1200" alt="Roxie &amp; Chalyna" style="width: 85px; height: 85px; object-fit: cover; object-position: top; border-radius: 50%; border: 2px solid #b0c47d; margin-right: 10px; flex-shrink: 0; box-shadow: 0 0 5px #b0c47d;"> 
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #b0c47d; margin-bottom: 1px;"><span>Stench</span><span>Lethal</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 95%; background: #b0c47d; height: 100%; border-radius: 3px;"></div></div>    
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #4cc9f0; margin-bottom: 1px;"><span>Wetness</span><span>Greasy</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 90%; background: #4cc9f0; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #f48c06; margin-bottom: 1px;"><span>Volume</span><span>Massive</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 95%; background: #f48c06; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #9d4edd; margin-bottom: 1px;"><span>Loudness</span><span>Aggressive Hiss</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 70%; background: #9d4edd; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #ef233c; margin-bottom: 1px;"><span>Heat</span><span>Hot</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px;"><div style="width: 85%; background: #ef233c; height: 100%; border-radius: 3px;"></div></div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <b style="color: #b0c47d; display: block;">— Roxie &amp; Chalyna —</b>
+                <span style="color: #ffffff; font-size: 0.75em; display: block; margin-top: 3px;">They are sweaty, angry, and ready to drag you back for your reunion. Resistance is futile; your servitude is overdue.</span>
+                <a rel="noopener noreferrer nofollow" href="https://janitorai.com/characters/76d1b451-17f2-4ed7-b42a-5372450736e4_character-roxie-and-chalyna-supremacy-skunk-tormentors">
+                    <span class="request-btn" style="width: 95%; margin: 6px auto 0 auto; display:block; padding: 5px 10px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.70em; background-color: #4d5d53 !important; box-shadow: 0 3px #262d29 !important;">⛓️ GET DRAGGED BACK ⛓️</span>
+                </a>
+            </div>
+        </div>
+        <div style="border: 2px solid #36454F; padding: 8px; border-radius: 8px; background-color: rgba(43, 58, 43, 0.5); box-sizing: border-box;">
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <img src="https://ella.janitorai.com/bot-avatars/CkfLNk6npsutKApt46Tj9.webp?width=1200" alt="Misato" style="width: 85px; height: 85px; object-fit: cover; object-position: top; border-radius: 50%; border: 2px solid #b0c47d; margin-right: 10px; flex-shrink: 0; box-shadow: 0 0 5px #b0c47d;">      
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #b0c47d; margin-bottom: 1px;"><span>Stench</span><span>Toxic Load</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 100%; background: #b0c47d; height: 100%; border-radius: 3px;"></div></div>      
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #4cc9f0; margin-bottom: 1px;"><span>Wetness</span><span>Dry/Dusty</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 15%; background: #4cc9f0; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #f48c06; margin-bottom: 1px;"><span>Volume</span><span>Dense</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 70%; background: #f48c06; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #9d4edd; margin-bottom: 1px;"><span>Loudness</span><span>Ghost</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 5%; background: #9d4edd; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #ef233c; margin-bottom: 1px;"><span>Heat</span><span>Singeing</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px;"><div style="width: 100%; background: #ef233c; height: 100%; border-radius: 3px;"></div></div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <b style="color: #b0c47d; display: block;">— Misato —</b>
+                <span style="color: #ffffff; font-size: 0.75em; display: block; margin-top: 3px;">A shy NEET and member of the Human Protection Association, with a passive BO that rivals Skunk Spray.</span>
+                <a rel="noopener noreferrer nofollow" href="https://janitorai.com/characters/d508de70-f559-428c-8b49-1c4e3eac8dec_character-misato-skunk-supremacy">
+                    <span class="request-btn" style="width: 95%; margin: 6px auto 0 auto; display:block; padding: 5px 10px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.70em; background-color: #4d5d53 !important; box-shadow: 0 3px #262d29 !important;">🏡 ACCEPT TOXIC SHELTER ⚠️</span>
+                </a>
+            </div>
+        </div>
+        <div style="border: 2px solid #36454F; padding: 8px; border-radius: 8px; background-color: rgba(20, 20, 20, 0.6); box-sizing: border-box;">
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <img src="https://ella.janitorai.com/bot-avatars/VtlF7xXOUIozTzF6s8x-k.webp?width=1200" alt="Chloe" style="width: 85px; height: 85px; object-fit: cover; object-position: top; border-radius: 50%; border: 2px solid #708090; margin-right: 10px; flex-shrink: 0; box-shadow: 0 0 5px #708090;">      
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #b0c47d; margin-bottom: 1px;"><span>Stench</span><span>Lethal Sulfurous</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 95%; background: #b0c47d; height: 100%; border-radius: 3px;"></div></div>      
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #4cc9f0; margin-bottom: 1px;"><span>Wetness</span><span>Slimy &amp; Chunky</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 100%; background: #4cc9f0; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #f48c06; margin-bottom: 1px;"><span>Volume</span><span>Massive Density</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 83%; background: #f48c06; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #9d4edd; margin-bottom: 1px;"><span>Loudness</span><span>Ripping Discharge</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 92%; background: #9d4edd; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #ef233c; margin-bottom: 1px;"><span>Heat</span><span>Hot</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px;"><div style="width: 67%; background: #ef233c; height: 100%; border-radius: 3px;"></div></div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <b style="color: #708090; display: block;">— Chloe —</b>
+                <span style="color: #ffffff; font-size: 0.75em; display: block; margin-top: 3px;">It's a surprise... Request what you'd like to see with her!</span>
+                <a rel="noopener noreferrer nofollow" href="">
+                    <span class="request-btn" style="width: 95%; margin: 6px auto 0 auto; display:block; padding: 5px 10px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.70em; background-color: #4d5d53 !important; box-shadow: 0 3px #262d29 !important;">🔒 COMING SOON! 🔒</span>
+                </a>
+            </div>
+        </div>
+      <div style="border: 2px solid #36454F; padding: 8px; border-radius: 8px; background-color: rgba(20, 20, 20, 0.6); box-sizing: border-box;">
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <img src="https://ella.janitorai.com/bot-avatars/nNTmttwb1P-kAx0NsUl7T.webp?width=1200" alt="Lilly" style="width: 85px; height: 85px; object-fit: cover; object-position: top; border-radius: 50%; border: 2px solid #708090; margin-right: 10px; flex-shrink: 0; box-shadow: 0 0 5px #708090;">      
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #b0c47d; margin-bottom: 1px;"><span>Stench</span><span>Toxic Stale BO</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 75%; background: #b0c47d; height: 100%; border-radius: 3px;"></div></div>      
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #4cc9f0; margin-bottom: 1px;"><span>Wetness</span><span>Stained &amp; Wet</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 83%; background: #4cc9f0; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #f48c06; margin-bottom: 1px;"><span>Volume</span><span>Dense</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 58%; background: #f48c06; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #9d4edd; margin-bottom: 1px;"><span>Loudness</span><span>Loud &amp; Startling</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 75%; background: #9d4edd; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #ef233c; margin-bottom: 1px;"><span>Heat</span><span>Warm</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px;"><div style="width:50%; background: #ef233c; height: 100%; border-radius: 3px;"></div></div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <b style="color: #708090; display: block;">— Lilly —</b>
+                <span style="color: #ffffff; font-size: 0.75em; display: block; margin-top: 3px;">It's a surprise... Request what you'd like to see with her!</span>
+                <a rel="noopener noreferrer nofollow" href="">
+                    <span class="request-btn" style="width: 95%; margin: 6px auto 0 auto; display:block; padding: 5px 10px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.70em; background-color: #4d5d53 !important; box-shadow: 0 3px #262d29 !important;">🔒 COMING SOON! 🔒</span>
+                </a>
+            </div>
+        </div>
+            <div style="border: 2px solid #36454F; padding: 8px; border-radius: 8px; background-color: rgba(20, 20, 20, 0.6); box-sizing: border-box;">
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <img src="https://ella.janitorai.com/bot-avatars/wUwfqorS4Tt3NyYEg0btg.webp?width=1200" alt="Lola" style="width: 85px; height: 85px; object-fit: cover; object-position: top; border-radius: 50%; border: 2px solid #708090; margin-right: 10px; flex-shrink: 0; box-shadow: 0 0 5px #708090;">      
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #b0c47d; margin-bottom: 1px;"><span>Stench</span><span>Heavy &amp; Earthy</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 67%; background: #b0c47d; height: 100%; border-radius: 3px;"></div></div>      
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #4cc9f0; margin-bottom: 1px;"><span>Wetness</span><span>Damp</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 42%; background: #4cc9f0; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #f48c06; margin-bottom: 1px;"><span>Volume</span><span>Dense Rumbling</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 75%; background: #f48c06; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #9d4edd; margin-bottom: 1px;"><span>Loudness</span><span>Rumbling</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 58%; background: #9d4edd; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #ef233c; margin-bottom: 1px;"><span>Heat</span><span>Warm</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px;"><div style="width:58%; background: #ef233c; height: 100%; border-radius: 3px;"></div></div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <b style="color: #708090; display: block;">— Lola —</b>
+                <span style="color: #ffffff; font-size: 0.75em; display: block; margin-top: 3px;">It's a surprise... Request what you'd like to see with her!</span>
+                <a rel="noopener noreferrer nofollow" href="">
+                    <span class="request-btn" style="width: 95%; margin: 6px auto 0 auto; display:block; padding: 5px 10px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.70em; background-color: #4d5d53 !important; box-shadow: 0 3px #262d29 !important;">🔒 COMING SOON! 🔒</span>
+                </a>
+            </div>
+        </div>
+          <div style="border: 2px solid #36454F; padding: 8px; border-radius: 8px; background-color: rgba(20, 20, 20, 0.6); box-sizing: border-box;">
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <img src="https://ella.janitorai.com/bot-avatars/uJgOoeXvoR9emmO0Q1ryY.webp?width=1200" alt="Amy" style="width: 85px; height: 85px; object-fit: cover; object-position: top; border-radius: 50%; border: 2px solid #708090; margin-right: 10px; flex-shrink: 0; box-shadow: 0 0 5px #708090;">      
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #b0c47d; margin-bottom: 1px;"><span>Stench</span><span>Toxic Sweet Decay</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 92%; background: #b0c47d; height: 100%; border-radius: 3px;"></div></div>      
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #4cc9f0; margin-bottom: 1px;"><span>Wetness</span><span>Wet &amp; Spluttering</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 92%; background: #4cc9f0; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #f48c06; margin-bottom: 1px;"><span>Volume</span><span>Dense</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 67%; background: #f48c06; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #9d4edd; margin-bottom: 1px;"><span>Loudness</span><span>Spluttering Hiss</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 67%; background: #9d4edd; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #ef233c; margin-bottom: 1px;"><span>Heat</span><span>Hot/Singeing</span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px;"><div style="width:75%; background: #ef233c; height: 100%; border-radius: 3px;"></div></div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <b style="color: #708090; display: block;">— Amy —</b>
+                <span style="color: #ffffff; font-size: 0.75em; display: block; margin-top: 3px;">It's a surprise... Request what you'd like to see with her!</span>
+                <a rel="noopener noreferrer nofollow" href="">
+                    <span class="request-btn" style="width: 95%; margin: 6px auto 0 auto; display:block; padding: 5px 10px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.70em; background-color: #4d5d53 !important; box-shadow: 0 3px #262d29 !important;">🔒 COMING SOON! 🔒</span>
+                </a>
+            </div>
+        </div>
+                <div style="border: 2px solid #36454F; padding: 8px; border-radius: 8px; background-color: rgba(20, 20, 20, 0.6); box-sizing: border-box;">
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <img src="https://ella.janitorai.com/media-approved/kE-RBr0xJWck2N3UB7rH9.webp" alt="Kumi" style="width: 85px; height: 85px; object-fit: cover; object-position: top; border-radius: 50%; border: 2px solid #708090; margin-right: 10px; flex-shrink: 0; box-shadow: 0 0 5px #708090;">      
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #b0c47d; margin-bottom: 1px;"><span>Stench</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #b0c47d; height: 100%; border-radius: 3px;"></div></div>      
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #4cc9f0; margin-bottom: 1px;"><span>Wetness</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #4cc9f0; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #f48c06; margin-bottom: 1px;"><span>Volume</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #f48c06; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #9d4edd; margin-bottom: 1px;"><span>Loudness</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #9d4edd; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #ef233c; margin-bottom: 1px;"><span>Heat</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px;"><div style="width:0%; background: #ef233c; height: 100%; border-radius: 3px;"></div></div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <b style="color: #708090; display: block;">— Kumi —</b>
+                <span style="color: #ffffff; font-size: 0.75em; display: block; margin-top: 3px;">It's a surprise... Request what you'd like to see with her!</span>
+                <a rel="noopener noreferrer nofollow" href="">
+                    <span class="request-btn" style="width: 95%; margin: 6px auto 0 auto; display:block; padding: 5px 10px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.70em; background-color: #4d5d53 !important; box-shadow: 0 3px #262d29 !important;">🔒 COMING SOON! 🔒</span>
+                </a>
+            </div>
+        </div>
+        <div style="border: 2px solid #36454F; padding: 8px; border-radius: 8px; background-color: rgba(20, 20, 20, 0.6); box-sizing: border-box;">
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <img src="https://ella.janitorai.com/media-approved/P0o3PngswlQANBw4Hz1Gd.webp" alt="Nova" style="width: 85px; height: 85px; object-fit: cover; object-position: top; border-radius: 50%; border: 2px solid #708090; margin-right: 10px; flex-shrink: 0; box-shadow: 0 0 5px #708090;">      
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #b0c47d; margin-bottom: 1px;"><span>Stench</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #b0c47d; height: 100%; border-radius: 3px;"></div></div>      
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #4cc9f0; margin-bottom: 1px;"><span>Wetness</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #4cc9f0; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #f48c06; margin-bottom: 1px;"><span>Volume</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #f48c06; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #9d4edd; margin-bottom: 1px;"><span>Loudness</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #9d4edd; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #ef233c; margin-bottom: 1px;"><span>Heat</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px;"><div style="width:0%; background: #ef233c; height: 100%; border-radius: 3px;"></div></div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <b style="color: #708090; display: block;">— Nova —</b>
+                <span style="color: #ffffff; font-size: 0.75em; display: block; margin-top: 3px;">It's a surprise... Request what you'd like to see with her!</span>
+                <a rel="noopener noreferrer nofollow" href="">
+                    <span class="request-btn" style="width: 95%; margin: 6px auto 0 auto; display:block; padding: 5px 10px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.70em; background-color: #4d5d53 !important; box-shadow: 0 3px #262d29 !important;">🔒 COMING SOON! 🔒</span>
+                </a>
+            </div>
+        </div>
+       <div style="border: 2px solid #36454F; padding: 8px; border-radius: 8px; background-color: rgba(20, 20, 20, 0.6); box-sizing: border-box;">
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <img src="https://ella.janitorai.com/media-approved/EcQE86v5jMGjqGydQJX1R.webp" alt="Sage" style="width: 85px; height: 85px; object-fit: cover; object-position: top; border-radius: 50%; border: 2px solid #708090; margin-right: 10px; flex-shrink: 0; box-shadow: 0 0 5px #708090;">      
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #b0c47d; margin-bottom: 1px;"><span>Stench</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #b0c47d; height: 100%; border-radius: 3px;"></div></div>      
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #4cc9f0; margin-bottom: 1px;"><span>Wetness</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #4cc9f0; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #f48c06; margin-bottom: 1px;"><span>Volume</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #f48c06; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #9d4edd; margin-bottom: 1px;"><span>Loudness</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #9d4edd; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #ef233c; margin-bottom: 1px;"><span>Heat</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px;"><div style="width:0%; background: #ef233c; height: 100%; border-radius: 3px;"></div></div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <b style="color: #708090; display: block;">— Sage —</b>
+                <span style="color: #ffffff; font-size: 0.75em; display: block; margin-top: 3px;">It's a surprise... Request what you'd like to see with her!</span>
+                <a rel="noopener noreferrer nofollow" href="">
+                    <span class="request-btn" style="width: 95%; margin: 6px auto 0 auto; display:block; padding: 5px 10px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.70em; background-color: #4d5d53 !important; box-shadow: 0 3px #262d29 !important;">🔒 COMING SOON! 🔒</span>
+                </a>
+            </div>
+        </div>
+      <div style="border: 2px solid #36454F; padding: 8px; border-radius: 8px; background-color: rgba(20, 20, 20, 0.6); box-sizing: border-box;">
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <img src="https://ella.janitorai.com/media-approved/qXGRYCnLtr6Qxmfi2hvUa.webp" alt="Cora" style="width: 85px; height: 85px; object-fit: cover; object-position: top; border-radius: 50%; border: 2px solid #708090; margin-right: 10px; flex-shrink: 0; box-shadow: 0 0 5px #708090;">      
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #b0c47d; margin-bottom: 1px;"><span>Stench</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #b0c47d; height: 100%; border-radius: 3px;"></div></div>      
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #4cc9f0; margin-bottom: 1px;"><span>Wetness</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #4cc9f0; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #f48c06; margin-bottom: 1px;"><span>Volume</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #f48c06; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #9d4edd; margin-bottom: 1px;"><span>Loudness</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #9d4edd; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #ef233c; margin-bottom: 1px;"><span>Heat</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px;"><div style="width:0%; background: #ef233c; height: 100%; border-radius: 3px;"></div></div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <b style="color: #708090; display: block;">— Cora —</b>
+                <span style="color: #ffffff; font-size: 0.75em; display: block; margin-top: 3px;">It's a surprise... Request what you'd like to see with her!</span>
+                <a rel="noopener noreferrer nofollow" href="">
+                    <span class="request-btn" style="width: 95%; margin: 6px auto 0 auto; display:block; padding: 5px 10px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.70em; background-color: #4d5d53 !important; box-shadow: 0 3px #262d29 !important;">🔒 COMING SOON! 🔒</span>
+                </a>
+            </div>
+        </div>
+            <div style="border: 2px solid #36454F; padding: 8px; border-radius: 8px; background-color: rgba(20, 20, 20, 0.6); box-sizing: border-box;">
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <img src="https://ella.janitorai.com/media-approved/DQMtMOLGZOuZD-mZ0CRr5.webp" alt="Juno" style="width: 85px; height: 85px; object-fit: cover; object-position: top; border-radius: 50%; border: 2px solid #708090; margin-right: 10px; flex-shrink: 0; box-shadow: 0 0 5px #708090;">      
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #b0c47d; margin-bottom: 1px;"><span>Stench</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #b0c47d; height: 100%; border-radius: 3px;"></div></div>      
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #4cc9f0; margin-bottom: 1px;"><span>Wetness</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #4cc9f0; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #f48c06; margin-bottom: 1px;"><span>Volume</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #f48c06; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #9d4edd; margin-bottom: 1px;"><span>Loudness</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px; margin-bottom: 3px;"><div style="width: 0%; background: #9d4edd; height: 100%; border-radius: 3px;"></div></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.65em; color: #ef233c; margin-bottom: 1px;"><span>Heat</span><span></span></div>
+                    <div style="background: rgba(0,0,0,0.5); height: 5px; border-radius: 3px;"><div style="width:0%; background: #ef233c; height: 100%; border-radius: 3px;"></div></div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <b style="color: #708090; display: block;">— Juno —</b>
+                <span style="color: #ffffff; font-size: 0.75em; display: block; margin-top: 3px;">It's a surprise... Request what you'd like to see with her!</span>
+                <a rel="noopener noreferrer nofollow" href="">
+                    <span class="request-btn" style="width: 95%; margin: 6px auto 0 auto; display:block; padding: 5px 10px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.70em; background-color: #4d5d53 !important; box-shadow: 0 3px #262d29 !important;">🔒 COMING SOON! 🔒</span>
+                </a>
+            </div>
+        </div>
+    </div>
+  <br>
+  <div id="genericskunksupremacy" style="border: 4px solid #708090; padding: 18px; margin-bottom: 35px; border-radius: 12px; background-color: rgba(30, 35, 40, 0.7);">
+    <h3 style="color: #708090; margin-top: 0; margin-bottom: 10px; font-size: 1.3em; text-align: center; border-bottom: 2px solid #556b2f; padding-bottom: 8px;">
+      💥 Skunk Supremacy: Roleplay Worlds 💥
+    </h3>
+    <i style="color: #ffffff; display: block; text-align: center; margin-bottom: 15px;">Explore different roles within the Skunk Supremacy world.</i>
+    <div style="display: flex; flex-direction: column; gap: 12px;">   
+        <div style="border: 2px solid #b0c47d; padding: 15px; border-radius: 8px; background-color: rgba(43, 58, 43, 0.5); box-sizing: border-box; text-align: center;">
+            <b style="color: #b0c47d; display: block; font-size: 1.2em; margin-bottom: 5px;">— Skunk Supremacy: Choose Your Fate —</b>
+            <span style="color: #ffffff; font-size: 0.85em; display: block; margin-bottom: 15px;">The world is under the pervasive, musky rule of Skunk Hybrids. Decide whether you are a Human Slave, forced into eternal servitude and olfactory torment, or a proud Skunk Hybrid Ruler, enjoying your gassy dominion.</span>  
+            <div style="display: flex; justify-content: space-around; gap: 8px;">
+                <a rel="noopener noreferrer nofollow" href="https://janitorai.com/characters/3e961d81-aa29-4cf6-87ff-627b98424787_character-skunk-supremacy-world">
+                    <span class="request-btn" style="width: 100%; padding: 4px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.60em; background-color: #588157 !important; box-shadow: 0 3px #3a5a40 !important;">🤢 PLAY AS HUMAN (SERVE) 🤢</span>
+                </a>
+                <a rel="noopener noreferrer nofollow" href="https://janitorai.com/characters/96d50ebc-eafd-4208-8090-4971eeae7ec0_character-skunk-supremacy-world-skunk-hybrid-player">
+                    <span class="request-btn" style="width: 100%; padding: 4px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.60em; background-color: #4a5746 !important; box-shadow: 0 3px #2b3a2b !important;">💨 PLAY AS SKUNK (DOMINATE) 💨</span>
+                </a>
+            </div>
+        </div>
+      <div style="border: 2px solid #b0c47d; padding: 15px; border-radius: 8px; background-color: rgba(43, 58, 43, 0.5); box-sizing: border-box; text-align: center; margin: 0px auto;">
+    <b style="color: #b0c47d; display: block; font-size: 1.2em; margin-bottom: 5px;">— Hotel Overbooking Chaos —</b>
+    <span style="color: #ffffff; font-size: 0.85em; display: block; margin-bottom: 15px;">Forced roommate duty with four Skunk-Human Hybrids! You're a low-priority human, kicked out of your room and now trapped in close quarters with Chloe, Lilly, Amy, and Lola. Prepare for mandatory compliance and immediate olfactory dominance in a world where their noxious, high-volume gas is the law.</span>
+    <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+        <img src="https://ella.janitorai.com/bot-avatars/VtlF7xXOUIozTzF6s8x-k.webp?width=1200" alt="Chloe" style="width: 60px; height: 60px; object-fit: cover; object-position: center top; border-radius: 50%; border: 2px solid rgb(0, 102, 204); box-shadow: rgb(0, 102, 204) 0px 0px 5px;">
+        <img src="https://ella.janitorai.com/bot-avatars/nNTmttwb1P-kAx0NsUl7T.webp?width=1200" alt="Lilly" style="width: 60px; height: 60px; object-fit: cover; object-position: center top; border-radius: 50%; border: 2px solid rgb(255, 153, 51); box-shadow: rgb(255, 153, 51) 0px 0px 5px;">
+        <img src="https://ella.janitorai.com/bot-avatars/wUwfqorS4Tt3NyYEg0btg.webp?width=1200" alt="Lola" style="width: 60px; height: 60px; object-fit: cover; object-position: center top; border-radius: 50%; border: 2px solid rgb(100, 100, 100); box-shadow: rgb(100, 100, 100) 0px 0px 5px;">
+        <img src="https://ella.janitorai.com/bot-avatars/uJgOoeXvoR9emmO0Q1ryY.webp?width=1200" alt="Amy" style="width: 60px; height: 60px; object-fit: cover; object-position: center top; border-radius: 50%; border: 2px solid rgb(255, 192, 203); box-shadow: rgb(255, 192, 203) 0px 0px 5px;">
+    </div>
+          <div style="display: flex; justify-content: space-around; gap: 8px;">
+                <a rel="noopener noreferrer nofollow" href="https://janitorai.com/characters/17a37da3-df3d-48d1-abee-d6c03c8e914c_character-hotel-overbooking-chaos-supremacy">
+                    <span class="request-btn" style="width: 100%; padding: 4px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.60em; background-color: #588157 !important; box-shadow: 0 3px #3a5a40 !important;">💨 FART FOCUSED MODE 💨</span>
+                </a>
+                <a rel="noopener noreferrer nofollow" href="https://janitorai.com/characters/7d8d9d28-059c-4f70-8b87-ebc7e20a5ca1_character-hotel-overbooking-chaos-supremacy-scat-version">
+                    <span class="request-btn" style="width: 100%; padding: 4px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.60em; background-color: #4a5746 !important; box-shadow: 0 3px #2b3a2b !important;">💩 SCAT FOCUSED MODE 💩 </span>
+                </a>                    
+</div>
+      </div>
+       <div style="border: 2px solid #b0c47d; padding: 15px; border-radius: 8px; background-color: rgba(43, 58, 43, 0.5); box-sizing: border-box; text-align: center;">
+            <b style="color: #b0c47d; display: block; font-size: 1.2em; margin-bottom: 5px;">— The Twelve Days of Stenchmas —</b>
+            <span style="color: #ffffff; font-size: 0.85em; display: block; margin-bottom: 15px;"><b>CHRISTMAS SCENARIO:</b> A Naughty List fate where the human slave must survive twelve escalating stages of musky torture leading up to the final, unbearable Christmas Day punishment. (Focus: Endurance, Accumulation)</span>  
+<div style="text-align: center;">
+    <a href="https://janitorai.com/characters/d5c650ec-ac79-4c6b-8060-cb2725f29669_character-beta-twelve-days-of-stenchmas-supremacy" style="text-decoration: none; display: block;">
+    <span class="request-btn" style="
+        display: block; 
+        margin: 0 auto; 
+        width: 65%; 
+        padding: 4px; 
+        border-radius: 4px; 
+        font-weight: bold; 
+        text-align: center; 
+        color: white; 
+        font-size: 0.6em; 
+        background-color: #4a5746 !important; 
+        box-shadow: 0 3px #2b3a2b !important;
+    ">
+        🎄 Start Twelve Days Now 🎁
+    </span>
+</a>
+</div>
+        </div>  
+        <div style="border: 2px solid #708090; padding: 15px; border-radius: 8px; background-color: rgba(30, 35, 40, 0.5); box-sizing: border-box; text-align: center;">
+            <b style="color: #708090; display: block; font-size: 1.2em; margin-bottom: 5px;">— The Holiday Musk List —</b>
+            <span style="color: #ffffff; font-size: 0.85em; display: block; margin-bottom: 15px;"><b>CHRISTMAS SCENARIO:</b> You've made the Naughty List! Wrapped and sealed inside a sturdy gift box, you become the Hybrids' personal "Fart Box." The Skunk Girls take turns sitting atop the box, delivering concentrated gas through a specially prepared opening as punishment for your disobedience. (Focus: Forced Containment, Farting, Olfactory Torture)</span>  
+            <span style="width: 100%; padding: 4px; border-radius: 4px; font-weight: bold; text-align: center; color: white; font-size: 0.65em; background-color: #708090 !important; box-shadow: 0 3px #4e5a6a !important; display: inline-block;">🔒 COMING SOON 🔒</span>
+        </div>
+    </div>
+
+                </div>
+            </div>
+            <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 30px 0;">
+
+            <h3 style="color: var(--stale-brown);">ALL Bots & Worlds Availability 🌍 (Dynamic List)</h3>
+            <p style="font-size: 0.9em;">This list is generated automatically by referencing the separate `bots.json` file. Ensure both files are in the same directory!</p>
+            <table class="bots-table" id="bots-table-body">
+                <thead>
+                    <tr>
+                        <th>Creation Name</th>
+                        <th>Type</th>
+                        <th>JanitorAI Link</th>
+                        <th>Yodayo Link</th>
+                        <th>Caveduck Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="5" style="text-align: center;">Loading data from bots.json...</td></tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <script>
+        function renderLink(url, text = 'Link 💨') {
+            if (url === 'N/A' || url.startsWith('[LINK TO')) {
+                return '<span class="na">N/A</span>';
+            }
+            return `<a href="${url}">${text}</a>`;
+        }
+
+        async function generateTable() {
+            const tbody = document.getElementById('bots-table-body').querySelector('tbody');
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Fetching data from bots.json...</td></tr>';
+
+            try {
+                // Fetch data from the external JSON file
+                const response = await fetch('bots.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                const creations = data.allCreations || [];
+
+                tbody.innerHTML = ''; // Clear loading message
+
+                if (creations.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="5" style="font-style: italic;">No creations found in bots.json.</td></tr>`;
+                    return;
+                }
+
+                // Populate the table with data from the JSON
+                creations.forEach(item => {
+                    const row = tbody.insertRow();
+                    
+                    // Creation Name
+                    const nameCell = row.insertCell();
+                    nameCell.innerHTML = `<strong>${item.name}</strong>`;
+                    
+                    // Type
+                    const typeCell = row.insertCell();
+                    typeCell.innerHTML = item.type || 'N/A';
+                    
+                    // JanitorAI Link
+                    const janitorCell = row.insertCell();
+                    janitorCell.innerHTML = renderLink(item.janitorUrl);
+
+                    // Yodayo Link
+                    const yodayoCell = row.insertCell();
+                    yodayoCell.innerHTML = renderLink(item.yodayoUrl);
+                    
+                    // Caveduck Link
+                    const caveduckCell = row.insertCell();
+                    caveduckCell.innerHTML = renderLink(item.caveduckUrl);
+                });
+
+            } catch (e) {
+                // Display error if bots.json could not be loaded
+                tbody.innerHTML = `<tr><td colspan="5" style="color: #ff5555; text-align: center;">ERROR loading data. Check if 'bots.json' exists in the same folder and has valid JSON format. <br>Details: ${e.message}</td></tr>`;
+                console.error("Data Fetch Error:", e);
+            }
+        }
+
+        // Run the script once the page loads
+        document.addEventListener('DOMContentLoaded', generateTable);
+    </script>
+</body>
+</html>
