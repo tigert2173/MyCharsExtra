@@ -12,7 +12,7 @@ f<!DOCTYPE html>
             --background: #1d281d;    /* Very dark background (Greenish tint) */
             --card-bg: #2b3a2b;       /* Card background (Dark Olive) */
             --text-color: #ffffff;
-            --link-color: #D68A34;    /* Accent Brown/Orange */
+            --link-color: #D68A34;    /* Accent Brown/Orange */c
             --border-color: #4a5746;  /* Mid-tone border */
             --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
             
@@ -827,6 +827,89 @@ f<!DOCTYPE html>
 </table>
         </div>
     </div>
+<script>
+    function renderLink(url) {
+        if (!url || url === 'N/A' || url.startsWith('[LINK TO')) {
+            return '<span class="na">N/A</span>';
+        }
+        return `<a href="${url}" target="_blank">🔗 Link</a>`;
+    }
 
+    async function generateTable() {
+        const tbody = document.getElementById('bots-table-body');
+        
+        if (!tbody) {
+            console.error("Target tbody element 'bots-table-body' not found.");
+            return;
+        }
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Fetching data from bots.json...</td></tr>';
+
+        try {
+            // Check the file path! It must be 'bots.json' and in the same directory.
+            const response = await fetch('bots.json');
+            
+            if (!response.ok) {
+                // *** MORE DETAILED ERROR MESSAGE ***
+                let statusText = response.status === 404 ? 'File Not Found (404)' : `HTTP Error (Status: ${response.status})`;
+                throw new Error(`Failed to load 'bots.json'. ${statusText}`);
+            }
+            
+            const data = await response.json();
+            const creations = data.allCreations || [];
+
+            tbody.innerHTML = ''; 
+
+            if (creations.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="font-style: italic;">No creations found in bots.json (File is empty or array is missing).</td></tr>`;
+                return;
+            }
+
+            // Populate the table with data
+            creations.forEach(item => {
+                const row = tbody.insertRow();
+                
+                // Creation Name (Hover Preview)
+                const nameCell = row.insertCell();
+                nameCell.className = 'name-cell';
+                
+                const description = item.description || 'No description available.';
+                const previewContent = `
+                    <div class="name-text">
+                        <strong>${item.name}</strong>
+                    </div>
+                    <div class="preview-box">
+                        <h4>${item.name}</h4>
+                        <p>${description}</p>
+                    </div>
+                `;
+                nameCell.innerHTML = previewContent;
+                
+                // Type
+                row.insertCell().innerHTML = item.type || 'N/A';
+                
+                // JanitorAI Link
+                row.insertCell().innerHTML = renderLink(item.janitorUrl);
+
+                // Yodayo Link
+                row.insertCell().innerHTML = renderLink(item.yodayoUrl);
+                
+                // Caveduck Link
+                row.insertCell().innerHTML = renderLink(item.caveduckUrl);
+            });
+
+        } catch (e) {
+            // Display a clear message about the failure
+            tbody.innerHTML = `<tr><td colspan="5" style="color: #ff5555; text-align: center;">
+                ERROR: Could not load or parse data. <br>
+                **Check File Name/Location or JSON Syntax.** <br>
+                Details: ${e.message}
+            </td></tr>`;
+            console.error("Data Fetch Error:", e);
+        }
+    }
+
+    // Run the script once the page loads
+    document.addEventListener('DOMContentLoaded', generateTable);
+</script>
 </body>
 </html>
