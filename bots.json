@@ -43,6 +43,8 @@
     {
       "name": "Skunk Supremacy [COMPACT]",
       "description": "👑 SKUNK SUPREMACY: COMPACT EDITION 👑 \nA world enforced via concentrated musk and gas. Humanity serves the dominant Skunk-Human Hybrids. This version uses streamlined character definitions for better performance on less powerful AI models, focusing on core personality, stench profile, and the oppressive world lore. Obedience is mandatory. Expect intense olfactory dominance and submission.",
+      "themes": ["Fart", "Burp", "Armpit", "Feet", "Skunk"],
+      "imageUrl": "https://ella.janitorai.com/bot-avatars/vgIASS-aFaMFfOnzH3Kfr.webp?width=400",
       "type": "World",
       "janitorUrl": "https://janitorai.com/characters/9d82106f-7a47-4d4f-817f-feb992231bcb_character-skunk-supremacy-compact",
       "yodayoUrl": "Not provided",
@@ -51,7 +53,9 @@
     {
       "name": "Hotel Overbooking Chaos [Supremacy] [Scat Version]",
       "description": "Forced roommate duty with four Skunk-Human Hybrids! You're a low-priority human, kicked out of your room and now trapped in close quarters with Chloe, Lilly, Amy, and Lola. Prepare for mandatory compliance and immediate olfactory dominance in a world where their noxious, high-volume gas is the law.",
+      "themes": ["Scat", "Fart", "Burp", "Skunk"],
       "type": "Scenario",
+      "imageUrl": "https://ella.janitorai.com/bot-avatars/BzlasUucI492IGVIy1vuz.webp?width=400",
       "janitorUrl": "https://janitorai.com/characters/7d8d9d28-059c-4f70-8b87-ebc7e20a5ca1_character-hotel-overbooking-chaos-supremacy-scat-version",
       "yodayoUrl": "Not provided",
       "caveduckUrl": "Not provided"
