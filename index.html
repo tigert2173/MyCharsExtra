@@ -234,74 +234,102 @@
         grid-template-columns: 2fr 1fr 1fr;
     }
 
-    /* ----------------------------------------------------------------- */
-    /* --- 📱 MOBILE-SPECIFIC STYLING (Media Query) --- */
-    /* ----------------------------------------------------------------- */
+   /* ========================================================== */
+/* --- 📱 MOBILE-SPECIFIC STYLING (Final Media Query Fixes) --- */
+/* ========================================================== */
 
-    @media (max-width: 768px) {
-        /* 1. Reset the Main Grid for Mobile */
-        .container {
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-
-        /* 2. Adjust Body and Content Padding */
-        body {
-            padding: 20px 10px;
-        }
-        .content {
-            padding: 20px 15px; /* Slightly tighter padding for small screens */
-        }
-        
-        /* 3. Fix the INNER Status Grid (Crucial Fix) */
-        .status-header, .status-row {
-            /* Collapse the 3-column status grid into a single column on mobile */
-            grid-template-columns: 1fr;
-            /* Add padding/margin to prevent content touching the edges on wrap */
-            padding: 8px 10px; 
-            margin-bottom: 10px; /* Space out the rows for readability */
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-        }
-
-        /* 4. Improve Inner Status Row Readability (Stacking content) */
-        .status-header {
-            display: none !important; /* Hide the header completely on mobile, it's redundant */
-        }
-        .status-row > div {
-            padding: 5px 0;
-            text-align: left !important;
-        }
-        /* Style the Status tag to be easily visible */
-        .status-row > div:nth-child(3) {
-            margin-top: 10px;
-        }
-        .status-row > div:nth-child(3) span {
-            display: inline-block;
-            width: 80px; /* Give the status tag a fixed width */
-            text-align: center;
-        }
-
-        /* 5. Make Link Table Scrollable (If the table is wide) */
-        .bots-table {
-            display: block;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-        
-        /* 6. Hide the Hover Preview (Not compatible with touch) */
-        .name-cell .preview-box {
-            display: none !important;
-        }
-        
-        /* 7. Simplify Sidebar Description Area */
-        .description-box h2 {
-            font-size: 20px !important;
-        }
-        .sidebar {
-            padding: 15px;
-        }
+@media (max-width: 768px) {
+    /* 1. Reset the Main Grid for Mobile */
+    .container {
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
+
+    /* 2. Adjust Body and Content Padding */
+    body {
+        padding: 15px 10px; /* Tighter vertical padding */
+    }
+    .content {
+        padding: 20px 10px; /* Tighter horizontal padding */
+    }
+    
+    /* 3. Force Sidebar Content to Wrap (Crucial for text overflow) */
+    .sidebar {
+        /* Ensure the sidebar itself does not contribute to overflow */
+        max-width: 100%;
+        box-sizing: border-box; 
+    }
+    .description-box, 
+    .description-box p, 
+    .description-box ul, 
+    .description-box li {
+        /* Ensure all text content in the sidebar wraps and prevents overflow */
+        word-break: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+    }
+    .description-box h2 {
+        font-size: 20px !important;
+        /* Force padding to zero to prevent overflow on very small screens */
+        padding: 0 !important;
+    }
+
+    /* 4. Fix the Profile Links Table (The small 2-column table) */
+    .bots-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    /* Optional: Hide the link table headers to save vertical space */
+    .bots-table thead {
+        display: none; 
+    }
+    .bots-table td {
+        /* Allow cells to wrap if needed */
+        white-space: normal;
+    }
+
+    /* 5. Fix the INNER Status Grid (Current Projects) */
+    .status-header {
+        display: none !important; /* Hide the header completely on mobile, it's redundant */
+    }
+    .status-row {
+        /* Force the inner grid to be a single column stack on mobile */
+        grid-template-columns: 1fr;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+    }
+    /* Ensure the individual text items inside the stacked grid align properly */
+    .status-row > div {
+        padding: 3px 0;
+        text-align: left !important;
+        white-space: normal; /* Allow text to wrap */
+    }
+    /* Move the status tag to the bottom and right-align it */
+    .status-row > div:nth-child(3) {
+        text-align: right !important;
+        margin-top: 5px;
+    }
+    .status-row > div:nth-child(3) span {
+        display: inline-block;
+        width: 100px;
+        text-align: center;
+    }
+    
+    /* 6. Hide the Hover Preview (Still necessary for touch devices) */
+    .name-cell .preview-box {
+        display: none !important;
+    }
+    
+    /* 7. Request Button Stack Fix (Ensure CTA doesn't overflow) */
+    .request-btn {
+        display: block; /* Make it take the full width */
+        padding: 12px 15px; /* Bigger touch area */
+        font-size: 1em;
+    }
+}
 </style>
 </head>
 <body>
@@ -873,7 +901,12 @@
     </div>
 <script>
     function renderLink(url) {
-        if (!url || url === 'N/A' || url.startsWith('[LINK TO')) {
+        // This check covers:
+        // 1. null or undefined (falsy values)
+        // 2. An empty string ""
+        // 3. Explicitly set strings like 'N/A' or 'Not provided'
+        // 4. Any placeholder text starting with '[LINK TO'
+        if (!url || url.trim().toLowerCase() === 'n/a' || url.trim().toLowerCase() === 'not provided' || url.startsWith('[LINK TO')) {
             return '<span class="na">N/A</span>';
         }
         return `<a href="${url}" target="_blank">🔗 Link</a>`;
@@ -916,13 +949,14 @@
                 const nameCell = row.insertCell();
                 nameCell.className = 'name-cell';
                 
+                // IMPORTANT: Use default values if the property is missing in the JSON object.
                 const description = item.description || 'No description available.';
                 const previewContent = `
                     <div class="name-text">
-                        <strong>${item.name}</strong>
+                        <strong>${item.name || 'Untitled Creation'}</strong>
                     </div>
                     <div class="preview-box">
-                        <h4>${item.name}</h4>
+                        <h4>${item.name || 'Untitled Creation'}</h4>
                         <p>${description}</p>
                     </div>
                 `;
@@ -932,6 +966,8 @@
                 row.insertCell().innerHTML = item.type || 'N/A';
                 
                 // JanitorAI Link
+                // The item.janitorUrl check ensures that if the property is missing from the JSON object, 
+                // it passes undefined/null to renderLink, which correctly returns N/A.
                 row.insertCell().innerHTML = renderLink(item.janitorUrl);
 
                 // Yodayo Link
