@@ -5,308 +5,304 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile of @TigerT - The Apex of Stench</title>
     
-    <style>
-        /* --- ROOT THEME (FART COLORS) --- */
-        /* These variables ensure consistency with the inline styles you provided */
-        :root {
-            --background: #1d281d;    /* Very dark background (Greenish tint) */
-            --card-bg: #2b3a2b;       /* Card background (Dark Olive) */
-            --text-color: #ffffff;
-            --link-color: #D68A34;    /* Accent Brown/Orange */c
-            --border-color: #4a5746;  /* Mid-tone border */
-            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-            
-            /* Fart Theme Colors */
-            --toxic-glow: #b0c47d;      /* Muted Green Glow/Highlight */
-            --stale-brown: #D68A34;     /* Primary Accent Brown/Orange */
-            --bar-fill: #798b5a;        /* Progress Bar Color (Olive) */
-            --success-color: #5cb85c;   /* Completed Green */
-            --beta-color: #f0ad4e;      /* Beta Orange */
-            --planned-color: #5bc0de;   /* Planned Blue/Cyan */
-            --cta-dominant: #b0c47d;    /* Dominant CTA button color */
-            --cta-secondary: #4a5746;   /* Secondary CTA button color */
-
-            /* Specific Bar Colors for Visual Variety (Used in inline styles) */
-            --bar-color-1: #b0c47d;   /* Stench (toxic-glow) */
-            --bar-color-2: #4cc9f0;   /* Wetness (Blue) */
-            --bar-color-3: #f48c06;   /* Volume (Orange) */
-            --bar-color-4: #9d4edd;   /* Loudness (Purple) */
-            --bar-color-5: #ef233c;   /* Heat (Red) */
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--background);
-            color: var(--text-color);
-            margin: 0;
-            padding: 30px 20px;
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1300px; 
-            margin: 0 auto;
-            display: grid;
-            gap: 20px;
-            grid-template-columns: 300px 1fr; 
-        }
-        
-        /* --- General Text & Links --- */
-        a {
-            color: var(--link-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        a:hover {
-            color: var(--toxic-glow);
-            text-decoration: underline;
-        }
-        h3 {
-            color: var(--text-color);
-            font-size: 1.3em;
-            margin-top: 30px;
-            padding-bottom: 5px;
-            border-bottom: 2px solid var(--stale-brown);
-        }
-        
-        /* --- Profile Sidebar (Left) --- */
-        .sidebar {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: var(--box-shadow);
-            height: fit-content;
-        }
-        .profile-header {
-            text-align: center;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 20px;
-        }
-        .profile-header h2 {
-            margin: 5px 0 0;
-            color: var(--toxic-glow);
-            font-size: 2.2em;
-        }
-
-        /* --- PFP GLOW EFFECT --- */
-        .profile-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: top;
-            margin: 0 auto 15px auto;
-            display: block;
-            border: 3px solid #556b2f; 
-            overflow: hidden;
-            animation: pfp-breathe-glow 6s infinite alternate ease-in-out; 
-        }
-        @keyframes pfp-breathe-glow {
-            0% { box-shadow: 0 0 4px 1px #556b2f, 0 0 8px 3px rgba(176, 196, 149, 0.2); }
-            50% { box-shadow: 0 0 10px 4px var(--toxic-glow), 0 0 15px 6px rgba(176, 196, 149, 0.4); }
-            100% { box-shadow: 0 0 4px 1px #556b2f, 0 0 8px 3px rgba(176, 196, 149, 0.2); }
-        }
-        
-        /* --- Main Content Area (Right) --- */
-        .content {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: var(--box-shadow);
-        }
-        h1 {
-            font-size: 2em;
-            color: var(--text-color);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
-
-        /* --- Comprehensive Bots Table --- */
-        .bots-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            margin-top: 20px;
-            overflow: hidden;
-            font-size: 0.95em;
-        }
-        .bots-table th, .bots-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid var(--border-color);
-            text-align: center;
-        }
-        .bots-table th { background-color: var(--border-color); text-transform: uppercase; font-size: 0.85em;}
-        .bots-table td:first-child { text-align: left; font-weight: bold; }
-        .bots-table tr:last-child td { border-bottom: none; }
-        .bots-table tr:hover { background-color: #1F2937; }
-        .na { color: #525252; font-style: italic; }
-        .request-btn {
-            display: inline-block;
-            padding: 8px 15px;
-            border-radius: 6px;
-            font-weight: bold;
-            text-align: center;
-            transition: transform 0.1s, box-shadow 0.1s;
-        }
-        .request-btn:active {
-            transform: translateY(3px);
-            box-shadow: none !important;
-        }
-
-        /* Highlight the hoverable column */
-        .name-cell {
-            cursor: help; /* Indicates that the element is hoverable for help/info */
-            color: var(--toxic-glow, #b0c47d); /* Muted Green Glow */
-            font-weight: bold;
-        }
-        
-        /* Alternating row colors for readability */
-        tr:nth-child(even) {
-            background-color: #273427;
-        }
-
-        .tags-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-
-        .tag {
-            background-color: #4a5746;
-            color: #ccc;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            white-space: nowrap;
-        }
-
-        /* Tooltip styling for a better effect, though the title attribute will work on its own */
-        .name-cell[title]:hover {
-            text-decoration: underline dotted;
-        }
-        /* Basic styling for the table headers */
-    #bots-table th {
-        background-color: #3b4e3b; /* Dark Olive background */
-        color: #ffffff;
-        font-weight: bold;
-        text-transform: uppercase;
-        padding: 10px;
-        border: 1px solid #4a5746;
+<style>
+    /* --- ROOT THEME (FART COLORS) --- */
+    :root {
+        --background: #1d281d;
+        --card-bg: #2b3a2b;
+        --text-color: #ffffff;
+        --link-color: #D68A34;
+        --border-color: #4a5746;
+        --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        --toxic-glow: #b0c47d;
+        --stale-brown: #D68A34;
+        --bar-fill: #798b5a;
+        --success-color: #5cb85c;
+        --beta-color: orange; /* Updated to use the orange color explicitly */
+        --planned-color: #5bc0de;
+        --cta-dominant: #b0c47d;
+        --cta-secondary: #4a5746;
+        --bar-color-1: #b0c47d;
+        --bar-color-2: #4cc9f0;
+        --bar-color-3: #f48c06;
+        --bar-color-4: #9d4edd;
+        --bar-color-5: #ef233c;
     }
 
-    /* Styling for N/A links */
-    .na {
-        color: #aaa;
-        font-style: italic;
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: var(--background);
+        color: var(--text-color);
+        margin: 0;
+        padding: 30px 20px;
+        line-height: 1.6;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 1300px;
+        margin: 0 auto;
+        display: grid;
+        gap: 20px;
+        grid-template-columns: 300px 1fr; /* PC Layout: Sidebar + Content */
     }
     
-    /* CORE HOVER LOGIC */
-    .name-cell {
-        position: relative; /* Crucial: anchors the preview box to this cell */
-        cursor: help;
+    /* --- General Text & Links --- */
+    a {
+        color: var(--link-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    a:hover {
+        color: var(--toxic-glow);
+        text-decoration: underline;
+    }
+    h3 {
+        color: var(--text-color);
+        font-size: 1.3em;
+        margin-top: 30px;
+        padding-bottom: 5px;
+        border-bottom: 2px solid var(--stale-brown);
+    }
+    
+    /* --- Profile Sidebar (Left) --- */
+    .sidebar {
+        background-color: var(--card-bg);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: var(--box-shadow);
+        height: fit-content;
+    }
+    .profile-header {
+        text-align: center;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 20px;
+    }
+    .profile-header h2 {
+        margin: 5px 0 0;
+        color: var(--toxic-glow);
+        font-size: 2.2em;
     }
 
-    /* THE CUSTOM PREVIEW CARD (Hidden by Default) */
+    /* --- PFP GLOW EFFECT --- */
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: top;
+        margin: 0 auto 15px auto;
+        display: block;
+        border: 3px solid #556b2f;
+        overflow: hidden;
+        animation: pfp-breathe-glow 6s infinite alternate ease-in-out;
+    }
+    @keyframes pfp-breathe-glow {
+        0% { box-shadow: 0 0 4px 1px #556b2f, 0 0 8px 3px rgba(176, 196, 149, 0.2); }
+        50% { box-shadow: 0 0 10px 4px var(--toxic-glow), 0 0 15px 6px rgba(176, 196, 149, 0.4); }
+        100% { box-shadow: 0 0 4px 1px #556b2f, 0 0 8px 3px rgba(176, 196, 149, 0.2); }
+    }
+    
+    /* --- Main Content Area (Right) --- */
+    .content {
+        background-color: var(--card-bg);
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: var(--box-shadow);
+    }
+    h1 {
+        font-size: 2em;
+        color: var(--text-color);
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 10px;
+        margin-top: 0;
+    }
+
+    /* --- Comprehensive Bots Table --- */
+    .bots-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        margin-top: 20px;
+        overflow: hidden;
+        font-size: 0.95em;
+    }
+    .bots-table th, .bots-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid var(--border-color);
+        text-align: center;
+    }
+    .bots-table th { 
+        background-color: var(--border-color); 
+        text-transform: uppercase; 
+        font-size: 0.85em;
+    }
+    .bots-table td:first-child { text-align: left; font-weight: bold; }
+    .bots-table tr:last-child td { border-bottom: none; }
+    .bots-table tr:hover { background-color: #1F2937; }
+    .na { color: #525252; font-style: italic; }
+    
+    /* Request Button */
+    .request-btn {
+        display: inline-block;
+        padding: 8px 15px;
+        border-radius: 6px;
+        font-weight: bold;
+        text-align: center;
+        transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .request-btn:active {
+        transform: translateY(3px);
+        box-shadow: none !important;
+    }
+
+    /* Table Highlighting */
+    .name-cell {
+        cursor: help;
+        color: var(--toxic-glow, #b0c47d);
+        font-weight: bold;
+        position: relative; /* Anchor for preview-box */
+    }
+    tr:nth-child(even) {
+        background-color: #273427;
+    }
+    .tags-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    .tag {
+        background-color: #4a5746;
+        color: #ccc;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+    .name-cell[title]:hover {
+        text-decoration: underline dotted;
+    }
+
+    /* Tooltip/Preview Logic (PC ONLY) */
     .preview-box {
-        display: none; /* Hide the box initially */
+        display: none;
         position: absolute;
-        top: 50%; /* Start positioning halfway down the cell */
-        left: 105%; /* Position slightly to the right of the cell */
-        transform: translateY(-50%); /* Centers the box vertically */
-        z-index: 30000; /* Ensures the box is drawn over other table elements */
-        width: 300px; 
+        top: 50%;
+        left: 105%;
+        transform: translateY(-50%);
+        z-index: 30000;
+        width: 300px;
         max-width: 400px;
         padding: 15px;
-        
-        /* THEME/AESTHETIC */
-        background-color: #0d120d; /* Even darker background for contrast */
-        border: 2px solid var(--toxic-glow, #b0c47d); /* Border color */
+        background-color: #0d120d;
+        border: 2px solid var(--toxic-glow, #b0c47d);
         border-radius: 6px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
-        pointer-events: none; /* Important: Prevents the box from blocking clicks on elements behind it */
+        pointer-events: none;
     }
-
-    /* HOVER STATE: SHOW THE PREVIEW */
     .name-cell:hover .preview-box {
-        display: block; /* Show the box when the parent cell is hovered */
+        display: block;
     }
-    
-    /* PREVIEW CARD STYLING */
     .preview-box h4 {
-        color: var(--stale-brown, #D68A34); /* Accent color for the name */
+        color: var(--stale-brown, #D68A34);
         margin: 0 0 8px 0;
         font-size: 1.1em;
         border-bottom: 1px solid #4a5746;
         padding-bottom: 5px;
     }
-
     .preview-box p {
         margin: 0;
         font-size: 0.9em;
         line-height: 1.4;
         color: #eee;
     }
-
-    /* Ensure the name text itself looks normal */
     .name-text {
         color: var(--text-color);
         font-weight: bold;
     }
-/* ========================================================== */
-/* --- 🖥️ DESKTOP-FIRST STYLING (The CSS you provided) --- */
-/* ========================================================== */
-
-/* ... (Your original CSS goes here) ... */
-
-
-/* ========================================================== */
-/* --- 📱 MOBILE-SPECIFIC STYLING (Media Query) --- */
-/* ========================================================== */
-
-@media (max-width: 768px) {
-    /* 1. Reset the Grid for Mobile */
-    .container {
-        /* Switch from 2 columns (sidebar + content) to 1 stacked column */
-        grid-template-columns: 1fr; 
-        gap: 30px; /* Increase gap slightly for better separation */
-    }
-
-    /* 2. Adjust Body Padding */
-    body {
-        /* Reduce side padding on tiny screens */
-        padding: 20px 10px;
-    }
-
-    /* 3. Simplify Main Content Padding */
-    .content {
-        /* Reduce padding to give content more horizontal space */
-        padding: 20px;
-    }
-
-    /* 4. Make Table Stackable/Scrollable (Crucial for mobile) */
-    .bots-table {
-        /* Allow horizontal scrolling for large tables */
-        display: block; 
-        overflow-x: auto; 
-        white-space: nowrap; /* Prevent cell wrapping */
-    }
     
-    /* 5. Hide the Hover Preview (Not compatible with touch) */
-    .name-cell .preview-box {
-        display: none !important;
+    /* ----------------------------------------------------------------- */
+    /* --- CUSTOM STATUS GRID CLASSES (for use with inline styles) --- */
+    /* ----------------------------------------------------------------- */
+
+    /* Define the grid properties so we can target them in the media query */
+    .status-header, .status-row {
+        display: grid; 
+        grid-template-columns: 2fr 1fr 1fr;
     }
 
-    /* 6. Ensure Sidebar is full width (it is already 1fr, but good practice) */
-    .sidebar {
-        width: 100%;
+    /* ----------------------------------------------------------------- */
+    /* --- 📱 MOBILE-SPECIFIC STYLING (Media Query) --- */
+    /* ----------------------------------------------------------------- */
+
+    @media (max-width: 768px) {
+        /* 1. Reset the Main Grid for Mobile */
+        .container {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        /* 2. Adjust Body and Content Padding */
+        body {
+            padding: 20px 10px;
+        }
+        .content {
+            padding: 20px 15px; /* Slightly tighter padding for small screens */
+        }
+        
+        /* 3. Fix the INNER Status Grid (Crucial Fix) */
+        .status-header, .status-row {
+            /* Collapse the 3-column status grid into a single column on mobile */
+            grid-template-columns: 1fr;
+            /* Add padding/margin to prevent content touching the edges on wrap */
+            padding: 8px 10px; 
+            margin-bottom: 10px; /* Space out the rows for readability */
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+
+        /* 4. Improve Inner Status Row Readability (Stacking content) */
+        .status-header {
+            display: none !important; /* Hide the header completely on mobile, it's redundant */
+        }
+        .status-row > div {
+            padding: 5px 0;
+            text-align: left !important;
+        }
+        /* Style the Status tag to be easily visible */
+        .status-row > div:nth-child(3) {
+            margin-top: 10px;
+        }
+        .status-row > div:nth-child(3) span {
+            display: inline-block;
+            width: 80px; /* Give the status tag a fixed width */
+            text-align: center;
+        }
+
+        /* 5. Make Link Table Scrollable (If the table is wide) */
+        .bots-table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        /* 6. Hide the Hover Preview (Not compatible with touch) */
+        .name-cell .preview-box {
+            display: none !important;
+        }
+        
+        /* 7. Simplify Sidebar Description Area */
+        .description-box h2 {
+            font-size: 20px !important;
+        }
+        .sidebar {
+            padding: 15px;
+        }
     }
-}
-    </style>
+</style>
 </head>
 <body>
     <div class="container">
@@ -378,33 +374,33 @@
                     Track the progress of custom bots and major updates here!
                 </p>
                 <div style="margin: 0 auto; max-width: 600px; font-size: 0.95em">
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: #556b2f; padding: 8px; border-top-left-radius: 6px; border-top-right-radius: 6px; font-weight: bold; color: #fff9e3; border-bottom: 2px solid #b0c47d; ">
+                <div class="status-header" style="background-color: #556b2f; padding: 8px; border-top-left-radius: 6px; border-top-right-radius: 6px; font-weight: bold; color: #fff9e3; border-bottom: 2px solid #b0c47d; ">
                         <div style="padding-left: 10px;">Project Name</div>
                         <div style="text-align: center;">Type</div>
                         <div style="text-align: center;">Status</div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                    <div class="status-row" style="background-color: rgba(43, 58, 43, 0.7); border-bottom: 1px solid #4a5746;">
                         <div style="color: #b0c47d; padding-left: 10px;">Skunk Supremacy [World]:<br> Skunk Hybrid Player</div>
                         <div style="text-align: center; color: #ffffff;">Request</div>
                         <div style="text-align: center;">
                             <span style="background-color: #5cb85c; color: white; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Completed</span>
                         </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                    <div class="status-row" style="background-color: rgba(43, 58, 43, 0.7); border-bottom: 1px solid #4a5746;">
                         <div style="color: #b0c47d; padding-left: 10px;">The Holiday Musk List [Supremacy]</div>
                         <div style="text-align: center; color: #ffffff;">New Bot</div>
                         <div style="text-align: center;">
                             <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
                         </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                    <div class="status-row" style="background-color: rgba(43, 58, 43, 0.7); border-bottom: 1px solid #4a5746;">
                         <div style="color: #b0c47d; padding-left: 10px;">Twelve Days of Stenchmas [Supremacy]</div>
                         <div style="text-align: center; color: #ffffff;">New Bot</div>
                         <div style="text-align: center;">
                             <span style="background-color: orange; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Beta Is Out!</span>
                         </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                    <div class="status-row" style="background-color: rgba(43, 58, 43, 0.7); border-bottom: 1px solid #4a5746;">
                         <div style="color: #b0c47d; padding-left: 10px;">Hotel Overbooking Chaos [Supremacy]</div>
                         <div style="text-align: center; color: #ffffff;">New Bot</div>
                         <div style="text-align: center;">
@@ -418,63 +414,63 @@
                             <span style="background-color: #5cb85c; color: white; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Completed</span>
                         </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                    <div class="status-row" style="background-color: rgba(43, 58, 43, 0.7); border-bottom: 1px solid #4a5746;">
                         <div style="color: #b0c47d; padding-left: 10px;">Kumi [Supremacy]</div>
                         <div style="text-align: center; color: #ffffff;">New Bot</div>
                         <div style="text-align: center;">
                             <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
                         </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                    <div class="status-row" style="background-color: rgba(43, 58, 43, 0.7); border-bottom: 1px solid #4a5746;">
                         <div style="color: #b0c47d; padding-left: 10px;">Nova [Supremacy]</div>
                         <div style="text-align: center; color: #ffffff;">New Bot</div>
                         <div style="text-align: center;">
                             <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
                         </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                    <div class="status-row" style="background-color: rgba(43, 58, 43, 0.7); border-bottom: 1px solid #4a5746;">
                         <div style="color: #b0c47d; padding-left: 10px;">Sage [Supremacy]</div>
                         <div style="text-align: center; color: #ffffff;">New Bot</div>
                         <div style="text-align: center;">
                             <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
                         </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                    <div class="status-row" style="background-color: rgba(43, 58, 43, 0.7); border-bottom: 1px solid #4a5746;">
                         <div style="color: #b0c47d; padding-left: 10px;">Cora [Supremacy]</div>
                         <div style="text-align: center; color: #ffffff;">New Bot</div>
                         <div style="text-align: center;">
                             <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
                         </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                    <div class="status-row" style="background-color: rgba(43, 58, 43, 0.7); border-bottom: 1px solid #4a5746;">
                         <div style="color: #b0c47d; padding-left: 10px;">Juno [Supremacy]</div>
                         <div style="text-align: center; color: #ffffff;">New Bot</div>
                         <div style="text-align: center;">
                             <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
                         </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                    <div class="status-row" style="background-color: rgba(43, 58, 43, 0.7); border-bottom: 1px solid #4a5746;">
                         <div style="color: #b0c47d; padding-left: 10px;">Chloe [Supremacy]</div>
                         <div style="text-align: center; color: #ffffff;">New Bot</div>
                         <div style="text-align: center;">
                             <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
                         </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                    <div class="status-row" style="background-color: rgba(43, 58, 43, 0.7); border-bottom: 1px solid #4a5746;">
                         <div style="color: #b0c47d; padding-left: 10px;">Lilly [Supremacy]</div>
                         <div style="text-align: center; color: #ffffff;">New Bot</div>
                         <div style="text-align: center;">
                             <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
                         </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                    <div class="status-row" style="background-color: rgba(43, 58, 43, 0.7); border-bottom: 1px solid #4a5746;">
                         <div style="color: #b0c47d; padding-left: 10px;">Lola [Supremacy]</div>
                         <div style="text-align: center; color: #ffffff;">New Bot</div>
                         <div style="text-align: center;">
                             <span style="background-color: #5bc0de; color: #333; padding: 3px 6px; border-radius: 4px; font-size: 0.75em; font-weight: bold;">Planned</span>
                         </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; background-color: rgba(43, 58, 43, 0.7); padding: 8px 0; border-bottom: 1px solid #4a5746;">
+                    <div class="status-row" style="background-color: rgba(43, 58, 43, 0.7); border-bottom: 1px solid #4a5746;">
                         <div style="color: #b0c47d; padding-left: 10px;">Amy [Supremacy]</div>
                         <div style="text-align: center; color: #ffffff;">New Bot</div>
                         <div style="text-align: center;">
