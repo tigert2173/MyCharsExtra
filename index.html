@@ -18,7 +18,7 @@
         --stale-brown: #D68A34;
         --bar-fill: #798b5a;
         --success-color: #5cb85c;
-        --beta-color: orange; /* Updated to use the orange color explicitly */
+        --beta-color: orange;
         --planned-color: #5bc0de;
         --cta-dominant: #b0c47d;
         --cta-secondary: #4a5746;
@@ -44,7 +44,7 @@
         margin: 0 auto;
         display: grid;
         gap: 20px;
-        grid-template-columns: 300px 1fr; /* PC Layout: Sidebar + Content */
+        grid-template-columns: 300px 1fr;
     }
     
     /* --- General Text & Links --- */
@@ -131,13 +131,13 @@
         margin-top: 20px;
         overflow: hidden;
         font-size: 0.95em;
-        table-layout: fixed; /* Added to help control column widths */
+        table-layout: fixed;
     }
     .bots-table th, .bots-table td {
         padding: 12px 15px;
         border-bottom: 1px solid var(--border-color);
         text-align: center;
-        box-sizing: border-box; /* Crucial for layout stability */
+        box-sizing: border-box;
     }
     .bots-table th { 
         background-color: var(--border-color); 
@@ -148,18 +148,15 @@
     .bots-table td:first-child { 
         text-align: left; 
         font-weight: bold; 
-        /* Allow name column to wrap */
         white-space: normal; 
     }
     .bots-table tr:last-child td { border-bottom: none; }
     .bots-table tr:hover { background-color: #1F2937; }
     
     /* --- LINK SQUISHING FIX --- */
-    /* Targets the JanitorAI, Yodayo, and Caveduck columns */
     .bots-table td:nth-child(3), 
     .bots-table td:nth-child(4), 
     .bots-table td:nth-child(5) {
-        /* Prevents the '🔗 Link' text from wrapping and squishing the column */
         white-space: nowrap; 
     }
 
@@ -184,7 +181,7 @@
         cursor: help;
         color: var(--toxic-glow, #b0c47d);
         font-weight: bold;
-        position: relative; /* Anchor for preview-box */
+        position: relative;
     }
     tr:nth-child(even) {
         background-color: #273427;
@@ -206,7 +203,7 @@
         text-decoration: underline dotted;
     }
 
-    /* Tooltip/Preview Logic (PC ONLY) */
+    /* --- TOOLTIP/PREVIEW LOGIC (PC ONLY) --- */
     .preview-box {
         display: none;
         position: absolute;
@@ -247,8 +244,6 @@
     /* ----------------------------------------------------------------- */
     /* --- CUSTOM STATUS GRID CLASSES (for use with inline styles) --- */
     /* ----------------------------------------------------------------- */
-
-    /* Define the grid properties so we can target them in the media query */
     .status-header, .status-row {
         display: grid; 
         grid-template-columns: 2fr 1fr 1fr;
@@ -259,9 +254,7 @@
 /* ========================================================== */
 
     /* Type Column Visibility Classes */
-    /* The header should use 'type-column-header' and the data cell should use 'type-column-data' */
     .type-column-header, .type-column-data {
-        /* Default: visible */
         display: table-cell;
     }
     
@@ -274,13 +267,13 @@
 
         /* 2. Adjust Body and Content Padding */
         body {
-            padding: 15px 10px; /* Tighter vertical padding */
+            padding: 15px 10px;
         }
         .content {
-            padding: 20px 10px; /* Tighter horizontal padding */
+            padding: 20px 10px;
         }
         
-        /* 3. Force Sidebar Content to Wrap (Crucial for text overflow) */
+        /* 3. Force Sidebar Content to Wrap */
         .sidebar {
             max-width: 100%;
             box-sizing: border-box; 
@@ -300,24 +293,31 @@
 
         /* 4. Comprehensive Bots Table Fixes */
         
-        /* Hide ONLY the Type DATA CELLS */
+        /* HIDE ONLY the Type DATA CELLS */
         .type-column-data {
             display: none;
         }
 
-        /* Adjust padding for link cells on small screen */
+        /* *** PREVIEW HIDE FIX *** */
+        /* This rule explicitly ensures the preview box is hidden on mobile */
+        /* by overriding the :hover rule with high specificity. */
+        .name-cell .preview-box {
+            display: none !important;
+        }
+
+        /* Adjust padding for table cells on small screen */
         .bots-table th, .bots-table td {
              padding: 8px;
         }
         .bots-table td:nth-child(3), 
         .bots-table td:nth-child(4), 
         .bots-table td:nth-child(5) {
-            padding: 8px 4px; /* Slightly less padding on links */
+            padding: 8px 4px;
         }
         
         /* 5. Fix the INNER Status Grid (Current Projects) */
         .status-header {
-            display: none !important; /* Hide the header completely on mobile, it's redundant */
+            display: none !important;
         }
         .status-row {
             grid-template-columns: 1fr;
@@ -341,12 +341,7 @@
             text-align: center;
         }
         
-        /* 6. Hide the Hover Preview (Still necessary for touch devices) */
-        .name-cell .preview-box {
-            display: none !important;
-        }
-        
-        /* 7. Request Button Stack Fix (Ensure CTA doesn't overflow) */
+        /* 6. Request Button Stack Fix */
         .request-btn {
             display: block;
             padding: 12px 15px;
