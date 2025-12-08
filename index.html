@@ -119,7 +119,9 @@
         margin-top: 0;
     }
 
-    /* --- Comprehensive Bots Table --- */
+    /* ------------------------------------------- */
+    /* --- COMPREHENSIVE BOTS TABLE STYLES --- */
+    /* ------------------------------------------- */
     .bots-table {
         width: 100%;
         border-collapse: separate;
@@ -129,20 +131,38 @@
         margin-top: 20px;
         overflow: hidden;
         font-size: 0.95em;
+        table-layout: fixed; /* Added to help control column widths */
     }
     .bots-table th, .bots-table td {
         padding: 12px 15px;
         border-bottom: 1px solid var(--border-color);
         text-align: center;
+        box-sizing: border-box; /* Crucial for layout stability */
     }
     .bots-table th { 
         background-color: var(--border-color); 
         text-transform: uppercase; 
         font-size: 0.85em;
+        vertical-align: middle;
     }
-    .bots-table td:first-child { text-align: left; font-weight: bold; }
+    .bots-table td:first-child { 
+        text-align: left; 
+        font-weight: bold; 
+        /* Allow name column to wrap */
+        white-space: normal; 
+    }
     .bots-table tr:last-child td { border-bottom: none; }
     .bots-table tr:hover { background-color: #1F2937; }
+    
+    /* --- LINK SQUISHING FIX --- */
+    /* Targets the JanitorAI, Yodayo, and Caveduck columns */
+    .bots-table td:nth-child(3), 
+    .bots-table td:nth-child(4), 
+    .bots-table td:nth-child(5) {
+        /* Prevents the '🔗 Link' text from wrapping and squishing the column */
+        white-space: nowrap; 
+    }
+
     .na { color: #525252; font-style: italic; }
     
     /* Request Button */
@@ -234,122 +254,105 @@
         grid-template-columns: 2fr 1fr 1fr;
     }
 
-   /* ========================================================== */
+/* ========================================================== */
 /* --- 📱 MOBILE-SPECIFIC STYLING (Final Media Query Fixes) --- */
 /* ========================================================== */
 
-    /* CSS for responsive table behavior */
-    .type-column {
-        /* This ensures the column is visible by default */
+    /* Type Column Visibility Classes */
+    /* The header should use 'type-column-header' and the data cell should use 'type-column-data' */
+    .type-column-header, .type-column-data {
+        /* Default: visible */
         display: table-cell;
     }
+    
+    @media (max-width: 768px) {
+        /* 1. Reset the Main Grid for Mobile */
+        .container {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
 
-    /* Media Query: Hides the Type column when the screen is 600px or smaller */
-    @media (max-width: 600px) {
-        .type-column {
-            /* Hides the header and all data cells in the Type column */
+        /* 2. Adjust Body and Content Padding */
+        body {
+            padding: 15px 10px; /* Tighter vertical padding */
+        }
+        .content {
+            padding: 20px 10px; /* Tighter horizontal padding */
+        }
+        
+        /* 3. Force Sidebar Content to Wrap (Crucial for text overflow) */
+        .sidebar {
+            max-width: 100%;
+            box-sizing: border-box; 
+        }
+        .description-box, 
+        .description-box p, 
+        .description-box ul, 
+        .description-box li {
+            word-break: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+        .description-box h2 {
+            font-size: 20px !important;
+            padding: 0 !important;
+        }
+
+        /* 4. Comprehensive Bots Table Fixes */
+        
+        /* Hide ONLY the Type DATA CELLS */
+        .type-column-data {
             display: none;
         }
-    }
-    
-    /* Styling for N/A */
-    .na {
-        color: #999;
-        font-style: italic;
-    }
-    
-@media (max-width: 768px) {
-    /* 1. Reset the Main Grid for Mobile */
-    .container {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
 
-    /* 2. Adjust Body and Content Padding */
-    body {
-        padding: 15px 10px; /* Tighter vertical padding */
+        /* Adjust padding for link cells on small screen */
+        .bots-table th, .bots-table td {
+             padding: 8px;
+        }
+        .bots-table td:nth-child(3), 
+        .bots-table td:nth-child(4), 
+        .bots-table td:nth-child(5) {
+            padding: 8px 4px; /* Slightly less padding on links */
+        }
+        
+        /* 5. Fix the INNER Status Grid (Current Projects) */
+        .status-header {
+            display: none !important; /* Hide the header completely on mobile, it's redundant */
+        }
+        .status-row {
+            grid-template-columns: 1fr;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+        .status-row > div {
+            padding: 3px 0;
+            text-align: left !important;
+            white-space: normal;
+        }
+        .status-row > div:nth-child(3) {
+            text-align: right !important;
+            margin-top: 5px;
+        }
+        .status-row > div:nth-child(3) span {
+            display: inline-block;
+            width: 100px;
+            text-align: center;
+        }
+        
+        /* 6. Hide the Hover Preview (Still necessary for touch devices) */
+        .name-cell .preview-box {
+            display: none !important;
+        }
+        
+        /* 7. Request Button Stack Fix (Ensure CTA doesn't overflow) */
+        .request-btn {
+            display: block;
+            padding: 12px 15px;
+            font-size: 1em;
+        }
     }
-    .content {
-        padding: 20px 10px; /* Tighter horizontal padding */
-    }
-    
-    /* 3. Force Sidebar Content to Wrap (Crucial for text overflow) */
-    .sidebar {
-        /* Ensure the sidebar itself does not contribute to overflow */
-        max-width: 100%;
-        box-sizing: border-box; 
-    }
-    .description-box, 
-    .description-box p, 
-    .description-box ul, 
-    .description-box li {
-        /* Ensure all text content in the sidebar wraps and prevents overflow */
-        word-break: break-word;
-        overflow-wrap: break-word;
-        white-space: normal;
-    }
-    .description-box h2 {
-        font-size: 20px !important;
-        /* Force padding to zero to prevent overflow on very small screens */
-        padding: 0 !important;
-    }
-
-    /* 4. Fix the Profile Links Table (The small 2-column table) */
-    .bots-table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-    /* Optional: Hide the link table headers to save vertical space */
-    .bots-table thead {
-        display: none; 
-    }
-    .bots-table td {
-        /* Allow cells to wrap if needed */
-        white-space: normal;
-    }
-
-    /* 5. Fix the INNER Status Grid (Current Projects) */
-    .status-header {
-        display: none !important; /* Hide the header completely on mobile, it's redundant */
-    }
-    .status-row {
-        /* Force the inner grid to be a single column stack on mobile */
-        grid-template-columns: 1fr;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
-    }
-    /* Ensure the individual text items inside the stacked grid align properly */
-    .status-row > div {
-        padding: 3px 0;
-        text-align: left !important;
-        white-space: normal; /* Allow text to wrap */
-    }
-    /* Move the status tag to the bottom and right-align it */
-    .status-row > div:nth-child(3) {
-        text-align: right !important;
-        margin-top: 5px;
-    }
-    .status-row > div:nth-child(3) span {
-        display: inline-block;
-        width: 100px;
-        text-align: center;
-    }
-    
-    /* 6. Hide the Hover Preview (Still necessary for touch devices) */
-    .name-cell .preview-box {
-        display: none !important;
-    }
-    
-    /* 7. Request Button Stack Fix (Ensure CTA doesn't overflow) */
-    .request-btn {
-        display: block; /* Make it take the full width */
-        padding: 12px 15px; /* Bigger touch area */
-        font-size: 1em;
-    }
-}
 </style>
 </head>
 <body>
@@ -901,23 +904,6 @@
             </div>
             <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 30px 0;">
 
-<h3 style="color: var(--stale-brown);">ALL Bots & Worlds Availability 🌍 (Dynamic List)</h3>
-<p style="font-size: 0.9em;">This list is generated automatically by referencing the separate `bots.json` file. Ensure both files are in the same directory!</p>
-<table class="bots-table">
-    <thead>
-        <tr>
-            <th>Creation Name (Hover for Description)</th> 
-            <th class="type-column">Type</th>
-            <th>JanitorAI Link</th>
-            <th>Yodayo Link</th>
-            <th>Caveduck Link</th>
-        </tr>
-    </thead>
-    <tbody id="bots-table-body">
-        <tr><td colspan="5" style="text-align: center;">Loading data from bots.json...</td></tr>
-    </tbody>
-</table>
-
 <script>
     function renderLink(url) {
         // Function remains the same to handle N/A links
@@ -936,7 +922,7 @@
         }
 
         // --- UPDATED LOGIC FOR COLUMN COUNT ---
-        // Total columns is 5. If small screen, we hide the Type column, making it 4 visible columns.
+        // Total columns is 5. If small screen (<= 600px), we hide the Type column, making it 4 visible columns.
         const isSmallScreen = window.matchMedia('(max-width: 600px)').matches;
         const initialColspan = isSmallScreen ? 4 : 5; 
         
@@ -956,7 +942,6 @@
             tbody.innerHTML = ''; 
 
             if (creations.length === 0) {
-                // Ensure this colspan uses the calculated initialColspan
                 tbody.innerHTML = `<tr><td colspan="${initialColspan}" style="font-style: italic;">No creations found in bots.json (File is empty or array is missing).</td></tr>`;
                 return;
             }
@@ -968,9 +953,9 @@
                 const name = item.name || 'Untitled Creation';
                 const description = item.description || 'No description available.';
                 
-                // 1. Creation Name (Hover Preview) - REMAINS VISIBLE
+                // 1. Creation Name (Hover Preview)
                 const nameCell = row.insertCell();
-                nameCell.className = 'name-cell'; // Keep the original name-cell class
+                nameCell.className = 'name-cell'; 
                 
                 const previewContent = `
                     <div class="name-text">
@@ -985,7 +970,8 @@
                 
                 // 2. Type - HIDES ON SMALL SCREEN
                 const typeCell = row.insertCell();
-                typeCell.className = 'type-column'; // ADDED CLASS HERE to target the data cell
+                // ADDED CLASS HERE to target the data cell for mobile hiding
+                typeCell.className = 'type-column-data'; 
                 typeCell.innerHTML = item.type || 'N/A';
                 
                 // 3. JanitorAI Link
@@ -999,7 +985,7 @@
             });
 
         } catch (e) {
-            // Error Display (Ensure colspan is updated here too)
+            // Error Display 
             tbody.innerHTML = `<tr><td colspan="${initialColspan}" style="color: #ff5555; text-align: center;">
                 ERROR: Could not load or parse data. <br>
                 **Check File Name/Location or JSON Syntax.** <br>
@@ -1011,7 +997,6 @@
 
     // Run the script once the page loads
     document.addEventListener('DOMContentLoaded', generateTable);
-</script>
 </script>
 </body>
 </html>
