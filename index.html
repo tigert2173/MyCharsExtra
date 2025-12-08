@@ -238,6 +238,33 @@
 /* --- 📱 MOBILE-SPECIFIC STYLING (Final Media Query Fixes) --- */
 /* ========================================================== */
 
+    /* CSS for responsive table behavior */
+    .creation-name, .name-cell {
+        /* This ensures the column is visible by default */
+        display: table-cell;
+    }
+
+    /* Media Query: Hides the column when the screen is 600px or smaller */
+    @media (max-width: 600px) {
+        .creation-name, .name-cell {
+            /* Hides the header and all data cells in this column */
+            display: none;
+        }
+        /* Optional: adjust the colspan for the "Loading" row */
+        #bots-table-body tr td[colspan="5"] {
+            /* Changes colspan from 5 to 4 when one column is hidden */
+            /* You may need to manually update the 'colspan' in the JS loading row */
+            /* or use JS to dynamically change it, but changing it here is safer. */
+            /* This is a placeholder and might need adjustment in the JS part. */
+        }
+    }
+    
+    /* Styling for N/A */
+    .na {
+        color: #999;
+        font-style: italic;
+    }
+    
 @media (max-width: 768px) {
     /* 1. Reset the Main Grid for Mobile */
     .container {
@@ -881,12 +908,12 @@
             </div>
             <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 30px 0;">
 
-           <h3 style="color: var(--stale-brown);">ALL Bots & Worlds Availability 🌍 (Dynamic List)</h3>
+    <h3 style="color: var(--stale-brown);">ALL Bots & Worlds Availability 🌍 (Dynamic List)</h3>
 <p style="font-size: 0.9em;">This list is generated automatically by referencing the separate `bots.json` file. Ensure both files are in the same directory!</p>
 <table class="bots-table">
     <thead>
         <tr>
-            <th>Creation Name (Hover for Description)</th> 
+            <th class="creation-name">Creation Name (Hover for Description)</th> 
             <th>Type</th>
             <th>JanitorAI Link</th>
             <th>Yodayo Link</th>
@@ -897,16 +924,11 @@
         <tr><td colspan="5" style="text-align: center;">Loading data from bots.json...</td></tr>
     </tbody>
 </table>
-        </div>
-    </div>
+
 <script>
     function renderLink(url) {
-        // This check covers:
-        // 1. null or undefined (falsy values)
-        // 2. An empty string ""
-        // 3. Explicitly set strings like 'N/A' or 'Not provided'
-        // 4. Any placeholder text starting with '[LINK TO'
-        if (!url || url.trim().toLowerCase() === 'n/a' || url.trim().toLowerCase() === 'not provided' || url.startsWith('[LINK TO')) {
+        // ... (renderLink function remains the same as previously corrected)
+        if (!url || String(url).trim().toLowerCase() === 'n/a' || String(url).trim().toLowerCase() === 'not provided' || String(url).startsWith('[LINK TO')) {
             return '<span class="na">N/A</span>';
         }
         return `<a href="${url}" target="_blank">🔗 Link</a>`;
@@ -915,29 +937,35 @@
     async function generateTable() {
         const tbody = document.getElementById('bots-table-body');
         
+        // ... (Error checks remain the same)
         if (!tbody) {
             console.error("Target tbody element 'bots-table-body' not found.");
             return;
         }
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Fetching data from bots.json...</td></tr>';
+
+        // Adjust colspan based on screen width for the loading message
+        const isSmallScreen = window.matchMedia('(max-width: 600px)').matches;
+        const initialColspan = isSmallScreen ? 4 : 5; 
+        
+        tbody.innerHTML = `<tr><td colspan="${initialColspan}" style="text-align: center;">Fetching data from bots.json...</td></tr>`;
 
         try {
-            // Check the file path! It must be 'bots.json' and in the same directory.
             const response = await fetch('bots.json');
             
+            // ... (HTTP/JSON parsing checks remain the same)
             if (!response.ok) {
-                // *** MORE DETAILED ERROR MESSAGE ***
                 let statusText = response.status === 404 ? 'File Not Found (404)' : `HTTP Error (Status: ${response.status})`;
                 throw new Error(`Failed to load 'bots.json'. ${statusText}`);
             }
             
             const data = await response.json();
-            const creations = data.allCreations || [];
+            const creations = data.allCreations || []; 
 
             tbody.innerHTML = ''; 
 
             if (creations.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" style="font-style: italic;">No creations found in bots.json (File is empty or array is missing).</td></tr>`;
+                // Ensure this colspan uses the calculated initialColspan
+                tbody.innerHTML = `<tr><td colspan="${initialColspan}" style="font-style: italic;">No creations found in bots.json (File is empty or array is missing).</td></tr>`;
                 return;
             }
 
@@ -945,18 +973,20 @@
             creations.forEach(item => {
                 const row = tbody.insertRow();
                 
+                const name = item.name || 'Untitled Creation';
+                const description = item.description || 'No description available.';
+                
                 // Creation Name (Hover Preview)
                 const nameCell = row.insertCell();
-                nameCell.className = 'name-cell';
+                // ADDED CLASS HERE to target the data cell
+                nameCell.className = 'name-cell creation-name-data'; 
                 
-                // IMPORTANT: Use default values if the property is missing in the JSON object.
-                const description = item.description || 'No description available.';
                 const previewContent = `
                     <div class="name-text">
-                        <strong>${item.name || 'Untitled Creation'}</strong>
+                        <strong>${name}</strong>
                     </div>
                     <div class="preview-box">
-                        <h4>${item.name || 'Untitled Creation'}</h4>
+                        <h4>${name}</h4>
                         <p>${description}</p>
                     </div>
                 `;
@@ -966,8 +996,6 @@
                 row.insertCell().innerHTML = item.type || 'N/A';
                 
                 // JanitorAI Link
-                // The item.janitorUrl check ensures that if the property is missing from the JSON object, 
-                // it passes undefined/null to renderLink, which correctly returns N/A.
                 row.insertCell().innerHTML = renderLink(item.janitorUrl);
 
                 // Yodayo Link
@@ -978,8 +1006,8 @@
             });
 
         } catch (e) {
-            // Display a clear message about the failure
-            tbody.innerHTML = `<tr><td colspan="5" style="color: #ff5555; text-align: center;">
+            // Error Display (Ensure colspan is updated here too)
+            tbody.innerHTML = `<tr><td colspan="${initialColspan}" style="color: #ff5555; text-align: center;">
                 ERROR: Could not load or parse data. <br>
                 **Check File Name/Location or JSON Syntax.** <br>
                 Details: ${e.message}
