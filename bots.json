@@ -3,7 +3,7 @@
     {
       "name": "[V0.91] Twelve Days of Stenchmas [Supremacy]",
       "description": "The STENCH event is here: 12 days of Gas Play, Musk, and Body Odor. Push your limits and uncover the final, hidden challenge—coded over 40 hours—if you dare.",
-      "themes": ["Fart", "Scat", "Burp", "Armpit", "Feet", "Skunk"],
+      "themes": ["Fart", "Scat", "Burp", "Armpit", "Feet", "Skunk", "Multiple"],
       "imageUrl": "https://ella.janitorai.com/bot-avatars/_HT2KHLm9vD-0ZyVIv3Gm.webp?width=400",
       "type": "Character",
       "janitorUrl": "https://janitorai.com/characters/29c62312-9043-4c56-b5a1-74e4ad525522_character-emma-pokemon-legends-za-facesitting-fart",
@@ -33,7 +33,7 @@
     {
       "name": "Skunk Supremacy [ULTRA-COMPACT]",
       "description": "👑 SKUNK SUPREMACY: ULTRA-COMPACT EDITION 👑 \nA world enforced via concentrated musk and gas. Humanity serves the dominant Skunk-Human Hybrids. This version uses streamlined character definitions for better performance on less powerful AI models, focusing on core personality, stench profile, and the oppressive world lore. Obedience is mandatory. Expect intense olfactory dominance and submission.",
-      "themes": ["Fart", "Burp", "Armpit", "Feet", "Skunk"],
+      "themes": ["Fart", "Burp", "Armpit", "Feet", "Skunk", "Multiple"],
       "imageUrl": "https://ella.janitorai.com/bot-avatars/vgIASS-aFaMFfOnzH3Kfr.webp?width=400",
       "type": "World",
       "janitorUrl": "https://janitorai.com/characters/04fdb6d9-0117-4dc6-8cb4-0df3d7021be3_character-skunk-supremacy-ultra-compact",
@@ -43,7 +43,7 @@
     {
       "name": "Skunk Supremacy [COMPACT]",
       "description": "👑 SKUNK SUPREMACY: COMPACT EDITION 👑 \nA world enforced via concentrated musk and gas. Humanity serves the dominant Skunk-Human Hybrids. This version uses streamlined character definitions for better performance on less powerful AI models, focusing on core personality, stench profile, and the oppressive world lore. Obedience is mandatory. Expect intense olfactory dominance and submission.",
-      "themes": ["Fart", "Burp", "Armpit", "Feet", "Skunk"],
+      "themes": ["Fart", "Burp", "Armpit", "Feet", "Skunk", "Multiple"],
       "imageUrl": "https://ella.janitorai.com/bot-avatars/vgIASS-aFaMFfOnzH3Kfr.webp?width=400",
       "type": "World",
       "janitorUrl": "https://janitorai.com/characters/9d82106f-7a47-4d4f-817f-feb992231bcb_character-skunk-supremacy-compact",
@@ -53,7 +53,7 @@
     {
       "name": "Hotel Overbooking Chaos [Supremacy] [Scat Version]",
       "description": "Forced roommate duty with four Skunk-Human Hybrids! You're a low-priority human, kicked out of your room and now trapped in close quarters with Chloe, Lilly, Amy, and Lola. Prepare for mandatory compliance and immediate olfactory dominance in a world where their noxious, high-volume gas is the law.",
-      "themes": ["Scat", "Fart", "Burp", "Skunk"],
+      "themes": ["Scat", "Fart", "Burp", "Skunk", "Multiple"],
       "type": "Scenario",
       "imageUrl": "https://ella.janitorai.com/bot-avatars/BzlasUucI492IGVIy1vuz.webp?width=400",
       "janitorUrl": "https://janitorai.com/characters/7d8d9d28-059c-4f70-8b87-ebc7e20a5ca1_character-hotel-overbooking-chaos-supremacy-scat-version",
@@ -63,8 +63,8 @@
     {
       "name": "Hotel Overbooking Chaos [Supremacy]",
       "description": "Forced roommate duty with four Skunk-Human Hybrids! You're a low-priority human, kicked out of your room and now trapped in close quarters with Chloe, Lilly, Amy, and Lola. Prepare for mandatory compliance and immediate olfactory dominance in a world where their noxious, high-volume gas is the law.",
-      "themes": ["Fart", "Burp", "Skunk"],
-      "type": "Character",
+      "themes": ["Fart", "Burp", "Skunk", "Multiple"],
+      "type": "Scenario",
       "imageUrl": "https://ella.janitorai.com/bot-avatars/d61A4m4NG7D2Ko0M7GSMl.webp?width=400",
       "janitorUrl": "https://janitorai.com/characters/17a37da3-df3d-48d1-abee-d6c03c8e914c_character-hotel-overbooking-chaos-supremacy",
       "yodayoUrl": "Not provided",
@@ -82,8 +82,10 @@
     },
     {
       "name": "RORIE AND CHALYNA [SUPREN_]",
-      "description": "A week ago, you escaped from your previous skunk girls Roxie and Chalyna. The world has been dominated by skunk girls who have humanity under their thumbs—no... it's more like they have us all under their asses! You've...",
+      "description": "A week ago, you escaped from your previous skunk girls Roxie and Chalyna. The world has been dominated by skunk girls who have humanity under their thumbs—no... it's more like they have us all under their asses! You've managed to stay under the radar for a week, but today that'll all change when Roxie and Chalyna spot you. You try to run away, only to make the mistake of getting yourself cornered.",
+      "themes": ["Fart", "Skunk", "Torture", "Multiple"],
       "type": "Character",
+      "imageUrl": "https://ella.janitorai.com/bot-avatars/leCJrtEEagbOIaSqStgik.webp?width=400",
       "janitorUrl": "Not provided",
       "yodayoUrl": "Not provided",
       "caveduckUrl": "Not provided"
