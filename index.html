@@ -6,294 +6,306 @@
     <title>Profile of @TigerT - The Apex of Stench</title>
     
     <style>
-/*
-|--------------------------------------------------------------------------
-| GLOBAL STYLES (No Change Needed for Responsiveness)
-|--------------------------------------------------------------------------
-*/
-body {
-    margin: 0;
-    padding: 30px 20px;
-    line-height: 1.6;
-    min-height: 100vh;
-    /* Removed extra spaces/tabs */
-}
+        /* --- ROOT THEME (FART COLORS) --- */
+        /* These variables ensure consistency with the inline styles you provided */
+        :root {
+            --background: #1d281d;    /* Very dark background (Greenish tint) */
+            --card-bg: #2b3a2b;       /* Card background (Dark Olive) */
+            --text-color: #ffffff;
+            --link-color: #D68A34;    /* Accent Brown/Orange */c
+            --border-color: #4a5746;  /* Mid-tone border */
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            
+            /* Fart Theme Colors */
+            --toxic-glow: #b0c47d;      /* Muted Green Glow/Highlight */
+            --stale-brown: #D68A34;     /* Primary Accent Brown/Orange */
+            --bar-fill: #798b5a;        /* Progress Bar Color (Olive) */
+            --success-color: #5cb85c;   /* Completed Green */
+            --beta-color: #f0ad4e;      /* Beta Orange */
+            --planned-color: #5bc0de;   /* Planned Blue/Cyan */
+            --cta-dominant: #b0c47d;    /* Dominant CTA button color */
+            --cta-secondary: #4a5746;   /* Secondary CTA button color */
 
-/* --- General Text & Links --- */
-a {
-    color: var(--link-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-a:hover {
-    color: var(--toxic-glow);
-    text-decoration: underline;
-}
-h3 {
-    color: var(--text-color);
-    font-size: 1.3em;
-    margin-top: 30px;
-    padding-bottom: 5px;
-    border-bottom: 2px solid var(--stale-brown);
-}
+            /* Specific Bar Colors for Visual Variety (Used in inline styles) */
+            --bar-color-1: #b0c47d;   /* Stench (toxic-glow) */
+            --bar-color-2: #4cc9f0;   /* Wetness (Blue) */
+            --bar-color-3: #f48c06;   /* Volume (Orange) */
+            --bar-color-4: #9d4edd;   /* Loudness (Purple) */
+            --bar-color-5: #ef233c;   /* Heat (Red) */
+        }
 
-/* --- General Card Styling (Sidebar & Content) --- */
-.sidebar, .content {
-    background-color: var(--card-bg);
-    border-radius: 10px;
-    padding: 20px; /* Reduced to 20px for sidebar to match content */
-    box-shadow: var(--box-shadow);
-    /* For sidebar */
-    height: fit-content;
-}
-.content {
-    padding: 30px; /* Slightly larger padding for main content */
-}
-h1 {
-    font-size: 2em;
-    color: var(--text-color);
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 10px;
-    margin-top: 0;
-}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background);
+            color: var(--text-color);
+            margin: 0;
+            padding: 30px 20px;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
 
-/*
-|--------------------------------------------------------------------------
-| CONTAINER LAYOUT (The Core Change)
-|--------------------------------------------------------------------------
-*/
-.container {
-    max-width: 1300px;
-    margin: 0 auto;
-    display: grid;
-    gap: 20px;
-    /* PC/Desktop Layout: Two-column grid (Sidebar fixed 300px, Content flexible 1fr) */
-    grid-template-columns: 300px 1fr;
-}
+        .container {
+            max-width: 1300px; 
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 300px 1fr; 
+        }
+        
+        /* --- General Text & Links --- */
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--toxic-glow);
+            text-decoration: underline;
+        }
+        h3 {
+            color: var(--text-color);
+            font-size: 1.3em;
+            margin-top: 30px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--stale-brown);
+        }
+        
+        /* --- Profile Sidebar (Left) --- */
+        .sidebar {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            height: fit-content;
+        }
+        .profile-header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        .profile-header h2 {
+            margin: 5px 0 0;
+            color: var(--toxic-glow);
+            font-size: 2.2em;
+        }
+
+        /* --- PFP GLOW EFFECT --- */
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top;
+            margin: 0 auto 15px auto;
+            display: block;
+            border: 3px solid #556b2f; 
+            overflow: hidden;
+            animation: pfp-breathe-glow 6s infinite alternate ease-in-out; 
+        }
+        @keyframes pfp-breathe-glow {
+            0% { box-shadow: 0 0 4px 1px #556b2f, 0 0 8px 3px rgba(176, 196, 149, 0.2); }
+            50% { box-shadow: 0 0 10px 4px var(--toxic-glow), 0 0 15px 6px rgba(176, 196, 149, 0.4); }
+            100% { box-shadow: 0 0 4px 1px #556b2f, 0 0 8px 3px rgba(176, 196, 149, 0.2); }
+        }
+        
+        /* --- Main Content Area (Right) --- */
+        .content {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+        }
+        h1 {
+            font-size: 2em;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* --- Comprehensive Bots Table --- */
+        .bots-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-top: 20px;
+            overflow: hidden;
+            font-size: 0.95em;
+        }
+        .bots-table th, .bots-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .bots-table th { background-color: var(--border-color); text-transform: uppercase; font-size: 0.85em;}
+        .bots-table td:first-child { text-align: left; font-weight: bold; }
+        .bots-table tr:last-child td { border-bottom: none; }
+        .bots-table tr:hover { background-color: #1F2937; }
+        .na { color: #525252; font-style: italic; }
+        .request-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        .request-btn:active {
+            transform: translateY(3px);
+            box-shadow: none !important;
+        }
+
+        /* Highlight the hoverable column */
+        .name-cell {
+            cursor: help; /* Indicates that the element is hoverable for help/info */
+            color: var(--toxic-glow, #b0c47d); /* Muted Green Glow */
+            font-weight: bold;
+        }
+        
+        /* Alternating row colors for readability */
+        tr:nth-child(even) {
+            background-color: #273427;
+        }
+
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .tag {
+            background-color: #4a5746;
+            color: #ccc;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        /* Tooltip styling for a better effect, though the title attribute will work on its own */
+        .name-cell[title]:hover {
+            text-decoration: underline dotted;
+        }
+        /* Basic styling for the table headers */
+    #bots-table th {
+        background-color: #3b4e3b; /* Dark Olive background */
+        color: #ffffff;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 10px;
+        border: 1px solid #4a5746;
+    }
+
+    /* Styling for N/A links */
+    .na {
+        color: #aaa;
+        font-style: italic;
+    }
+    
+    /* CORE HOVER LOGIC */
+    .name-cell {
+        position: relative; /* Crucial: anchors the preview box to this cell */
+        cursor: help;
+    }
+
+    /* THE CUSTOM PREVIEW CARD (Hidden by Default) */
+    .preview-box {
+        display: none; /* Hide the box initially */
+        position: absolute;
+        top: 50%; /* Start positioning halfway down the cell */
+        left: 105%; /* Position slightly to the right of the cell */
+        transform: translateY(-50%); /* Centers the box vertically */
+        z-index: 30000; /* Ensures the box is drawn over other table elements */
+        width: 300px; 
+        max-width: 400px;
+        padding: 15px;
+        
+        /* THEME/AESTHETIC */
+        background-color: #0d120d; /* Even darker background for contrast */
+        border: 2px solid var(--toxic-glow, #b0c47d); /* Border color */
+        border-radius: 6px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+        pointer-events: none; /* Important: Prevents the box from blocking clicks on elements behind it */
+    }
+
+    /* HOVER STATE: SHOW THE PREVIEW */
+    .name-cell:hover .preview-box {
+        display: block; /* Show the box when the parent cell is hovered */
+    }
+    
+    /* PREVIEW CARD STYLING */
+    .preview-box h4 {
+        color: var(--stale-brown, #D68A34); /* Accent color for the name */
+        margin: 0 0 8px 0;
+        font-size: 1.1em;
+        border-bottom: 1px solid #4a5746;
+        padding-bottom: 5px;
+    }
+
+    .preview-box p {
+        margin: 0;
+        font-size: 0.9em;
+        line-height: 1.4;
+        color: #eee;
+    }
+
+    /* Ensure the name text itself looks normal */
+    .name-text {
+        color: var(--text-color);
+        font-weight: bold;
+    }
+/* ========================================================== */
+/* --- 🖥️ DESKTOP-FIRST STYLING (The CSS you provided) --- */
+/* ========================================================== */
+
+/* ... (Your original CSS goes here) ... */
 
 
-/*
-|--------------------------------------------------------------------------
-| MOBILE OPTIMIZATION (BREAKPOINT: 768px)
-| The layout collapses to a single column (Sidebar on top, Content below)
-|--------------------------------------------------------------------------
-*/
+/* ========================================================== */
+/* --- 📱 MOBILE-SPECIFIC STYLING (Media Query) --- */
+/* ========================================================== */
+
 @media (max-width: 768px) {
+    /* 1. Reset the Grid for Mobile */
+    .container {
+        /* Switch from 2 columns (sidebar + content) to 1 stacked column */
+        grid-template-columns: 1fr; 
+        gap: 30px; /* Increase gap slightly for better separation */
+    }
+
+    /* 2. Adjust Body Padding */
     body {
-        /* Reduce side padding on very small screens for better use of space */
+        /* Reduce side padding on tiny screens */
         padding: 20px 10px;
     }
-    
-    .container {
-        /* Mobile Layout: Single column */
-        grid-template-columns: 1fr;
-    }
-    
-    /* Ensure the sidebar appears *above* the main content on mobile */
-    .sidebar {
-        order: 1;
-    }
+
+    /* 3. Simplify Main Content Padding */
     .content {
-        order: 2;
-        padding: 20px; /* Uniform padding on mobile */
+        /* Reduce padding to give content more horizontal space */
+        padding: 20px;
     }
 
-    /* --- Bots Table Adjustments for Mobile --- */
+    /* 4. Make Table Stackable/Scrollable (Crucial for mobile) */
     .bots-table {
-        /* Prevent horizontal overflow on mobile by enabling horizontal scrolling */
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap; /* Keeps content in one line, forcing horizontal scroll */
+        /* Allow horizontal scrolling for large tables */
+        display: block; 
+        overflow-x: auto; 
+        white-space: nowrap; /* Prevent cell wrapping */
     }
     
-    /* Force table width wide enough to be readable/scrollable */
-    .bots-table tbody, .bots-table thead, .bots-table tr {
-        display: table; /* Revert to standard table display */
+    /* 5. Hide the Hover Preview (Not compatible with touch) */
+    .name-cell .preview-box {
+        display: none !important;
+    }
+
+    /* 6. Ensure Sidebar is full width (it is already 1fr, but good practice) */
+    .sidebar {
         width: 100%;
-        table-layout: fixed; /* Optional: helps with equal column width */
     }
 }
-
-
-/*
-|--------------------------------------------------------------------------
-| PROFILE & PFP STYLING (No Change Needed for Responsiveness)
-|--------------------------------------------------------------------------
-*/
-.profile-header {
-    text-align: center;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 20px;
-}
-.profile-header h2 {
-    margin: 5px 0 0;
-    color: var(--toxic-glow);
-    font-size: 2.2em;
-}
-
-/* --- PFP GLOW EFFECT --- */
-.profile-avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: top;
-    margin: 0 auto 15px auto;
-    display: block;
-    border: 3px solid #556b2f;
-    overflow: hidden;
-    animation: pfp-breathe-glow 6s infinite alternate ease-in-out;
-}
-@keyframes pfp-breathe-glow {
-    0% { box-shadow: 0 0 4px 1px #556b2f, 0 0 8px 3px rgba(176, 196, 149, 0.2); }
-    50% { box-shadow: 0 0 10px 4px var(--toxic-glow), 0 0 15px 6px rgba(176, 196, 149, 0.4); }
-    100% { box-shadow: 0 0 4px 1px #556b2f, 0 0 8px 3px rgba(176, 196, 149, 0.2); }
-}
-
-/*
-|--------------------------------------------------------------------------
-| BOTS TABLE & TOOLTIP STYLING
-|--------------------------------------------------------------------------
-*/
-.bots-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    margin-top: 20px;
-    overflow: hidden;
-    font-size: 0.95em;
-}
-.bots-table th, .bots-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid var(--border-color);
-    text-align: center;
-}
-.bots-table th { background-color: var(--border-color); text-transform: uppercase; font-size: 0.85em;}
-.bots-table td:first-child { text-align: left; font-weight: bold; }
-.bots-table tr:last-child td { border-bottom: none; }
-.bots-table tr:hover { background-color: #1F2937; }
-.na { color: #525252; font-style: italic; }
-.request-btn {
-    display: inline-block;
-    padding: 8px 15px;
-    border-radius: 6px;
-    font-weight: bold;
-    text-align: center;
-    transition: transform 0.1s, box-shadow 0.1s;
-}
-.request-btn:active {
-    transform: translateY(3px);
-    box-shadow: none !important;
-}
-
-/* Highlight the hoverable column */
-.name-cell {
-    cursor: help;
-    color: var(--toxic-glow, #b0c47d);
-    font-weight: bold;
-    /* Added this for mobile visibility */
-    position: relative; /* Crucial for preview box anchoring */
-}
-.name-text {
-    color: var(--text-color);
-    font-weight: bold;
-}
-/* Alternating row colors for readability */
-tr:nth-child(even) {
-    background-color: #273427;
-}
-
-.tags-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    justify-content: center; /* Center tags on mobile */
-}
-
-.tag {
-    background-color: #4a5746;
-    color: #ccc;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-}
-
-/* Tooltip styling for a better effect, though the title attribute will work on its own */
-.name-cell[title]:hover {
-    text-decoration: underline dotted;
-}
-/* Basic styling for the table headers */
-#bots-table th {
-    background-color: #3b4e3b;
-    color: #ffffff;
-    font-weight: bold;
-    text-transform: uppercase;
-    padding: 10px;
-    border: 1px solid #4a5746;
-}
-
-/* Styling for N/A links */
-.na {
-    color: #aaa;
-    font-style: italic;
-}
-
-/* CORE HOVER LOGIC & PREVIEW CARD */
-.preview-box {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 105%;
-    transform: translateY(-50%);
-    z-index: 30000;
-    width: 300px;
-    max-width: 400px;
-    padding: 15px;
-    background-color: #0d120d;
-    border: 2px solid var(--toxic-glow, #b0c47d);
-    border-radius: 6px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
-    pointer-events: none;
-}
-.name-cell:hover .preview-box {
-    display: block;
-}
-
-/* PREVIEW CARD STYLING */
-.preview-box h4 {
-    color: var(--stale-brown, #D68A34);
-    margin: 0 0 8px 0;
-    font-size: 1.1em;
-    border-bottom: 1px solid #4a5746;
-    padding-bottom: 5px;
-}
-.preview-box p {
-    margin: 0;
-    font-size: 0.9em;
-    line-height: 1.4;
-    color: #eee;
-}
-
-/* --- MOBILE TOOLTIP ADJUSTMENT --- */
-@media (max-width: 768px) {
-    /* Move the tooltip to sit *above* the cell when hovered on mobile to avoid horizontal overflow */
-    .preview-box {
-        left: 50%; /* Center horizontally */
-        top: -10px; /* Position above the cell */
-        transform: translateX(-50%) translateY(-100%); /* Adjust centering and move it up */
-        width: 90vw; /* Take up most of the viewport width */
-        max-width: 300px; /* Cap the max width */
-    }
-    
-    /* Hide the tooltip entirely if the screen is too small to handle the hover complexity well */
-    /* This might be preferred by some designers. */
-    /* .name-cell:hover .preview-box { display: none; } */
-}
-
     </style>
 </head>
 <body>
