@@ -47,7 +47,7 @@
         /* WIDER SIDEBAR: 350px fixed width for sidebar + fluid main content */
         grid-template-columns: 350px 1fr;
     }
-    
+
     /* --- General Text & Links --- */
     a {
         color: var(--link-color);
@@ -74,6 +74,9 @@
         padding: 20px;
         box-shadow: var(--box-shadow);
         height: fit-content;
+        /* ADD THIS to ensure it uses the full width allocated by the grid column (350px) */
+        width: 100%; 
+        box-sizing: border-box; /* Crucial for padding to be inside 350px */
     }
     .profile-header {
         text-align: center;
