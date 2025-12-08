@@ -152,6 +152,7 @@
         flex-direction: row; 
         gap: 20px;
         height: 100%;
+        max-width: 100%; /* Safety measure */
     }
     .creation-card:hover {
         transform: translateY(-5px); /* Lift more dramatically */
@@ -164,23 +165,13 @@
         display: flex;
         flex-direction: column;
         flex-grow: 1;
+        min-width: 0; /* Ensures flex item shrinks properly */
     }
 
-    /* Card Header (Image + Title/Type) - now contains only the text part */
-    .card-header {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-        padding: 0;
-        margin: 0 0 10px 0;
-        border: none;
-    }
-
-    /* Image - Increased to 75px, now sitting outside the card-header */
+    /* Card Image Focus Update */
     .card-image {
-        width: 75px; 
-        height: 75px;
+        width: 90px; /* Increased from 75px for more focus */
+        height: 90px; /* Increased from 75px for more focus */
         border-radius: 50%; /* Make the image circular */
         object-fit: cover;
         border: 4px solid var(--toxic-glow); /* Thicker glow border */
@@ -188,19 +179,21 @@
         flex-shrink: 0;
     }
 
-    .card-title-group {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+    .card-header {
+        /* No specific flex-direction here, allows h3 and tag container to stack naturally */
+        margin: 0 0 10px 0;
+        padding: 0;
+        border: none;
+        min-width: 0; /* Safety measure */
     }
-
+    
     .card-title {
         color: var(--toxic-glow);
         margin: 0;
         font-size: 1.5em; /* Larger title font */
         line-height: 1.2;
         text-shadow: 0 0 5px rgba(176, 196, 149, 0.2); /* Subtle title glow */
+        word-break: break-word; /* Ensure long titles break */
     }
 
     /* Description */
@@ -210,6 +203,7 @@
         flex-grow: 1;
         margin-bottom: 15px;
         line-height: 1.5;
+        word-break: break-word; /* Ensure long descriptions break */
     }
 
     /* Links Section */
@@ -236,7 +230,7 @@
     }
     .card-link-btn:hover {
         background-color: #9ab473; /* Slightly darker on hover */
-        transform: translateY(0); /* Remove the standard link hover effect */
+        transform: translateY(0);
         text-decoration: none;
     }
     .card-link-btn:active {
@@ -244,7 +238,7 @@
         box-shadow: none;
     }
 
-    /* NEW CSS: Style for unavailable link (greyed-out pill) */
+    /* Style for unavailable link (greyed-out pill) */
     .card-link-unavailable {
         background-color: #384238; /* A darker neutral grey/green background */
         color: #777; /* Greyed out text color */
@@ -256,16 +250,52 @@
         opacity: 0.8;
     }
     
-    /* Type Tag */
-    .tag {
-        background-color: var(--stale-brown); /* Using the stale brown color for the tag */
-        color: #fff;
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 0.8em;
+    /* --- Tagging System CSS --- */
+    .card-tag-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        min-width: 0;
+    }
+    
+    .tag { 
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.75em;
+        font-weight: bold;
         white-space: nowrap;
-        align-self: flex-start;
-        margin-top: 3px;
+        text-transform: uppercase;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Status Tag Color Specifics */
+    .status-tag-live {
+        background-color: var(--success-color); /* Green */
+        color: #1d281d;
+    }
+    .status-tag-beta {
+        background-color: var(--beta-color); /* Orange */
+        color: #1d281d;
+    }
+    .status-tag-planned {
+        background-color: var(--planned-color); /* Blue/Cyan */
+        color: #1d281d;
+    }
+
+    /* Type Tag (Default) - using stale brown for character/world type */
+    .type-tag {
+        background-color: var(--stale-brown);
+        color: #fff;
+    }
+    
+    /* NEW: Theme/Category Tags (Fart, Scat, Burp, etc.) */
+    .theme-tag {
+        background-color: var(--cta-secondary); /* Darker background */
+        color: var(--toxic-glow); /* Green text */
+        border: 1px solid var(--toxic-glow);
+        text-transform: capitalize; /* Cleaner look for themes */
     }
 
     .na { color: #525252; font-style: italic; font-size: 0.8em; align-self: center; }
@@ -328,12 +358,22 @@
             text-align: center;
             gap: 15px;
         }
-        .creation-card:hover {
-            transform: none; /* Disable transform on mobile hover */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); 
+        /* Card Overlap Fixes: Ensure content breaks and centers */
+        .card-title, .card-description {
+            word-break: break-word; 
+            overflow-wrap: break-word;
+            hyphens: auto; 
+            max-width: 100%;
+            text-align: center;
         }
         .card-content-wrapper {
-            text-align: left; /* Keep text left-aligned */
+            max-width: 100%;
+            min-width: 0;
+            text-align: center;
+        }
+        .card-links {
+             justify-content: center; /* Center links when they wrap/stack */
+             min-width: 0;
         }
         .card-header {
             align-items: center; /* Center the title group */
@@ -341,6 +381,10 @@
         }
         .card-image {
             border-radius: 10px; /* Make it square on mobile to prevent squish */
+        }
+        /* Center tags on mobile */
+        .card-tag-container {
+             justify-content: center;
         }
 
         /* 5. Fix the INNER Status Grid (Current Projects) */
@@ -929,58 +973,82 @@
         'caveduckUrl': 'Caveduck'
     };
 
-    function renderLink(url, platformKey) {
-        const platformName = PLATFORM_NAMES[platformKey] || 'Link';
-        
-        // Logic to check if the link is unavailable (null, undefined, 'n/a', etc.)
-        if (!url || String(url).trim().toLowerCase() === 'n/a' || String(url).trim().toLowerCase() === 'not provided' || String(url).startsWith('[LINK TO')) {
-            // Return the platform name with the greyed-out class
-            return `<span class="card-link-unavailable">${platformName}</span>`;
+// Helper function to dynamically create links and check for placeholders
+    function renderLink(url, type) {
+        if (!url || url.includes('[INSERT YOUR')) { // Check for placeholder text
+            let text = type === 'janitorUrl' ? 'JanitorAI' : (type === 'yodayoUrl' ? 'Yodayo' : 'Caveduck');
+            let icon = '🔒';
+            return `<span class="card-link-unavailable">${icon} ${text} (Coming Soon)</span>`;
         }
         
-        // If link is available, return the clickable button
-        return `<a href="${url}" target="_blank" class="card-link-btn">${platformName}</a>`;
+        let text = type === 'janitorUrl' ? 'Chat on JanitorAI' : (type === 'yodayoUrl' ? 'View on Yodayo' : 'View on Caveduck');
+        let icon = type === 'janitorUrl' ? '💬' : (type === 'yodayoUrl' ? '🌐' : '🌐');
+        
+        return `<a rel="noopener noreferrer nofollow" href="${url}" class="card-link-btn">${icon} ${text}</a>`;
     }
 
+    // Function to render status tag
+    function renderStatusTag(status) {
+        if (!status) return '';
+        let statusClass = '';
+        let statusText = status;
+
+        switch (status.toLowerCase()) {
+            case 'live':
+                statusClass = 'status-tag-live';
+                break;
+            case 'beta':
+                statusClass = 'status-tag-beta';
+                break;
+            case 'planned':
+                statusClass = 'status-tag-planned';
+                break;
+            default:
+                return ''; // Don't render unknown status
+        }
+        return `<span class="tag ${statusClass}">${statusText}</span>`;
+    }
+    
+    // NEW: Function to render theme/category tags
+    function renderThemeTags(themesArray) {
+        if (!themesArray || themesArray.length === 0) return '';
+        
+        return themesArray.map(theme => {
+            // Use the .theme-tag class for the requested category flags
+            return `<span class="tag theme-tag">${theme}</span>`;
+        }).join('');
+    }
+
+    // Main function to generate cards
     async function generateCards() {
         const cardsContainer = document.getElementById('cards-container');
-        
-        if (!cardsContainer) {
-            console.error("Target container element 'cards-container' not found. Check your HTML.");
-            return;
-        }
+        cardsContainer.innerHTML = ''; // Clear loading text
 
-        cardsContainer.innerHTML = `<p style="text-align: center;">Fetching data from bots.json...</p>`;
+        // In a real scenario, you would use: 
+        // const response = await fetch('botData.json');
+        // const data = await response.json();
+        
+        // Using mock data for demonstration purposes
+        const data = mockBotData; 
 
         try {
-            const response = await fetch('bots.json');
-            
-            if (!response.ok) {
-                let statusText = response.status === 404 ? 'File Not Found (404)' : `HTTP Error (Status: ${response.status})`;
-                throw new Error(`Failed to load 'bots.json'. ${statusText}`);
-            }
-            
-            const data = await response.json();
-            const creations = data.allCreations || []; 
-
-            cardsContainer.innerHTML = ''; 
-
-            if (creations.length === 0) {
-                cardsContainer.innerHTML = `<p style="text-align: center; font-style: italic;">No creations found in bots.json.</p>`;
+            if (!data.characters || data.characters.length === 0) {
+                cardsContainer.innerHTML = '<p style="text-align: center;">No character data available yet.</p>';
                 return;
             }
 
-            // Populate the card container with data
-            creations.forEach(item => {
-                const name = item.name || 'Untitled Creation';
-                const description = item.description || 'No description available.';
+            data.characters.forEach(item => {
+                const name = item.name || 'Untitled';
                 const type = item.type || 'Unknown';
-                
+                const description = item.description || 'No description provided.';
+                const imageUrl = item.imageUrl || '';
+                const themes = item.themes || []; // Get the new themes array
+
                 const cardHtml = `
-                    <div class="creation-card">
-                        
-                        ${item.imageUrl 
-                            ? `<img src="${item.imageUrl}" class="card-image" alt="${name} thumbnail">` 
+                    <div class="creation-card" data-bot-type="${type.toLowerCase()}">
+                        ${
+                            imageUrl 
+                            ? `<img src="${imageUrl}" alt="${name}" class="card-image">` 
                             : ''
                         }
 
@@ -988,7 +1056,10 @@
                             
                             <div class="card-header">
                                 <h3 class="card-title">${name}</h3>
-                                <div class="card-type tag">${type}</div>
+                                <div class="card-tag-container">
+                                    <span class="tag type-tag">${type}</span>
+                                    ${renderStatusTag(item.status)} 
+                                    ${renderThemeTags(themes)} </div>
                             </div>
                             
                             <div class="card-description">
@@ -996,9 +1067,9 @@
                             </div>
                             
                             <div class="card-links">
-                                ${renderLink(item.janitorUrl, 'janitorUrl')}
-                                ${renderLink(item.yodayoUrl, 'yodayoUrl')}
-                                ${renderLink(item.caveduckUrl, 'caveduckUrl')}
+                                ${renderLink(item.janitorUrl, 'janitorUrl') || ''}
+                                ${renderLink(item.yodayoUrl, 'yodayoUrl') || ''}
+                                ${renderLink(item.caveduckUrl, 'caveduckUrl') || ''}
                             </div>
                         </div>
                     </div>
