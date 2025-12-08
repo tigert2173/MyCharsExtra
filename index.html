@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile of @TigerT - The Apex of Stench</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile of @TigerT - The Apex of Stench</title>
 <style>
     /* --- ROOT THEME (FART COLORS) --- */
     :root {
@@ -136,21 +142,21 @@
     }
 
     .creation-card {
-        background-color: #273427; 
-        border: 1px solid var(--border-color);
-        border-radius: 12px; /* Slightly larger border radius for aesthetics */
-        padding: 20px; /* Increased padding */
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-        transition: transform 0.2s, box-shadow 0.2s;
-        /* CHANGE: Use Flexbox to align the image/header beside the text/links */
+        background-color: #243024; /* Slightly darker than card-bg for contrast */
+        border: 2px solid var(--border-color); /* Thicker border */
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); /* Stronger shadow */
+        transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
         display: flex;
         flex-direction: row; 
         gap: 20px;
-        height: 100%; /* Ensure cards fill their grid area */
+        height: 100%;
     }
     .creation-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(176, 196, 149, 0.3);
+        transform: translateY(-5px); /* Lift more dramatically */
+        border-color: var(--toxic-glow); /* Border color change on hover */
+        box-shadow: 0 8px 20px rgba(176, 196, 149, 0.4); /* Stronger glow shadow */
     }
 
     /* Card Content Container - new wrapper for description and links */
@@ -175,9 +181,10 @@
     .card-image {
         width: 75px; 
         height: 75px;
-        border-radius: 10px; /* Adjusted radius to match card style */
+        border-radius: 50%; /* Make the image circular */
         object-fit: cover;
-        border: 3px solid var(--toxic-glow); /* Slightly thicker border */
+        border: 4px solid var(--toxic-glow); /* Thicker glow border */
+        box-shadow: 0 0 8px rgba(176, 196, 149, 0.4); /* Permanent subtle glow */
         flex-shrink: 0;
     }
 
@@ -191,15 +198,16 @@
     .card-title {
         color: var(--toxic-glow);
         margin: 0;
-        font-size: 1.3em; /* Slightly larger title font */
+        font-size: 1.5em; /* Larger title font */
         line-height: 1.2;
+        text-shadow: 0 0 5px rgba(176, 196, 149, 0.2); /* Subtle title glow */
     }
 
     /* Description */
     .card-description {
-        font-size: 0.95em; /* Slightly larger description font */
-        color: #ccc;
-        flex-grow: 1; /* Pushes links to the bottom */
+        font-size: 1.0em; /* Larger description font */
+        color: #ddd;
+        flex-grow: 1;
         margin-bottom: 15px;
         line-height: 1.5;
     }
@@ -208,47 +216,55 @@
     .card-links {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
-        margin-top: auto; /* Push links to the bottom of the content wrapper */
-        padding-top: 10px;
-        border-top: 1px dashed var(--border-color);
+        gap: 10px; /* Slightly increased gap */
+        margin-top: auto;
+        padding-top: 15px;
+        border-top: 1px solid #4a5746; /* Solid line for separation */
     }
 
     .card-link-btn {
-        background-color: var(--stale-brown);
-        color: var(--text-color);
-        padding: 6px 10px;
-        border-radius: 4px;
-        font-size: 0.85em;
+        background-color: var(--cta-dominant); /* Use the dominant CTA color */
+        color: #1d281d; /* Dark text for contrast */
+        padding: 8px 12px; /* Increased padding */
+        border-radius: 6px;
+        font-size: 0.9em;
         font-weight: bold;
         text-decoration: none !important;
-        transition: background-color 0.2s;
+        transition: background-color 0.2s, transform 0.1s;
+        box-shadow: 0 3px 0 #798b5a; /* Button depth */
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     }
     .card-link-btn:hover {
-        background-color: #A36E28;
+        background-color: #9ab473; /* Slightly darker on hover */
+        transform: translateY(0); /* Remove the standard link hover effect */
+        text-decoration: none;
+    }
+    .card-link-btn:active {
+        transform: translateY(3px);
+        box-shadow: none;
     }
 
     /* NEW CSS: Style for unavailable link (greyed-out pill) */
     .card-link-unavailable {
-        background-color: #4a5746; /* A neutral grey/green background */
-        color: #999; /* Greyed out text color */
-        padding: 6px 10px;
-        border-radius: 4px;
-        font-size: 0.85em;
+        background-color: #384238; /* A darker neutral grey/green background */
+        color: #777; /* Greyed out text color */
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 0.9em;
         font-weight: bold;
-        cursor: not-allowed; /* Indicate it's not clickable */
-        opacity: 0.7; /* Further fade the appearance */
+        cursor: not-allowed;
+        opacity: 0.8;
     }
     
     /* Type Tag */
     .tag {
-        background-color: #4a5746;
-        color: #ccc;
-        padding: 3px 8px;
-        border-radius: 4px;
-        font-size: 0.75em;
+        background-color: var(--stale-brown); /* Using the stale brown color for the tag */
+        color: #fff;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.8em;
         white-space: nowrap;
-        align-self: flex-start; /* Keeps the tag tight to its content */
+        align-self: flex-start;
         margin-top: 3px;
     }
 
@@ -314,7 +330,7 @@
         }
         .creation-card:hover {
             transform: none; /* Disable transform on mobile hover */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); 
         }
         .card-content-wrapper {
             text-align: left; /* Keep text left-aligned */
@@ -322,6 +338,9 @@
         .card-header {
             align-items: center; /* Center the title group */
             margin-bottom: 10px;
+        }
+        .card-image {
+            border-radius: 10px; /* Make it square on mobile to prevent squish */
         }
 
         /* 5. Fix the INNER Status Grid (Current Projects) */
