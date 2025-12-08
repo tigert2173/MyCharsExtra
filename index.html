@@ -988,7 +988,7 @@
 
 // Helper function to dynamically create links and check for placeholders
     function renderLink(url, type) {
-        if (!url || url.includes('[INSERT YOUR') || url.includes'(Not provided') { // Check for placeholder text
+        if (!url || url.includes('[INSERT YOUR') || url.includes'(Not provided')) { // Check for placeholder text
             let text = type === 'janitorUrl' ? 'JanitorAI' : (type === 'yodayoUrl' ? 'Yodayo' : 'Caveduck');
             let icon = '🔒';
             return `<span class="card-link-unavailable">${icon} ${text} (Coming Soon)</span>`;
