@@ -979,145 +979,125 @@
     </div>
             
 <script>
-    // Map URLs to their display names for clarity
-    const PLATFORM_NAMES = {
-        'janitorUrl': 'JanitorAI',
-        'yodayoUrl': 'Yodayo',
-        'caveduckUrl': 'Caveduck'
-    };
+                // Map URLs to their display names for clarity
+                const PLATFORM_NAMES = {
+                    'janitorUrl': 'JanitorAI',
+                    'yodayoUrl': 'Yodayo',
+                    'caveduckUrl': 'Caveduck'
+                };
 
-// Helper function to dynamically create links and check for placeholders
-    function renderLink(url, type) {
-        if (!url || url.includes('[INSERT YOUR') || url.toLowerCase().includes('(not provided')) { // Check for placeholder text
-            let text = type === 'janitorUrl' ? 'JanitorAI' : (type === 'yodayoUrl' ? 'Yodayo' : 'Caveduck');
-            let icon = '🔒';
-            return `<span class="card-link-unavailable">${icon} ${text} (Coming Soon)</span>`;
-        }
-        
-        let text = type === 'janitorUrl' ? 'JanitorAI' : (type === 'yodayoUrl' ? 'Yodayo' : 'Caveduck');
-        let icon = type === 'janitorUrl' ? '💬' : (type === 'yodayoUrl' ? '🌐' : '🌐');
-        
-        return `<a rel="noopener noreferrer nofollow" href="${url}" class="card-link-btn">${icon} ${text}</a>`;
-    }
+                // Helper function to dynamically create links and check for placeholders
+                function renderLink(url, type) {
+                    const platformName = PLATFORM_NAMES[type] || 'Link';
+                    const placeholderCheck = !url.toUpperCase().includes('[INSERT') && !url.toUpperCase().includes('YOUR') && !url.toUpperCase().includes('HERE');
 
-    // Function to render status tag
-    function renderStatusTag(status) {
-        if (!status) return '';
-        let statusClass = '';
-        let statusText = status;
+                    // Check if URL is provided and not a placeholder
+                    // ADDED: Check for '[]' in case it's an empty array placeholder and simplified the logic.
+                    if (url && url.trim() !== '' && url !== '[]' && placeholderCheck) {
+                        // Renders an active button
+                        return `<a rel="noopener noreferrer nofollow" href="${url}" class="card-link-btn">${platformName}</a>`;
+                    } else {
+                        // Renders a greyed-out pill (FIXED: Explicitly return the unavailable span)
+                        return `<span class="card-link-unavailable">${platformName} (N/A)</span>`;
+                    }
+                }
 
-        switch (status.toLowerCase()) {
-            case 'live':
-                statusClass = 'status-tag-live';
-                break;
-            case 'beta':
-                statusClass = 'status-tag-beta';
-                break;
-            case 'planned':
-                statusClass = 'status-tag-planned';
-                break;
-            default:
-                return ''; // Don't render unknown status
-        }
-        return `<span class="tag ${statusClass}">${statusText}</span>`;
-    }
-    
-    // NEW: Function to render theme/category tags
-    function renderThemeTags(themesArray) {
-        if (!themesArray || themesArray.length === 0) return '';
-        
-        return themesArray.map(theme => {
-            // Use the .theme-tag class for the requested category flags
-            return `<span class="tag theme-tag">${theme}</span>`;
-        }).join('');
-    }
+                function renderStatusTag(status) {
+                    if (!status) return '';
+                    let tagClass;
+                    let tagText;
 
-    // Main function to generate cards
-    async function generateCards() {
-        const cardsContainer = document.getElementById('cards-container');
-        
-        if (!cardsContainer) {
-            console.error("Target container element 'cards-container' not found. Check your HTML.");
-            return;
-        }
+                    if (status.toLowerCase().includes('live') || status.toLowerCase().includes('completed')) {
+                        tagClass = 'status-tag-live';
+                        tagText = 'Live';
+                    } else if (status.toLowerCase().includes('beta') || status.toLowerCase().includes('test')) {
+                        tagClass = 'status-tag-beta';
+                        tagText = 'Beta';
+                    } else if (status.toLowerCase().includes('planned') || status.toLowerCase().includes('soon')) {
+                        tagClass = 'status-tag-planned';
+                        tagText = 'Planned';
+                    } else {
+                        return '';
+                    }
 
-        cardsContainer.innerHTML = `<p style="text-align: center;">Fetching data from bots.json...</p>`;
+                    return `<span class="tag ${tagClass}">${tagText}</span>`;
+                }
 
-        try {
-            const response = await fetch('bots.json');
-            
-            if (!response.ok) {
-                let statusText = response.status === 404 ? 'File Not Found (404)' : `HTTP Error (Status: ${response.status})`;
-                throw new Error(`Failed to load 'bots.json'. ${statusText}`);
-            }
-            
-            const data = await response.json();
-            
-            // --- MODIFICATION START ---
-            // Use 'data.characters' if it exists, otherwise assume 'data' is the array or use 'data.allCreations'
-            // The code you provided was designed to use data.characters, so we'll stick to that
-            const creations = data.characters || data.allCreations || []; 
+                function renderThemeTags(themes) {
+                    if (!themes || themes.length === 0) return '';
+                    return themes.map(theme => `<span class="tag theme-tag">${theme}</span>`).join('');
+                }
 
-            cardsContainer.innerHTML = ''; // Clear the "Fetching data..." message
 
-            if (creations.length === 0) {
-                cardsContainer.innerHTML = `<p style="text-align: center; font-style: italic;">No creations found in bots.json or 'data.characters' is empty.</p>`;
-                return;
-            }
+                async function generateCards() {
+                    const cardsContainer = document.getElementById('cards-container');
+                    const dataFile = 'bots.json'; // Name of the JSON file containing the bot data
 
-            creations.forEach(item => { // Loop over the creations array
-                const name = item.name || 'Untitled';
-                const type = item.type || 'Unknown';
-                const description = item.description || 'No description provided.';
-                const imageUrl = item.imageUrl || '';
-                const themes = item.themes || []; 
+                    try {
+                        const response = await fetch(dataFile);
+                        if (!response.ok) {
+                            const statusText = response.statusText || 'Unknown Error';
+                            throw new Error(`Failed to load 'bots.json'. ${statusText}`);
+                        }
+                        const data = await response.json();
 
-                const cardHtml = `
-                    <div class="creation-card" data-bot-type="${type.toLowerCase()}">
-                        ${
-                            imageUrl 
-                            ? `<img src="${imageUrl}" alt="${name}" class="card-image">` 
-                            : ''
+                        // --- MODIFICATION START ---
+                        // Use 'data.characters' if it exists, otherwise assume 'data' is the array or use 'data.allCreations'
+                        const creations = data.characters || data.allCreations || [];
+                        cardsContainer.innerHTML = ''; // Clear the "Fetching data..." message
+
+                        if (creations.length === 0) {
+                            cardsContainer.innerHTML = `<p style="text-align: center; color: #777;">No creations found in ${dataFile}.</p>`;
+                            return;
                         }
 
-                        <div class="card-content-wrapper">
+                        creations.forEach(item => {
+                            const { name, imageUrl, type, status, description, themes = [] } = item; // Destructure with default empty array for themes
                             
-                            <div class="card-header">
-                                <h3 class="card-title">${name}</h3>
-                                <div class="card-tag-container">
-                                    <span class="tag type-tag">${type}</span>
-                                    ${renderStatusTag(item.status)} 
-                                    ${renderThemeTags(themes)} </div>
-                            </div>
-                            
-                            <div class="card-description">
-                                ${description}
-                            </div>
-                            
-                            <div class="card-links">
-                                ${renderLink(item.janitorUrl, 'janitorUrl') || ''}
-                                ${renderLink(item.yodayoUrl, 'yodayoUrl') || ''}
-                                ${renderLink(item.caveduckUrl, 'caveduckUrl') || ''}
-                            </div>
-                        </div>
-                    </div>
-                `;
-                cardsContainer.innerHTML += cardHtml;
-            });
-            // --- MODIFICATION END ---
+                            // Check for minimum required data to prevent rendering empty cards
+                            if (!name || !description) return; 
 
-        } catch (e) {
-            // This catch block handles fetch errors (404, network issues) and JSON parsing errors.
-            cardsContainer.innerHTML = `<p style="color: #ff5555; text-align: center;">
-                ERROR: Could not load or parse data. <br>
-                **Check File Name/Location or JSON Syntax.** <br>
-                Details: ${e.message}
-            </p>`;
-            console.error("Data Fetch Error:", e);
-        }
-    }
+                            const cardHtml = `
+                                <div class="creation-card">
+                                    <img src="${imageUrl || 'https://via.placeholder.com/150'}" alt="${name} Image" class="card-image">
+                                    <div class="card-content-wrapper">
+                                        <div class="card-header">
+                                            <h3 class="card-title">${name}</h3>
+                                        <div class="card-tag-container">
+                                            <span class="tag type-tag">${type}</span>
+                                            ${renderStatusTag(status)} 
+                                            ${renderThemeTags(themes)} 
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="card-description">
+                                        ${description}
+                                    </div>
+                                    
+                                    <div class="card-links">
+                                        ${renderLink(item.janitorUrl, 'janitorUrl')}
+                                        ${renderLink(item.yodayoUrl, 'yodayoUrl')}
+                                        ${renderLink(item.caveduckUrl, 'caveduckUrl')}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        cardsContainer.innerHTML += cardHtml;
+                    });
+                    // --- MODIFICATION END ---
 
-    document.addEventListener('DOMContentLoaded', generateCards);
-</script>
+                } catch (e) {
+                    // This catch block handles fetch errors (404, network issues) and JSON parsing errors.
+                    cardsContainer.innerHTML = `<p style="color: #ff5555; text-align: center;">
+                        ERROR: Could not load or parse data. <br>
+                        **Check File Name/Location or JSON Syntax.** <br>
+                        Details: ${e.message}
+                    </p>`;
+                    console.error("Data Fetch Error:", e);
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', generateCards);
+        </script>
 </body>
 </html>
