@@ -3,7 +3,7 @@
     {
       "name": "[V0.91] Twelve Days of Stenchmas [Supremacy]",
       "description": "The STENCH event is here: 12 days of Gas Play, Musk, and Body Odor. Push your limits and uncover the final, hidden challenge—coded over 40 hours—if you dare.",
-      "themes": ["Fart", "Scat", "Stench", "Messy", "Burp", "Armpit", "Feet"],
+      "themes": ["Fart", "Scat", "Burp", "Armpit", "Feet", "Skunk"],
       "imageUrl": "https://ella.janitorai.com/bot-avatars/_HT2KHLm9vD-0ZyVIv3Gm.webp?width=400",
       "type": "Character",
       "janitorUrl": "https://janitorai.com/characters/29c62312-9043-4c56-b5a1-74e4ad525522_character-emma-pokemon-legends-za-facesitting-fart",
@@ -13,6 +13,8 @@
     {
       "name": "Emma [Pokemon Legends ZA] (Facesitting/Fart)",
       "description": "DETECTIVE EMMA: EXPANSION SUIT INTERROGATOR! You are a \"special case\" subject for Detective Emma, an operative using the chaotic Lumiose Incident as a cover. Prepare for mandatory Systemic Exposure and intense Olfactory Interrogation under the strict, high-tech command of her Expansion Suit.",
+      "themes": ["Fart"],
+      "imageURL": "https://ella.janitorai.com/bot-avatars/7ncWFYDJiuGM_souapCYD.webp?width=400",
       "type": "Character",
       "janitorUrl": "https://janitorai.com/characters/29c62312-9043-4c56-b5a1-74e4ad525522_character-emma-pokemon-legends-za-facesitting-fart",
       "yodayoUrl": "Not provided",
@@ -21,14 +23,18 @@
     {
       "name": "Emma (Pokemon Legends ZA) (Scat)",
       "description": "DETECTIVE EMMA: EXPANSION SUIT INTERROGATOR! You are a \"special case\" subject for Detective Emma, an operative using the chaotic Lumiose Incident as a cover. Prepare for mandatory Systemic Exposure and intense Olfactory Interrogation under the strict, high-tech command of her Expansion Suit.",
+      "themes": ["Fart", "Scat"],
+      "imageUrl": "https://ella.janitorai.com/bot-avatars/tdxnUVZ6mmn7ABjGjSkKK.webp?width=400",
       "type": "Character",
       "janitorUrl": "https://janitorai.com/characters/ed913a77-92ba-4822-a34f-8363af4df884_character-emma-pokemon-legends-za-scat",
       "yodayoUrl": "Not provided",
       "caveduckUrl": "Not provided"
     },
     {
-      "name": "Skunk Supremacy [ULTRA-COMPA...]",
+      "name": "Skunk Supremacy [ULTRA-COMPACT]",
       "description": "👑 SKUNK SUPREMACY: ULTRA-COMPACT EDITION 👑 \nA world enforced via concentrated musk and gas. Humanity serves the dominant Skunk-Human Hybrids. This version uses streamlined character definitions for better performance on less powerful AI models, focusing on core personality, stench profile, and the oppressive world lore. Obedience is mandatory. Expect intense olfactory dominance and submission.",
+      "themes": ["Fart", "Burp", "Armpit", "Feet", "Skunk"],
+      "imageUrl": "https://ella.janitorai.com/bot-avatars/vgIASS-aFaMFfOnzH3Kfr.webp?width=400",
       "type": "World",
       "janitorUrl": "https://janitorai.com/characters/04fdb6d9-0117-4dc6-8cb4-0df3d7021be3_character-skunk-supremacy-ultra-compact",
       "yodayoUrl": "Not provided",
