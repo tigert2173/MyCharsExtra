@@ -144,7 +144,11 @@
         font-size: 0.85em;
         vertical-align: middle;
     }
-    .bots-table td:first-child { 
+     .bots-table td:first-child { 
+        /* Changed to flex for easy alignment of image and name */
+        display: flex; 
+        align-items: center; 
+        gap: 10px;
         text-align: left; 
         font-weight: bold; 
         white-space: normal; 
@@ -159,6 +163,16 @@
         white-space: nowrap; 
     }
 
+    /* --- NEW IMAGE STYLING --- */
+    .character-thumbnail {
+        width: 35px;
+        height: 35px;
+        border-radius: 5px;
+        object-fit: cover;
+        border: 1px solid var(--border-color);
+        flex-shrink: 0; /* Prevents image from shrinking */
+    }
+    
     .na { color: #525252; font-style: italic; }
     
     /* Request Button */
@@ -311,12 +325,16 @@
         
         /* Character Name - Make it stand out and clear */
         .bots-table td:first-child { 
+            /* Reset to block in card view, but still use flex inside for image/name alignment */
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 1.1em;
             color: var(--stale-brown);
             padding-bottom: 10px;
             border-bottom: 1px solid var(--border-color);
             margin-bottom: 5px;
-            font-weight: normal; /* Weight is in the inner <strong> tag */
+            font-weight: normal; 
         }
         
         /* Hide the Type DATA CELLS (as requested previously) */
@@ -915,10 +933,7 @@
         <tr>
             <th>Creation Name (Hover for Description)</th> 
             <th class="type-column-header">Type</th>
-            <th>JanitorAI Link</th>
-            <th>Yodayo Link</th>
-            <th>Caveduck Link</th>
-        </tr>
+            <th>JanitorAI</th> <th>Yodayo</th> <th>Caveduck</th> </tr>
     </thead>
     <tbody id="bots-table-body">
         <tr><td colspan="5" style="text-align: center;">Loading data from bots.json...</td></tr>
@@ -926,12 +941,22 @@
 </table>
 
 <script>
-    function renderLink(url) {
-        // Function remains the same to handle N/A links
+    // Map URLs to their display names for clarity
+    const PLATFORM_NAMES = {
+        'janitorUrl': 'JanitorAI',
+        'yodayoUrl': 'Yodayo',
+        'caveduckUrl': 'Caveduck'
+    };
+
+    function renderLink(url, platformKey) {
+        const platformName = PLATFORM_NAMES[platformKey] || 'Link';
+        
+        // This check handles: null, undefined, empty string, 'N/A', 'Not provided', or placeholder text
         if (!url || String(url).trim().toLowerCase() === 'n/a' || String(url).trim().toLowerCase() === 'not provided' || String(url).startsWith('[LINK TO')) {
-            return '<span class="na">N/A</span>';
+            return `<span class="na">N/A</span>`;
         }
-        return `<a href="${url}" target="_blank">🔗 Link</a>`;
+        // Display the platform name as the link text
+        return `<a href="${url}" target="_blank">${platformName}</a>`;
     }
 
     async function generateTable() {
@@ -942,9 +967,8 @@
             return;
         }
 
-        // --- UPDATED LOGIC FOR COLUMN COUNT ---
-        // Total columns is 5. If small screen (<= 600px), we hide the Type column, making it 4 visible columns.
-        const isSmallScreen = window.matchMedia('(max-width: 600px)').matches;
+        const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
+        // Total columns is 5. If small screen, we hide the Type column, making it 4 visible columns.
         const initialColspan = isSmallScreen ? 4 : 5; 
         
         tbody.innerHTML = `<tr><td colspan="${initialColspan}" style="text-align: center;">Fetching data from bots.json...</td></tr>`;
@@ -978,7 +1002,13 @@
                 const nameCell = row.insertCell();
                 nameCell.className = 'name-cell'; 
                 
+                // --- IMAGE IMPLEMENTATION ---
+                const imageHtml = item.imageUrl 
+                    ? `<img src="${item.imageUrl}" class="character-thumbnail" alt="${name} thumbnail">` 
+                    : '';
+                
                 const previewContent = `
+                    ${imageHtml}
                     <div class="name-text">
                         <strong>${name}</strong>
                     </div>
@@ -991,22 +1021,20 @@
                 
                 // 2. Type - HIDES ON SMALL SCREEN
                 const typeCell = row.insertCell();
-                // ADDED CLASS HERE to target the data cell for mobile hiding
                 typeCell.className = 'type-column-data'; 
                 typeCell.innerHTML = item.type || 'N/A';
                 
-                // 3. JanitorAI Link
-                row.insertCell().innerHTML = renderLink(item.janitorUrl);
+                // 3. JanitorAI Link (passing platform key to renderLink)
+                row.insertCell().innerHTML = renderLink(item.janitorUrl, 'janitorUrl');
 
-                // 4. Yodayo Link
-                row.insertCell().innerHTML = renderLink(item.yodayoUrl);
+                // 4. Yodayo Link (passing platform key to renderLink)
+                row.insertCell().innerHTML = renderLink(item.yodayoUrl, 'yodayoUrl');
                 
-                // 5. Caveduck Link
-                row.insertCell().innerHTML = renderLink(item.caveduckUrl);
+                // 5. Caveduck Link (passing platform key to renderLink)
+                row.insertCell().innerHTML = renderLink(item.caveduckUrl, 'caveduckUrl');
             });
 
         } catch (e) {
-            // Error Display 
             tbody.innerHTML = `<tr><td colspan="${initialColspan}" style="color: #ff5555; text-align: center;">
                 ERROR: Could not load or parse data. <br>
                 **Check File Name/Location or JSON Syntax.** <br>
@@ -1016,7 +1044,6 @@
         }
     }
 
-    // Run the script once the page loads
     document.addEventListener('DOMContentLoaded', generateTable);
 </script>
 </body>
