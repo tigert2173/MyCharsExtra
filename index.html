@@ -215,7 +215,18 @@
     .card-link-btn:hover {
         background-color: #A36E28;
     }
-    
+
+    /* NEW CSS: Style for unavailable link */
+    .card-link-unavailable {
+        background-color: #4a5746; /* A neutral grey/green background */
+        color: #999; /* Greyed out text color */
+        padding: 6px 10px;
+        border-radius: 4px;
+        font-size: 0.85em;
+        font-weight: bold;
+        cursor: not-allowed; /* Indicate it's not clickable */
+        opacity: 0.7; /* Further fade the appearance */
+    }
     /* Type Tag */
     .tag {
         background-color: #4a5746;
@@ -876,15 +887,17 @@
     function renderLink(url, platformKey) {
         const platformName = PLATFORM_NAMES[platformKey] || 'Link';
         
+        // Logic to check if the link is unavailable (null, undefined, 'n/a', etc.)
         if (!url || String(url).trim().toLowerCase() === 'n/a' || String(url).trim().toLowerCase() === 'not provided' || String(url).startsWith('[LINK TO')) {
-            return `<span class="na">N/A</span>`;
+            // Return the platform name with the greyed-out class
+            return `<span class="card-link-unavailable">${platformName}</span>`;
         }
-        // Display the platform name as the link text inside a button/pill structure
+        
+        // If link is available, return the clickable button
         return `<a href="${url}" target="_blank" class="card-link-btn">${platformName}</a>`;
     }
 
     async function generateCards() {
-        // We will now place the cards inside a new container div with ID 'cards-container'
         const cardsContainer = document.getElementById('cards-container');
         
         if (!cardsContainer) {
