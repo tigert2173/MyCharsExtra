@@ -1021,7 +1021,6 @@
     // Main function to generate cards
     async function generateCards() {
         const cardsContainer = document.getElementById('cards-container');
-        cardsContainer.innerHTML = ''; // Clear loading text
         
         if (!cardsContainer) {
             console.error("Target container element 'cards-container' not found. Check your HTML.");
@@ -1039,27 +1038,25 @@
             }
             
             const data = await response.json();
-            const creations = data.allCreations || []; 
+            
+            // --- MODIFICATION START ---
+            // Use 'data.characters' if it exists, otherwise assume 'data' is the array or use 'data.allCreations'
+            // The code you provided was designed to use data.characters, so we'll stick to that
+            const creations = data.characters || data.allCreations || []; 
 
-            cardsContainer.innerHTML = ''; 
+            cardsContainer.innerHTML = ''; // Clear the "Fetching data..." message
 
             if (creations.length === 0) {
-                cardsContainer.innerHTML = `<p style="text-align: center; font-style: italic;">No creations found in bots.json.</p>`;
+                cardsContainer.innerHTML = `<p style="text-align: center; font-style: italic;">No creations found in bots.json or 'data.characters' is empty.</p>`;
                 return;
             }
 
-        try {
-            if (!data.characters || data.characters.length === 0) {
-                cardsContainer.innerHTML = '<p style="text-align: center;">No character data available yet.</p>';
-                return;
-            }
-
-            data.characters.forEach(item => {
+            creations.forEach(item => { // Loop over the creations array
                 const name = item.name || 'Untitled';
                 const type = item.type || 'Unknown';
                 const description = item.description || 'No description provided.';
                 const imageUrl = item.imageUrl || '';
-                const themes = item.themes || []; // Get the new themes array
+                const themes = item.themes || []; 
 
                 const cardHtml = `
                     <div class="creation-card" data-bot-type="${type.toLowerCase()}">
@@ -1093,8 +1090,10 @@
                 `;
                 cardsContainer.innerHTML += cardHtml;
             });
+            // --- MODIFICATION END ---
 
         } catch (e) {
+            // This catch block handles fetch errors (404, network issues) and JSON parsing errors.
             cardsContainer.innerHTML = `<p style="color: #ff5555; text-align: center;">
                 ERROR: Could not load or parse data. <br>
                 **Check File Name/Location or JSON Syntax.** <br>
