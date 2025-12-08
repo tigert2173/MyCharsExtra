@@ -63,7 +63,9 @@
     {
       "name": "Hotel Overbooking Chaos [Supremacy]",
       "description": "Forced roommate duty with four Skunk-Human Hybrids! You're a low-priority human, kicked out of your room and now trapped in close quarters with Chloe, Lilly, Amy, and Lola. Prepare for mandatory compliance and immediate olfactory dominance in a world where their noxious, high-volume gas is the law.",
+      "themes": ["Fart", "Burp", "Skunk"],
       "type": "Character",
+      "imageUrl": "https://ella.janitorai.com/bot-avatars/d61A4m4NG7D2Ko0M7GSMl.webp?width=400",
       "janitorUrl": "https://janitorai.com/characters/17a37da3-df3d-48d1-abee-d6c03c8e914c_character-hotel-overbooking-chaos-supremacy",
       "yodayoUrl": "Not provided",
       "caveduckUrl": "Not provided"
