@@ -978,7 +978,7 @@
         </div>
     </div>
             
--<script>
+<script>
     // Map URLs to their display names for clarity
     const PLATFORM_NAMES = {
         'janitorUrl': 'JanitorAI',
@@ -989,17 +989,16 @@
     // Helper function to dynamically create links and check for placeholders
     function renderLink(url, type) {
         const platformName = PLATFORM_NAMES[type] || 'Link';
-        // Normalize and check for all unprovided states, including the literal "Not provided" from the JSON
-        const urlUpper = url ? url.toUpperCase() : '';
         
-        // Define availability checks: must be a truthy string, not a placeholder, and not the literal "Not provided"
+        // Define availability checks: must be a truthy string and not contain placeholder text
+        const urlUpper = url ? url.toUpperCase() : '';
         const isAvailable = url && 
                             url.trim() !== '' && 
                             url !== '[]' && 
                             !urlUpper.includes('[INSERT') && 
                             !urlUpper.includes('YOUR') && 
                             !urlUpper.includes('HERE') &&
-                            !urlUpper.includes('NOT PROVIDED'); // <--- FIX APPLIED HERE
+                            !urlUpper.includes('NOT PROVIDED'); // <--- URL FIX IS HERE
 
         if (isAvailable) {
             // Renders an active button
@@ -1049,8 +1048,6 @@
             }
             const data = await response.json();
 
-            // --- MODIFICATION START ---
-            // Use 'data.characters' if it exists, otherwise assume 'data' is the array or use 'data.allCreations'
             const creations = data.characters || data.allCreations || [];
             cardsContainer.innerHTML = ''; // Clear the "Fetching data..." message
 
@@ -1060,7 +1057,7 @@
             }
 
             creations.forEach(item => {
-                const { name, imageUrl, type, status, description, themes = [] } = item; // Destructure with default empty array for themes
+                const { name, imageUrl, type, status, description, themes = [] } = item; // <-- THEMES ARE DESTRUCTURED HERE
                 
                 // Check for minimum required data to prevent rendering empty cards
                 if (!name || !description) return; 
@@ -1074,8 +1071,7 @@
                             <div class="card-tag-container">
                                 <span class="tag type-tag">${type}</span>
                                 ${renderStatusTag(status)} 
-                                ${renderThemeTags(themes)} 
-                            </div>
+                                ${renderThemeTags(themes)} </div>
                         </div>
                         
                         <div class="card-description">
@@ -1092,7 +1088,6 @@
             `;
             cardsContainer.innerHTML += cardHtml;
         });
-        // --- MODIFICATION END ---
 
     } catch (e) {
         // This catch block handles fetch errors (404, network issues) and JSON parsing errors.
