@@ -1023,13 +1023,31 @@
     async function generateCards() {
         const cardsContainer = document.getElementById('cards-container');
         cardsContainer.innerHTML = ''; // Clear loading text
-
-        // In a real scenario, you would use: 
-        // const response = await fetch('botData.json');
-        // const data = await response.json();
         
-        // Using mock data for demonstration purposes
-        const data = mockBotData; 
+        if (!cardsContainer) {
+            console.error("Target container element 'cards-container' not found. Check your HTML.");
+            return;
+        }
+
+        cardsContainer.innerHTML = `<p style="text-align: center;">Fetching data from bots.json...</p>`;
+
+        try {
+            const response = await fetch('bots.json');
+            
+            if (!response.ok) {
+                let statusText = response.status === 404 ? 'File Not Found (404)' : `HTTP Error (Status: ${response.status})`;
+                throw new Error(`Failed to load 'bots.json'. ${statusText}`);
+            }
+            
+            const data = await response.json();
+            const creations = data.allCreations || []; 
+
+            cardsContainer.innerHTML = ''; 
+
+            if (creations.length === 0) {
+                cardsContainer.innerHTML = `<p style="text-align: center; font-style: italic;">No creations found in bots.json.</p>`;
+                return;
+            }
 
         try {
             if (!data.characters || data.characters.length === 0) {
