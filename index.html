@@ -39,12 +39,11 @@
     }
 
     .container {
-        /* INCREASED MAX WIDTH to 1400px for larger screens */
         max-width: 1400px;
         margin: 0 auto;
         display: grid;
         gap: 20px;
-        /* WIDER SIDEBAR: Increased the sidebar column from 300px to 350px */
+        /* Sidebar is 350px */
         grid-template-columns: 350px 1fr;
     }
     
@@ -132,7 +131,8 @@
         margin-top: 20px;
         overflow: hidden;
         font-size: 0.95em;
-        table-layout: fixed;
+        /* Using auto layout now since Description is the main variable width column */
+        table-layout: auto; 
     }
     .bots-table th, .bots-table td {
         padding: 12px 15px;
@@ -154,15 +154,29 @@
         text-align: left; 
         font-weight: bold; 
         white-space: normal; 
+        width: 15%; /* Keep name column reasonable size */
     }
     .bots-table tr:last-child td { border-bottom: none; }
     .bots-table tr:hover { background-color: #1F2937; }
     
-    /* --- LINK SQUISHING FIX (Desktop) --- */
-    .bots-table td:nth-child(3), 
+    /* Description column styling for desktop */
+    .description-column-data {
+        text-align: left;
+        font-size: 0.9em;
+        max-width: none; /* Allow it to take up available space */
+    }
+    
+    /* Link columns should still prevent squishing */
     .bots-table td:nth-child(4), 
-    .bots-table td:nth-child(5) {
+    .bots-table td:nth-child(5), 
+    .bots-table td:nth-child(6) {
         white-space: nowrap; 
+        width: 100px; /* Give links a fixed width */
+    }
+
+    /* Type column styling for desktop */
+    .type-column-header, .type-column-data {
+        width: 80px;
     }
 
     /* --- NEW IMAGE STYLING --- */
@@ -193,64 +207,17 @@
 
     /* Table Highlighting */
     .name-cell {
-        cursor: help;
+        cursor: default; /* Remove help cursor */
         color: var(--toxic-glow, #b0c47d);
         font-weight: bold;
         position: relative;
     }
+    .name-cell[title]:hover {
+        text-decoration: none; /* Remove underline dot */
+    }
     /* Ensure only the background changes on hover on desktop */
     .bots-table tr:nth-child(even):not(.mobile-card-row) {
         background-color: #273427;
-    }
-    .tags-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-    }
-    .tag {
-        background-color: #4a5746;
-        color: #ccc;
-        padding: 3px 8px;
-        border-radius: 4px;
-        font-size: 12px;
-        white-space: nowrap;
-    }
-    .name-cell[title]:hover {
-        text-decoration: underline dotted;
-    }
-
-    /* --- TOOLTIP/PREVIEW LOGIC (PC ONLY) --- */
-    .preview-box {
-        display: none;
-        position: absolute;
-        top: 50%;
-        left: 105%;
-        transform: translateY(-50%);
-        z-index: 300000;
-        width: 300px;
-        max-width: 400px;
-        padding: 15px;
-        background-color: #0d120d;
-        border: 2px solid var(--toxic-glow, #b0c47d);
-        border-radius: 6px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
-        pointer-events: none;
-    }
-    .name-cell:hover .preview-box {
-        display: block;
-    }
-    .preview-box h4 {
-        color: var(--stale-brown, #D68A34);
-        margin: 0 0 8px 0;
-        font-size: 1.1em;
-        border-bottom: 1px solid #4a5746;
-        padding-bottom: 5px;
-    }
-    .preview-box p {
-        margin: 0;
-        font-size: 0.9em;
-        line-height: 1.4;
-        color: #eee;
     }
     .name-text {
         color: var(--text-color);
@@ -325,9 +292,8 @@
             text-align: left !important;
         }
         
-        /* Character Name - Make it stand out and clear */
-        .bots-table td:first-child { 
-            /* Flex for image/name alignment in the card */
+        /* Character Name (Row 1) - Make it stand out and clear */
+        .bots-table td:nth-child(1) { 
             display: flex;
             align-items: center;
             gap: 10px;
@@ -338,19 +304,25 @@
             margin-bottom: 5px;
             font-weight: normal; 
         }
+
+        /* Description (Row 2) - Standard block display */
+        .bots-table td:nth-child(2) {
+             padding-bottom: 10px;
+             font-size: 0.9em;
+             color: #ccc;
+        }
         
-        /* Hide the Type DATA CELLS */
-        .type-column-data {
+        /* Hide the Type DATA CELLS (Row 3) */
+        .bots-table td:nth-child(3) {
             display: none; 
         }
 
-        /* Link Cells - Group them horizontally at the bottom */
-        .bots-table td:nth-child(3), 
+        /* Link Cells (Rows 4, 5, 6) - Group them at the bottom */
         .bots-table td:nth-child(4), 
-        .bots-table td:nth-child(5) {
-            /* Display as blocks on separate lines in the mobile card */
-            display: block; 
-            padding: 2px 0; /* Adjusted padding */
+        .bots-table td:nth-child(5), 
+        .bots-table td:nth-child(6) {
+            display: block; /* Stack them vertically */
+            padding: 2px 0; 
             text-align: left !important;
             white-space: nowrap; 
         }
@@ -369,12 +341,7 @@
         .status-row > div:nth-child(3) { text-align: right !important; margin-top: 5px; }
         .status-row > div:nth-child(3) span { display: inline-block; width: 100px; text-align: center; }
         
-        /* 6. Hide the Hover Preview Fix */
-        .name-cell .preview-box {
-            display: none !important;
-        }
-        
-        /* 7. Request Button Stack Fix */
+        /* 6. Request Button Stack Fix */
         .request-btn {
             display: block; padding: 12px 15px; font-size: 1em;
         }
@@ -934,14 +901,18 @@
 <table class="bots-table">
     <thead>
         <tr>
-            <th>Creation Name (Hover for Description)</th> 
-            <th class="type-column-header">Type</th>
-            <th>JanitorAI</th> <th>Yodayo</th> <th>Caveduck</th> </tr>
+            <th>Creation Name</th> <th>Description</th> <th class="type-column-header">Type</th>
+            <th>JanitorAI</th>
+            <th>Yodayo</th>
+            <th>Caveduck</th>
+        </tr>
     </thead>
     <tbody id="bots-table-body">
-        <tr><td colspan="5" style="text-align: center;">Loading data from bots.json...</td></tr>
-    </tbody>
+        </tbody>
 </table>
+    <!-- <tbody id="bots-table-body">
+        <tr><td colspan="5" style="text-align: center;">Loading data from bots.json...</td></tr>
+    </tbody> -->
 
 <script>
     // Map URLs to their display names for clarity
@@ -970,9 +941,9 @@
             return;
         }
 
-        const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
-        // Total columns is 5. If small screen, we hide the Type column, making it 4 visible columns.
-        const initialColspan = isSmallScreen ? 4 : 5; 
+        // The table now has 6 columns: Name, Description, Type, JAI, Yoda, Duck
+        // On small screens, we hide Type (5 visible columns total)
+        const initialColspan = 6; 
         
         tbody.innerHTML = `<tr><td colspan="${initialColspan}" style="text-align: center;">Fetching data from bots.json...</td></tr>`;
 
@@ -1001,39 +972,39 @@
                 const name = item.name || 'Untitled Creation';
                 const description = item.description || 'No description available.';
                 
-                // 1. Creation Name (Hover Preview)
+                // 1. Creation Name & Image (no more hover logic)
                 const nameCell = row.insertCell();
                 nameCell.className = 'name-cell'; 
                 
-                // --- IMAGE IMPLEMENTATION ---
                 const imageHtml = item.imageUrl 
                     ? `<img src="${item.imageUrl}" class="character-thumbnail" alt="${name} thumbnail">` 
                     : '';
                 
-                const previewContent = `
+                const nameContent = `
                     ${imageHtml}
                     <div class="name-text">
                         <strong>${name}</strong>
                     </div>
-                    <div class="preview-box">
-                        <h4>${name}</h4>
-                        <p>${description}</p>
-                    </div>
                 `;
-                nameCell.innerHTML = previewContent;
+                nameCell.innerHTML = nameContent;
                 
-                // 2. Type - HIDES ON SMALL SCREEN
+                // 2. Description (NEW DEDICATED COLUMN)
+                const descCell = row.insertCell();
+                descCell.className = 'description-column-data';
+                descCell.innerHTML = description;
+
+                // 3. Type - HIDES ON SMALL SCREEN
                 const typeCell = row.insertCell();
                 typeCell.className = 'type-column-data'; 
                 typeCell.innerHTML = item.type || 'N/A';
                 
-                // 3. JanitorAI Link (passing platform key to renderLink)
+                // 4. JanitorAI Link 
                 row.insertCell().innerHTML = renderLink(item.janitorUrl, 'janitorUrl');
 
-                // 4. Yodayo Link (passing platform key to renderLink)
+                // 5. Yodayo Link
                 row.insertCell().innerHTML = renderLink(item.yodayoUrl, 'yodayoUrl');
                 
-                // 5. Caveduck Link (passing platform key to renderLink)
+                // 6. Caveduck Link
                 row.insertCell().innerHTML = renderLink(item.caveduckUrl, 'caveduckUrl');
             });
 
