@@ -239,23 +239,16 @@
 /* ========================================================== */
 
     /* CSS for responsive table behavior */
-    .creation-name, .name-cell {
+    .type-column {
         /* This ensures the column is visible by default */
         display: table-cell;
     }
 
-    /* Media Query: Hides the column when the screen is 600px or smaller */
+    /* Media Query: Hides the Type column when the screen is 600px or smaller */
     @media (max-width: 600px) {
-        .creation-name, .name-cell {
-            /* Hides the header and all data cells in this column */
+        .type-column {
+            /* Hides the header and all data cells in the Type column */
             display: none;
-        }
-        /* Optional: adjust the colspan for the "Loading" row */
-        #bots-table-body tr td[colspan="5"] {
-            /* Changes colspan from 5 to 4 when one column is hidden */
-            /* You may need to manually update the 'colspan' in the JS loading row */
-            /* or use JS to dynamically change it, but changing it here is safer. */
-            /* This is a placeholder and might need adjustment in the JS part. */
         }
     }
     
@@ -908,13 +901,13 @@
             </div>
             <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 30px 0;">
 
-    <h3 style="color: var(--stale-brown);">ALL Bots & Worlds Availability 🌍 (Dynamic List)</h3>
+<h3 style="color: var(--stale-brown);">ALL Bots & Worlds Availability 🌍 (Dynamic List)</h3>
 <p style="font-size: 0.9em;">This list is generated automatically by referencing the separate `bots.json` file. Ensure both files are in the same directory!</p>
 <table class="bots-table">
     <thead>
         <tr>
-            <th class="creation-name">Creation Name (Hover for Description)</th> 
-            <th>Type</th>
+            <th>Creation Name (Hover for Description)</th> 
+            <th class="type-column">Type</th>
             <th>JanitorAI Link</th>
             <th>Yodayo Link</th>
             <th>Caveduck Link</th>
@@ -927,7 +920,7 @@
 
 <script>
     function renderLink(url) {
-        // ... (renderLink function remains the same as previously corrected)
+        // Function remains the same to handle N/A links
         if (!url || String(url).trim().toLowerCase() === 'n/a' || String(url).trim().toLowerCase() === 'not provided' || String(url).startsWith('[LINK TO')) {
             return '<span class="na">N/A</span>';
         }
@@ -937,13 +930,13 @@
     async function generateTable() {
         const tbody = document.getElementById('bots-table-body');
         
-        // ... (Error checks remain the same)
         if (!tbody) {
             console.error("Target tbody element 'bots-table-body' not found.");
             return;
         }
 
-        // Adjust colspan based on screen width for the loading message
+        // --- UPDATED LOGIC FOR COLUMN COUNT ---
+        // Total columns is 5. If small screen, we hide the Type column, making it 4 visible columns.
         const isSmallScreen = window.matchMedia('(max-width: 600px)').matches;
         const initialColspan = isSmallScreen ? 4 : 5; 
         
@@ -952,7 +945,6 @@
         try {
             const response = await fetch('bots.json');
             
-            // ... (HTTP/JSON parsing checks remain the same)
             if (!response.ok) {
                 let statusText = response.status === 404 ? 'File Not Found (404)' : `HTTP Error (Status: ${response.status})`;
                 throw new Error(`Failed to load 'bots.json'. ${statusText}`);
@@ -976,10 +968,9 @@
                 const name = item.name || 'Untitled Creation';
                 const description = item.description || 'No description available.';
                 
-                // Creation Name (Hover Preview)
+                // 1. Creation Name (Hover Preview) - REMAINS VISIBLE
                 const nameCell = row.insertCell();
-                // ADDED CLASS HERE to target the data cell
-                nameCell.className = 'name-cell creation-name-data'; 
+                nameCell.className = 'name-cell'; // Keep the original name-cell class
                 
                 const previewContent = `
                     <div class="name-text">
@@ -992,16 +983,18 @@
                 `;
                 nameCell.innerHTML = previewContent;
                 
-                // Type
-                row.insertCell().innerHTML = item.type || 'N/A';
+                // 2. Type - HIDES ON SMALL SCREEN
+                const typeCell = row.insertCell();
+                typeCell.className = 'type-column'; // ADDED CLASS HERE to target the data cell
+                typeCell.innerHTML = item.type || 'N/A';
                 
-                // JanitorAI Link
+                // 3. JanitorAI Link
                 row.insertCell().innerHTML = renderLink(item.janitorUrl);
 
-                // Yodayo Link
+                // 4. Yodayo Link
                 row.insertCell().innerHTML = renderLink(item.yodayoUrl);
                 
-                // Caveduck Link
+                // 5. Caveduck Link
                 row.insertCell().innerHTML = renderLink(item.caveduckUrl);
             });
 
@@ -1018,6 +1011,7 @@
 
     // Run the script once the page loads
     document.addEventListener('DOMContentLoaded', generateTable);
+</script>
 </script>
 </body>
 </html>
