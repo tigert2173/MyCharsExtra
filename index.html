@@ -39,11 +39,13 @@
     }
 
     .container {
-        max-width: 1300px;
+        /* INCREASED MAX WIDTH to 1400px for larger screens */
+        max-width: 1400px;
         margin: 0 auto;
         display: grid;
         gap: 20px;
-        grid-template-columns: 300px 1fr;
+        /* WIDER SIDEBAR: Increased the sidebar column from 300px to 350px */
+        grid-template-columns: 350px 1fr;
     }
     
     /* --- General Text & Links --- */
@@ -144,8 +146,8 @@
         font-size: 0.85em;
         vertical-align: middle;
     }
-     .bots-table td:first-child { 
-        /* Changed to flex for easy alignment of image and name */
+    .bots-table td:first-child { 
+        /* Flex for image/name alignment */
         display: flex; 
         align-items: center; 
         gap: 10px;
@@ -170,7 +172,7 @@
         border-radius: 5px;
         object-fit: cover;
         border: 1px solid var(--border-color);
-        flex-shrink: 0; /* Prevents image from shrinking */
+        flex-shrink: 0;
     }
     
     .na { color: #525252; font-style: italic; }
@@ -311,21 +313,21 @@
             /* Reset striped background for card look */
             background-color: var(--card-bg) !important; 
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-            transition: none; /* Disable hover effect */
+            transition: none;
         }
         
         /* Remove internal borders between cells */
         .bots-table td {
-            display: block; /* Stack cells vertically */
+            display: block;
             width: auto;
             border-bottom: none;
-            padding: 5px 0; /* Reduced padding inside the card */
-            text-align: left !important; /* Align content to the left */
+            padding: 5px 0;
+            text-align: left !important;
         }
         
         /* Character Name - Make it stand out and clear */
         .bots-table td:first-child { 
-            /* Reset to block in card view, but still use flex inside for image/name alignment */
+            /* Flex for image/name alignment in the card */
             display: flex;
             align-items: center;
             gap: 10px;
@@ -337,7 +339,7 @@
             font-weight: normal; 
         }
         
-        /* Hide the Type DATA CELLS (as requested previously) */
+        /* Hide the Type DATA CELLS */
         .type-column-data {
             display: none; 
         }
@@ -346,9 +348,10 @@
         .bots-table td:nth-child(3), 
         .bots-table td:nth-child(4), 
         .bots-table td:nth-child(5) {
-            display: inline-block; /* Display them side-by-side */
-            padding: 5px 8px;
-            /* Allow nowrap for links */
+            /* Display as blocks on separate lines in the mobile card */
+            display: block; 
+            padding: 2px 0; /* Adjusted padding */
+            text-align: left !important;
             white-space: nowrap; 
         }
 
