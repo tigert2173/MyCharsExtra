@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile of @TigerT - The Apex of Stench</title>
-    
 <style>
     /* --- ROOT THEME (FART COLORS) --- */
     :root {
@@ -153,7 +152,7 @@
     .bots-table tr:last-child td { border-bottom: none; }
     .bots-table tr:hover { background-color: #1F2937; }
     
-    /* --- LINK SQUISHING FIX --- */
+    /* --- LINK SQUISHING FIX (Desktop) --- */
     .bots-table td:nth-child(3), 
     .bots-table td:nth-child(4), 
     .bots-table td:nth-child(5) {
@@ -183,7 +182,8 @@
         font-weight: bold;
         position: relative;
     }
-    tr:nth-child(even) {
+    /* Ensure only the background changes on hover on desktop */
+    .bots-table tr:nth-child(even):not(.mobile-card-row) {
         background-color: #273427;
     }
     .tags-list {
@@ -242,21 +242,21 @@
     }
     
     /* ----------------------------------------------------------------- */
-    /* --- CUSTOM STATUS GRID CLASSES (for use with inline styles) --- */
+    /* --- CUSTOM STATUS GRID CLASSES --- */
     /* ----------------------------------------------------------------- */
     .status-header, .status-row {
         display: grid; 
         grid-template-columns: 2fr 1fr 1fr;
     }
 
-/* ========================================================== */
-/* --- 📱 MOBILE-SPECIFIC STYLING (Final Media Query Fixes) --- */
-/* ========================================================== */
-
-    /* Type Column Visibility Classes */
+    /* Type Column Visibility Classes (for use in TH and TD) */
     .type-column-header, .type-column-data {
         display: table-cell;
     }
+    
+/* ========================================================== */
+/* --- 📱 MOBILE-SPECIFIC STYLING (TABLE TO CARD) --- */
+/* ========================================================== */
     
     @media (max-width: 768px) {
         /* 1. Reset the Main Grid for Mobile */
@@ -272,80 +272,90 @@
         .content {
             padding: 20px 10px;
         }
-        
-        /* 3. Force Sidebar Content to Wrap */
-        .sidebar {
-            max-width: 100%;
-            box-sizing: border-box; 
-        }
-        .description-box, 
-        .description-box p, 
-        .description-box ul, 
-        .description-box li {
-            word-break: break-word;
-            overflow-wrap: break-word;
-            white-space: normal;
-        }
-        .description-box h2 {
-            font-size: 20px !important;
-            padding: 0 !important;
-        }
 
-        /* 4. Comprehensive Bots Table Fixes */
+        /* 3. Force Sidebar Content to Wrap */
+        .sidebar { max-width: 100%; box-sizing: border-box; }
+        .description-box, .description-box p, .description-box ul, .description-box li {
+            word-break: break-word; overflow-wrap: break-word; white-space: normal;
+        }
+        .description-box h2 { font-size: 20px !important; padding: 0 !important; }
+
+        /* 4. Table to Character Card Transformation */
         
-        /* HIDE ONLY the Type DATA CELLS */
-        .type-column-data {
+        /* Hide the Table Headers entirely on mobile */
+        .bots-table thead {
             display: none;
         }
 
-        /* *** PREVIEW HIDE FIX *** */
-        /* This rule explicitly ensures the preview box is hidden on mobile */
-        /* by overriding the :hover rule with high specificity. */
-        .name-cell .preview-box {
-            display: none !important;
+        /* Make each row look like a card */
+        .bots-table tbody tr {
+            display: block;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+            /* Reset striped background for card look */
+            background-color: var(--card-bg) !important; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+            transition: none; /* Disable hover effect */
+        }
+        
+        /* Remove internal borders between cells */
+        .bots-table td {
+            display: block; /* Stack cells vertically */
+            width: auto;
+            border-bottom: none;
+            padding: 5px 0; /* Reduced padding inside the card */
+            text-align: left !important; /* Align content to the left */
+        }
+        
+        /* Character Name - Make it stand out and clear */
+        .bots-table td:first-child { 
+            font-size: 1.1em;
+            color: var(--stale-brown);
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 5px;
+            font-weight: normal; /* Weight is in the inner <strong> tag */
+        }
+        
+        /* Hide the Type DATA CELLS (as requested previously) */
+        .type-column-data {
+            display: none; 
         }
 
-        /* Adjust padding for table cells on small screen */
-        .bots-table th, .bots-table td {
-             padding: 8px;
-        }
+        /* Link Cells - Group them horizontally at the bottom */
         .bots-table td:nth-child(3), 
         .bots-table td:nth-child(4), 
         .bots-table td:nth-child(5) {
-            padding: 8px 4px;
+            display: inline-block; /* Display them side-by-side */
+            padding: 5px 8px;
+            /* Allow nowrap for links */
+            white-space: nowrap; 
         }
-        
+
+        /* Remove the padding/border from the last cell in the card */
+        .bots-table tr:last-child td { border-bottom: none; }
+
+
         /* 5. Fix the INNER Status Grid (Current Projects) */
-        .status-header {
+        .status-header { display: none !important; }
+        .status-row {
+            grid-template-columns: 1fr; padding: 10px; margin-bottom: 10px;
+            border: 1px solid var(--border-color); border-radius: 6px;
+        }
+        .status-row > div { padding: 3px 0; text-align: left !important; white-space: normal; }
+        .status-row > div:nth-child(3) { text-align: right !important; margin-top: 5px; }
+        .status-row > div:nth-child(3) span { display: inline-block; width: 100px; text-align: center; }
+        
+        /* 6. Hide the Hover Preview Fix */
+        .name-cell .preview-box {
             display: none !important;
         }
-        .status-row {
-            grid-template-columns: 1fr;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-        }
-        .status-row > div {
-            padding: 3px 0;
-            text-align: left !important;
-            white-space: normal;
-        }
-        .status-row > div:nth-child(3) {
-            text-align: right !important;
-            margin-top: 5px;
-        }
-        .status-row > div:nth-child(3) span {
-            display: inline-block;
-            width: 100px;
-            text-align: center;
-        }
         
-        /* 6. Request Button Stack Fix */
+        /* 7. Request Button Stack Fix */
         .request-btn {
-            display: block;
-            padding: 12px 15px;
-            font-size: 1em;
+            display: block; padding: 12px 15px; font-size: 1em;
         }
     }
 </style>
