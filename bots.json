@@ -101,11 +101,23 @@
       "caveduckUrl": "Not provided"
     },
     {
-      "name": "Hazel (The Gassy Witch)",
-      "description": "You were exploring deep in the forest when you notice a hut. You enter the but thinking its abandoned and instead, you find Hazel. She just so happens to study an entire school of magic based around gas and farts. Haze...",
+      "name": "[V1] The Striped Tail Club",
+      "description": "",
+      "themes": ["Fart", "Skunk", "Anal Vore", "Scat"],
       "type": "Character",
-      "janitorUrl": "Not provided",
+      "imageUrl": "https://ella.janitorai.com/bot-avatars/tmHlu0nSiVjRCCqL9Ufv-.webp?width=400",
+      "janitorUrl": "https://janitorai.com/characters/c719fde1-8aba-4e67-a420-917a7e10a60b_character-v-1-the-striped-tail-club",
       "yodayoUrl": "Not provided",
+      "caveduckUrl": "https://caveduck.io/character-info/1347a4b2-48e1-47ae-b98d-c8c1661cf52d?locale=en"
+    },
+    {
+      "name": "Hazel (The Gassy Witch)",
+      "description": "You were exploring deep in the forest when you notice a hut. You enter the hut thinking it's abandoned and instead, you find Hazel. She just so happens to study an entire school of magic based around gas and farts. Hazel is also very gassy, and she loves having someone to test her new smelly spells on!",
+      "themes": ["Fart"],
+      "type": "Character",
+      "imageUrl": "https://ella.janitorai.com/bot-avatars/lOEn2ZuZ3OhP6eVILHVXO.webp?width=400",
+      "janitorUrl": "https://janitorai.com/characters/66b9b4d4-2650-43d9-907f-5db6faa81c30_character-hazel-the-gassy-witch",
+      "yodayoUrl": "https://yodayo.com/tavern/characters/07474394-a99c-4fe1-a9c4-3bb3f224d9ef",
       "caveduckUrl": "Not provided"
     },
     {
