@@ -44,16 +44,9 @@
         margin: 0 auto;
         display: grid;
         gap: 20px;
-        /* UPDATED WIDTH: Sidebar is now 450px fixed width + fluid main content */
+        /* WIDER SIDEBAR: 350px fixed width for sidebar + fluid main content */
         grid-template-columns: 500px 1fr;
     }
-
-    @media (max-width: 768px) {
-        /* 1. Reset the Main Grid for Mobile */
-        .container {
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
     
     /* --- General Text & Links --- */
     a {
