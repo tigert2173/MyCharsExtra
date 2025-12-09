@@ -1008,9 +1008,6 @@
         const isAvailable = url && 
                             url.trim() !== '' && 
                             url !== '[]' && 
-                            !urlUpper.includes('[INSERT') && 
-                            !urlUpper.includes('YOUR') && 
-                            !urlUpper.includes('HERE') &&
                             !urlUpper.includes('NOT PROVIDED'); // <--- URL FIX IS HERE
 
         if (isAvailable) {
