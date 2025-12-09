@@ -335,7 +335,20 @@
         transform: translateY(3px);
         box-shadow: none !important;
     }
-    
+
+    /* NEW CSS for Tag Separation and Centering */
+.tag-group-top, .tag-group-bottom {
+    display: flex;          /* Required for centering and wrapping */
+    flex-wrap: wrap;
+    justify-content: center; /* Centers the tags horizontally */
+    gap: 10px;
+    margin: 0 auto;         /* Centers the container itself on the line */
+    min-width: 0;
+}
+/* Add some space between the two new rows */
+.tag-group-top {
+    margin-bottom: 10px !important;
+}
 /* ========================================================== */
 /* --- 📱 MOBILE-SPECIFIC STYLING --- */
 /* ========================================================== */
@@ -1067,12 +1080,13 @@
                         <div class="card-content-wrapper">
                             <div class="card-header">
                                 <h3 class="card-title">${name}</h3>
-                            <div class="card-tag-container">
+                           <div class="tag-group-top card-tag-container">
                                 <span class="tag type-tag">${type}</span>
-                                <br>
-                                ${renderStatusTag(status)} 
-                                ${renderThemeTags(themes)} </div>
-                        </div>
+                                ${renderStatusTag(status)}
+                            </div>
+                            <div class="tag-group-bottom card-tag-container">
+                                ${renderThemeTags(themes)} 
+                            </div>
                         
                         <div class="card-description">
                             ${description}
