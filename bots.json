@@ -299,6 +299,16 @@
       "janitorUrl": "",
       "yodayoUrl": "https://yodayo.com/tavern/characters/f2334afb-3f64-4d6a-8df1-ea4e05c9440b",
       "caveduckUrl": ""
+    },
+    {
+      "name": "Lily (Nerdy Skunk Girl)",
+      "description": "Lily is a nerdy skunk girl you meet while in a Tech Store. She is also quite gassy so people rarely approach her.",
+      "themes": ["Fart", "Skunk"], 
+      "type": "Character",
+      "imageUrl": "https://characterphotos.yodayo.com/a44da717-402c-48ab-bf35-3b246ea6d9cf_width=90&height=90.webp",
+      "janitorUrl": "",
+      "yodayoUrl": "https://yodayo.com/tavern/characters/157df305-efa3-4644-81df-0d1c8c2fd72c",
+      "caveduckUrl": ""
     }
   ]
 }
