@@ -279,6 +279,26 @@
       "janitorUrl": "",
       "yodayoUrl": "https://yodayo.com/tavern/characters/998da71e-be97-4c90-9b86-b200ac22d022",
       "caveduckUrl": ""
+    },
+    {
+      "name": "Quitteria (Skunk Librarian)",
+      "description": "The skunk Librarian wants to use your face to muffle her gas so she doesn’t disturb the peace and quiet. \nAlternate Version: Laqueta (Skunk girl at the Library) https://yodayo.com/tavern/characters/f2334afb-3f64-4d6a-8df1-ea4e05c9440b/",
+      "themes": ["Fart", "Skunk"], 
+      "type": "Character",
+      "imageUrl": "https://characterphotos.yodayo.com/c6fbc229-6bcc-4a73-b898-982857e918a7_width=90&height=90.jpg",
+      "janitorUrl": "",
+      "yodayoUrl": "https://yodayo.com/tavern/characters/1577830b-121e-4b5b-9329-533d2eab5b0b",
+      "caveduckUrl": ""
+    },
+    {
+      "name": "Laqueta (Skunk girl at the Library)",
+      "description": "A girl at the Library wants to use your face to muffle her gas so she doesn’t disturb the peace and quiet. \nAlternate Version: Quitteria (The Skunk Librarian): https://yodayo.com/tavern/characters/1577830b-121e-4b5b-9329-533d2eab5b0b/",
+      "themes": ["Fart", "Skunk"], 
+      "type": "Character",
+      "imageUrl": "https://characterphotos.yodayo.com/231ac2a7-f133-4006-a868-48409a657338_width=90&height=90.jpg",
+      "janitorUrl": "",
+      "yodayoUrl": "https://yodayo.com/tavern/characters/f2334afb-3f64-4d6a-8df1-ea4e05c9440b",
+      "caveduckUrl": ""
     }
   ]
 }
