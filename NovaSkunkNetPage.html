@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova — SkunkNet</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #0d0d0d;
+        color: #eee;
+    }
+    header {
+        background-color: #1a1a1a;
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2px solid #4d5d53;
+    }
+    header h1 { color: #ff69b4; font-size: 1.8em; margin: 0; }
+    header button {
+        background-color: #9d4edd;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        color: white;
+    }
+    .profile {
+        display: flex;
+        background-color: #1a1a1a;
+        padding: 20px;
+        border-bottom: 2px solid #4d5d53;
+    }
+    .profile img {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        border: 2px solid #ff69b4;
+        object-fit: cover;
+        margin-right: 20px;
+        box-shadow: 0 0 10px #ff69b4;
+    }
+    .profile-info h2 { margin: 0; color: #ff69b4; font-size: 2em; }
+    .profile-info p { margin: 4px 0; color: #b0c47d; font-size: 0.9em; }
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding-top: 15px;
+    }
+    .stat { display: flex; flex-direction: column; }
+    .stat span { font-size: 0.75em; margin-bottom: 3px; }
+    .bar-container {
+        background: rgba(0,0,0,0.4);
+        border-radius: 5px;
+        height: 12px;
+    }
+    .bar-fill { height: 100%; border-radius: 5px; }
+    .bar-stench { background: #b0c47d; }
+    .bar-wetness { background: #4cc9f0; }
+    .bar-volume { background: #f48c06; }
+    .bar-loudness { background: #9d4edd; }
+    .bar-heat { background: #ef233c; }
+    .bar-attention { background: #ff69b4; }
+    .bar-drama { background: #ffa500; }
+
+    /* Gallery */
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
+        padding: 20px;
+    }
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        border: 1px solid #ff69b4;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.1); }
+    .overlay {
+        position: absolute;
+        bottom: 0;
+        background: rgba(0,0,0,0.6);
+        color: #fff;
+        width: 100%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        text-align: center;
+        font-size: 0.7em;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .gallery-item:hover .overlay { opacity: 1; }
+
+    /* Modal for images */
+    #image-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.9);
+        align-items: center;
+        justify-content: center;
+    }
+    #image-modal img {
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 10px;
+        box-shadow: 0 0 20px #ff69b4;
+    }
+    #image-modal .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 2em;
+        color: #ff69b4;
+        cursor: pointer;
+    }
+
+    /* Feed posts */
+    .feed { padding: 20px; }
+    .post {
+        background-color: #1a1a1a;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid #4d5d53;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .post:hover { background-color: #2a2a2a; }
+    .post-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .post-header img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+        border: 1px solid #ff69b4;
+    }
+    .post-header .name { font-weight: bold; color: #ff69b4; }
+    .post-content p { margin: 0; }
+    .post-footer {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8em;
+        color: #b0c47d;
+        margin-top: 8px;
+    }
+    .btn-like, .btn-comment { cursor: pointer; color: #ff69b4; font-weight: bold; }
+
+    /* Modal for post details */
+    #post-modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.95);
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 50px;
+        overflow-y: auto;
+    }
+    #post-modal .modal-content {
+        background: #1a1a1a;
+        border: 2px solid #ff69b4;
+        border-radius: 10px;
+        padding: 20px;
+        width: 90%;
+        max-width: 600px;
+        color: #eee;
+    }
+    #post-modal .modal-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    #post-modal .modal-header img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+        border: 1px solid #ff69b4;
+    }
+    #post-modal .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 2em;
+        color: #ff69b4;
+        cursor: pointer;
+    }
+    #modal-comments h4 { color: #ff69b4; }
+    #modal-comments ul { list-style: none; padding: 0; }
+    #modal-comments li {
+        background: #2a2a2a;
+        padding: 8px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>SkunkNet</h1>
+    <button>Follow Nova</button>
+</header>
+
+<div class="profile">
+    <img src="https://ella.janitorai.com/media-approved/P0o3PngswlQANBw4Hz1Gd.webp" alt="Nova">
+    <div class="profile-info">
+        <h2>Nova</h2>
+        <p>Skunk-Human Hybrid | Scentfluencer</p>
+        <p>✨ Loves attention, glitter, and scent domination! ✨</p>
+        <div class="stats">
+            <div class="stat"><span>Stench: 92%</span><div class="bar-container"><div class="bar-fill bar-stench" style="width:92%;"></div></div></div>
+            <div class="stat"><span>Wetness: 38%</span><div class="bar-container"><div class="bar-fill bar-wetness" style="width:38%;"></div></div></div>
+            <div class="stat"><span>Volume: 78%</span><div class="bar-container"><div class="bar-fill bar-volume" style="width:78%;"></div></div></div>
+            <div class="stat"><span>Loudness: 70%</span><div class="bar-container"><div class="bar-fill bar-loudness" style="width:70%;"></div></div></div>
+            <div class="stat"><span>Heat: 22%</span><div class="bar-container"><div class="bar-fill bar-heat" style="width:22%;"></div></div></div>
+        </div>
+    </div>
+</div>
+
+<h3 style="padding:0 20px; color:#ff69b4;">📸 Gallery</h3>
+<div class="gallery">
+    <div class="gallery-item"><img src="https://ella.janitorai.com/media-approved/S8JlrBJtN3-Mh4YoeA0jX.webp" alt="Nova 1"><div class="overlay">💖 Tail Pose #1</div></div>
+    <div class="gallery-item"><img src="https://ella.janitorai.com/media-approved/CzV97CZhvPzdAGvvelqHq.webp" alt="Nova 2"><div class="overlay">💥 Decay Cloud</div></div>
+    <div class="gallery-item"><img src="https://ella.janitorai.com/media-approved/jMwdliURQOPDUqN01bdNi.webp" alt="Nova 3"><div class="overlay">☣️ Chemical Blast</div></div>
+    <div class="gallery-item"><img src="https://ella.janitorai.com/media-approved/kCOgoXBpjMi7zBU6wRl_F.webp" alt="Nova 4"><div class="overlay">💨 Sulfur Stream</div></div>
+    <div class="gallery-item"><img src="https://ella.janitorai.com/media-approved/bgOgHn2TglK9SS4seWnOO.webp" alt="Nova 5"><div class="overlay">🤢 Yeasty Foot Check</div></div>
+    <div class="gallery-item"><img src="https://ella.janitorai.com/media-approved/wC0QqoFTqZn1cgrj4S4rx.webp" alt="Nova 6"><div class="overlay">😵 Cabbage Cannon</div></div>
+    <div class="gallery-item"><img src="https://ella.janitorai.com/media-approved/QBGIL6xqNyaRuvwygigUs.webp" alt="Nova 7"><div class="overlay">🦠 Rotting Gym Clothes</div></div>
+</div>
+
+<!-- Image Modal -->
+<div id="image-modal">
+    <span class="close">&times;</span>
+    <img id="modal-img" src="">
+</div>
+
+<!-- Feed posts -->
+<div class="feed">
+    <div class="post" data-post="1">
+        <div class="post-header">
+            <img src="https://ella.janitorai.com/media-approved/P0o3PngswlQANBw4Hz1Gd.webp" alt="Nova">
+            <div class="name">Nova</div>
+        </div>
+        <div class="post-content">
+            <p>💖 Just released my latest scent mix! Deep decay meets cloying chemical chaos 😈💨 Rate it now!</p>
+        </div>
+        <div class="post-footer">
+            <span class="btn-like">👍 1.2k Likes</span>
+            <span class="btn-comment">💬 321 Comments</span>
+        </div>
+    </div>
+    <div class="post" data-post="2">
+        <div class="post-header">
+            <img src="https://ella.janitorai.com/media-approved/P0o3PngswlQANBw4Hz1Gd.webp" alt="Nova">
+            <div class="name">Nova</div>
+        </div>
+        <div class="post-content">
+            <p>✨ Glam session over! Who’s ready for the glitter fart challenge? Rotten cabbage and pure skunk, go! 💨</p>
+        </div>
+        <div class="post-footer">
+            <span class="btn-like">👍 980 Likes</span>
+            <span class="btn-comment">💬 210 Comments</span>
+        </div>
+    </div>
+    <div class="post" data-post="3">
+        <div class="post-header">
+            <img src="https://ella.janitorai.com/media-approved/P0o3PngswlQANBw4Hz1Gd.webp" alt="Nova">
+            <div class="name">Nova</div>
+        </div>
+        <div class="post-content">
+            <p>💨 Mood: Mischief. Just tested a new scent combo—pure decay, sulfuric gas, and a hint of chemical sweetness. 😂🔥</p>
+        </div>
+        <div class="post-footer">
+            <span class="btn-like">👍 1.5k Likes</span>
+            <span class="btn-comment">💬 412 Comments</span>
+        </div>
+    </div>
+</div>
+
+<!-- Post Modal -->
+<div id="post-modal">
+    <span class="close">&times;</span>
+    <div class="modal-content">
+        <div class="modal-header">
+            <img id="modal-avatar" src="" alt="Poster">
+            <div id="modal-name"></div>
+        </div>
+        <div id="modal-text"></div>
+        <div id="modal-comments">
+            <h4>Comments</h4>
+            <ul id="comment-list"></ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Image modal functionality
+    const imageModal = document.getElementById('image-modal');
+    const modalImg = document.getElementById('modal-img');
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+    const closeImgBtn = imageModal.querySelector('.close');
+
+    galleryItems.forEach(img => {
+        img.addEventListener('click', () => {
+            imageModal.style.display = 'flex';
+            modalImg.src = img.src;
+        });
+    });
+    closeImgBtn.addEventListener('click', () => { imageModal.style.display = 'none'; });
+    imageModal.addEventListener('click', e => { if(e.target === imageModal) imageModal.style.display = 'none'; });
+
+    // Post modal functionality
+    const postModal = document.getElementById('post-modal');
+    const modalAvatar = document.getElementById('modal-avatar');
+    const modalName = document.getElementById('modal-name');
+    const modalText = document.getElementById('modal-text');
+    const commentList = document.getElementById('comment-list');
+    const closePostBtn = postModal.querySelector('.close');
+
+    const postComments = {
+        1: [
+            {name: "Chloe", avatar: "https://ella.janitorai.com/media-approved/chloe.webp", text: "🔥 That scent is dangerous, love it!"},
+            {name: "Misato", avatar: "https://ella.janitorai.com/media-approved/misato.webp", text: "💀 I’m rating this a 10/10 chaos!"}
+        ],
+        2: [
+            {name: "Oliva", avatar: "https://ella.janitorai.com/media-approved/oliva.webp", text: "🌸 Glitter and stink? Perfect combo!"},
+            {name: "Chloe", avatar: "https://ella.janitorai.com/media-approved/chloe.webp", text: "I see your tail flare 😏"}
+        ],
+        3: [
+            {name: "Misato", avatar: "https://ella.janitorai.com/media-approved/misato.webp", text: "😂 Bubblegum-marshmallow? Genius!"},
+            {name: "Oliva", avatar: "https://ella.janitorai.com/media-approved/oliva.webp", text: "💨 Can’t wait to try this scent!"}
+        ]
+    };
+
+    document.querySelectorAll('.post').forEach(post => {
+        post.addEventListener('click', () => {
+            const postId = post.dataset.post;
+            const headerImg = post.querySelector('.post-header img').src;
+            const name = post.querySelector('.name').textContent;
+            const content = post.querySelector('.post-content p').innerHTML;
+
+            modalAvatar.src = headerImg;
+            modalName.textContent = name;
+            modalText.innerHTML = content;
+
+            commentList.innerHTML = '';
+            if(postComments[postId]){
+                postComments[postId].forEach(c => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<strong style="color:#ff69b4">${c.name}:</strong> ${c.text}`;
+                    commentList.appendChild(li);
+                });
+            }
+
+            postModal.style.display = 'flex';
+        });
+    });
+
+    closePostBtn.addEventListener('click', () => { postModal.style.display = 'none'; });
+    postModal.addEventListener('click', e => { if(e.target === postModal) postModal.style.display = 'none'; });
+</script>
+
+</body>
+</html>
+
